@@ -52,7 +52,7 @@ const Form: React.FC = () => {
   return (
     <ButtonAndForm>
       <FormTitle>Authentication</FormTitle>
-      <FormWrapper size={85} onSubmit={submitLoginHandler}>
+      <FormWrapper size={60} onSubmit={submitLoginHandler}>
         <Input
           type="email"
           text="Email"
@@ -77,7 +77,7 @@ const Form: React.FC = () => {
         </ButtonForm>
       </FormWrapper>
       <ButtonForm handleClick = {redirectToRegisterPageHandler}>
-        Sigin Up
+        <span>Sign Up</span>
         <VscArrowRight />
       </ButtonForm>
     </ButtonAndForm>

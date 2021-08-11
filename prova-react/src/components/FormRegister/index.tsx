@@ -8,7 +8,6 @@ import ButtonForm from "../ButtonForm";
 import {
   ButtonAndForm,
   ErrorMessage,
-  FormText,
   FormTitle,
   FormWrapper,
 } from "../FormSignIn/style";
