@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
     background: #F7F7F7 0% 0% no-repeat padding-box;
     font-family: Helvetica;
   }
+  html{
+    font-size: 62.5%;
+  }
 `;
 
 export default GlobalStyle;

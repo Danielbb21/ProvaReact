@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
-import Form from "../components/FormSignIn";
+import FormForgot from "../components/FormForget";
+
 
 import Logo from "../components/Logo";
 
@@ -14,17 +15,17 @@ const HomeWrapper = styled.div`
 
   @media(max-width: 800px) {
     flex-direction: column;
-    
+    /* position: relative; */
   }
   
 `;
 
-const Home: React.FC = () => {
+const ResetPassword: React.FC = () => {
   return (
     <>
       <HomeWrapper>
         <Logo />
-        <Form />
+        <FormForgot />
         
       </HomeWrapper>
       <Footer />
@@ -32,4 +33,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default ResetPassword;

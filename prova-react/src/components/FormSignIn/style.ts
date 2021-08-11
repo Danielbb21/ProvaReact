@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-
-interface ButtonProps {
-    color?: string;
-    position?: string;
+interface FormProps{
+    size: number;
 }
+
 
 export const FormTitle = styled.h3`
     font-size: 35px;
@@ -21,12 +20,12 @@ export const ButtonAndForm = styled.div`
     height: 550px;
 `;
 
-export const FormWrapper = styled.form`
+export const FormWrapper = styled.form<FormProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 85%;
+    height: ${(props) => props.size + '%'};
     background: #fff;
     border: 1px solid #DDDDDD;
     border-radius: 14px;
@@ -35,6 +34,10 @@ export const FormWrapper = styled.form`
         margin-top: 10px;
         width: 91%;
     }
+    @media(max-width: 800px) {
+        height: 250px;
+        width: 95%;
+  }
 `;
 
 export const FormText = styled(Link)`
@@ -47,19 +50,10 @@ export const FormText = styled(Link)`
 
 `;
 
-export const FormButon = styled.button<ButtonProps>`
-    width: 100%;
-    position: ${(props) => props.position ? 'absolute' : ''};
-    bottom: 0;
-    left:0;
-    height: 110px;
-    background: none;
-    text-align: center;
-    font-size: 35px;
-    border: 1px solid transparent;
-    border-radius: 10px;
-    color: ${(props) => props.color ? props.color : '#707070'};
-    &:hover{
-        cursor: pointer;
-    }
-`;
+
+
+
+export const ErrorMessage = styled.span`
+    font-size: 1.5rem;
+    color: red;
+`

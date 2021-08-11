@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const InputWrapper = styled.input`
-    padding-bottom: 15px;
-    padding-top: 25px;
-    padding-left:30px;
+    padding-bottom: 1.5rem;
+    padding-top: 2.5rem;
+    padding-left:3rem;
     border: none;
-    font-size: 17px;
-    border-bottom: 2px solid #EBEBEB;
+    font-size: 1.7rem;
+    border-bottom: .2rem solid #EBEBEB;
     /* &::-webkit-input-placeholder{
         
         
@@ -16,7 +16,7 @@ export const InputWrapper = styled.input`
         box-shadow: 0 0 0 0;
         border: 0 none;
          outline: 0;
-         border-bottom: 2px solid #EBEBEB;
+         border-bottom: .2rem solid #EBEBEB;
         
     }
 `;

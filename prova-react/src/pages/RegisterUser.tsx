@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Footer from "../components/Footer";
-import Form from "../components/FormSignIn";
+import FormRegister from "../components/FormRegister";
+
 
 import Logo from "../components/Logo";
 
@@ -19,12 +20,12 @@ const HomeWrapper = styled.div`
   
 `;
 
-const Home: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <>
       <HomeWrapper>
         <Logo />
-        <Form />
+        <FormRegister />
         
       </HomeWrapper>
       <Footer />
@@ -32,4 +33,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Register;

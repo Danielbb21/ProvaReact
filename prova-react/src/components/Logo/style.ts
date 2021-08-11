@@ -10,40 +10,59 @@ export const LogoWrapper = styled.div`
 `;
 
 export const LogoTitle = styled.div`
-  width: 244px;
-  height: 217px;
+  width: 24.4rem;
+  height: 21.7rem;
 
   h1 {
     width: 100%;
     height: 100%;
-    font-size: 65px;
+    font-size: 6.5rem;
     text-align: center;
     word-wrap: wrap;
   }
+ 
 `;
 
 export const LogoCircle = styled.div`
     text-align: center;
-    width: 144px;
-    height:39px;
-    margin-top:100px;
-    border-radius: 100px;
+    width: 14.4rem;
+    height:3.9rem;
+    margin-top:10rem;
+    border-radius: 10rem;
     background: #B5C401;
+
+    @media(max-width: 800px) {
+        width: 8.4rem;
+    height:1.9rem;
+    margin-top:5rem;
+  }
     span{
      
         color: #fff;
-        font-size:26px;
+        font-size:2.6rem;
     }
+    @media(max-width: 800px) {
+       span{
+        font-size: 1.3rem;
+            
+        }
+  }
 `;
 
 export const LotoWord = styled.div`
-    width: 380px;
-    height: 99px;
+    width: 38rem;
+    height: 9.9rem;
 
     h1{
         width: 100%;
         height: 100%;
-        font-size: 83px;
+        font-size: 8.3rem;
         text-align: center;
     }
+    @media(max-width: 800px) {
+        h1{
+        font-size: 2.3rem;
+            
+        }
+  }
 `;
