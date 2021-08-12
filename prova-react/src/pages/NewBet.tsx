@@ -16,11 +16,18 @@ interface Options {
   color: string;
   "max-number": number;
 }
+interface CartOptions {
+  price: number;
+  numbers: number[];
+  type: string;
+  color: string;
+}
 
 const NewBet: React.FC = () => {
   const [gameOptions, setGameOptions] = useState<Options>();
   const [numbersOfTheGame, setNumbersOfTheGame] = useState<number[]>([]);
   const [chosedNumbers, setChosedNumber] = useState<number[]>([]);
+  const [cartNumbers, setCartNumber] = useState<CartOptions[]>([]);
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -146,8 +153,28 @@ const NewBet: React.FC = () => {
     }
   };
 
+  const addGameToCartHandler = () => {
+    if (chosedNumbers.length !== gameOptions?.["max-number"]) {
+      console.log("ainda faltam números no jogo");
+      return;
+    }
+    setCartNumber((previus) => {
+      const newArray = [...previus];
+      newArray.push({
+        color: gameOptions.color,
+        numbers: chosedNumbers,
+        price: gameOptions.price,
+        type: gameOptions.type,
+      });
+      return newArray;
+    });
+
+    setChosedNumber([]);
+  };
+
   return (
     <>
+      
       <Navbar hasHome={true} />
       {gameData.types.map((game) => (
         <ButtonGame
@@ -201,10 +228,10 @@ const NewBet: React.FC = () => {
       <ActionButton
         win={20.9}
         hei={5.2}
-        backgroung ='#27C383'
-        onAction={clearGameHandler}
+        backgroung="#27C383"
+        onAction={addGameToCartHandler}
       >
-        Clear Game
+        Add to Cart
       </ActionButton>
     </>
   );
