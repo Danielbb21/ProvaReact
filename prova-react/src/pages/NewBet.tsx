@@ -122,21 +122,28 @@ const NewBet: React.FC = () => {
     }
   };
 
-  const completeGameHandler = () =>{
+  const completeGameHandler = () => {
     const arrayOfChosenNumbers = [...chosedNumbers];
-    if(!gameOptions){
+    if (!gameOptions) {
       return;
     }
-    while(arrayOfChosenNumbers.length !== gameOptions?.["max-number"]){
-
+    while (arrayOfChosenNumbers.length !== gameOptions?.["max-number"]) {
       let numberSorted = Math.floor(Math.random() * gameOptions?.range) + 1;
-      console.log('number', numberSorted);
-      let isAlreadyChosed = arrayOfChosenNumbers.find(number => number === numberSorted);
-      if(!isAlreadyChosed){
+      console.log("number", numberSorted);
+      let isAlreadyChosed = arrayOfChosenNumbers.find(
+        (number) => number === numberSorted
+      );
+      if (!isAlreadyChosed) {
         arrayOfChosenNumbers.push(numberSorted);
       }
     }
     setChosedNumber(arrayOfChosenNumbers);
+  };
+
+  const clearGameHandler = () => {
+    if (chosedNumbers.length > 0) {
+      setChosedNumber([]);
+    }
   };
 
   return (
@@ -175,8 +182,29 @@ const NewBet: React.FC = () => {
             })
           : ""}
       </NumberPlace>
-      <ActionButton win={16.4} hei={5.2} color="#27C383" onAction= {completeGameHandler}>
+      <ActionButton
+        win={16.4}
+        hei={5.2}
+        color="#27C383"
+        onAction={completeGameHandler}
+      >
         Complet Game
+      </ActionButton>
+      <ActionButton
+        win={13.5}
+        hei={5.2}
+        color="#27C383"
+        onAction={clearGameHandler}
+      >
+        Clear Game
+      </ActionButton>
+      <ActionButton
+        win={20.9}
+        hei={5.2}
+        backgroung ='#27C383'
+        onAction={clearGameHandler}
+      >
+        Clear Game
       </ActionButton>
     </>
   );

@@ -4,7 +4,7 @@ import { ButtonActionWrapper } from "./style";
 interface ActionButtonProps {
   win: number;
   hei: number;
-  color: string;
+  color?: string;
   backgroung?: string;
   onAction?: () => void;
 }
