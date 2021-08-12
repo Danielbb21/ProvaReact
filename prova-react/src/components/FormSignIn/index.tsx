@@ -42,13 +42,13 @@ const Form: React.FC = () => {
     if (formIsValid) {
       console.log("Valid");
       setIsClicked(false);
-      return;
+      history.push("/my-bets");
     }
   };
 
-  const redirectToRegisterPageHandler = () =>{
-    history.push('/register');
-  }
+  const redirectToRegisterPageHandler = () => {
+    history.push("/register");
+  };
   return (
     <ButtonAndForm>
       <FormTitle>Authentication</FormTitle>
@@ -76,7 +76,7 @@ const Form: React.FC = () => {
           <VscArrowRight />
         </ButtonForm>
       </FormWrapper>
-      <ButtonForm handleClick = {redirectToRegisterPageHandler}>
+      <ButtonForm handleClick={redirectToRegisterPageHandler}>
         <span>Sign Up</span>
         <VscArrowRight />
       </ButtonForm>

@@ -10,6 +10,7 @@ const HomeWrapper = styled.div`
   align-items: center;
   justify-content: space-evenly;
   height: 35vw;
+  flex: 1;
 
 
   @media(max-width: 800px) {

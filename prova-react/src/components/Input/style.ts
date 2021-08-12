@@ -18,5 +18,13 @@ export const InputWrapper = styled.input`
          outline: 0;
          border-bottom: .2rem solid #EBEBEB;
         
+
+         
     }
+
+    @media(max-width: 280px) {
+        height: auto;
+        width: 100%;
+  }
+
 `;

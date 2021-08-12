@@ -14,4 +14,8 @@ export const FooterWrapeer = styled.div`
         color: #707070;
         font-size: 1.5rem;
     }
+    @media(max-width: 280px) {
+        height: 0.1vh;
+    }
+
 `

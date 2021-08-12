@@ -10,21 +10,38 @@ export const FormTitle = styled.h3`
     font-size: 35px;
     text-align: center;
     color: #707070;
+    @media(max-width: 280px) {
+        font-size: 2.8rem;
+  }
+
 `;
 
 export const ButtonAndForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 352px;
-    height: 550px;
+    width: 35.2rem;
+    height: 55rem;
+    flex: 1;
+
+    @media(max-width: 800px) {
+        height: 25vh;
+        width: 90%;
+  }
+
+  @media(max-width: 280px) {
+        height: 1.1rem;
+        width: 90%;
+        margin-top: 10rem;
+  }
+
 `;
 
 export const FormWrapper = styled.form<FormProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 50%;
     height: ${(props) => props.size + '%'};
     background: #fff;
     border: 1px solid #DDDDDD;

@@ -6,7 +6,17 @@ export const LogoWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    
+    flex: 1;
+    @media(max-width: 800px) {
+        height: 25vh;
+        width: 100%;
+  }
+
+  @media(max-width: 280px) {
+        height: 1.1rem;
+        width: 90%;
+  }
+
 `;
 
 export const LogoTitle = styled.div`
@@ -20,7 +30,17 @@ export const LogoTitle = styled.div`
     text-align: center;
     word-wrap: wrap;
   }
- 
+  @media(max-width: 800px) {
+    h1{
+        font-size: 4.4rem;
+    }
+  }
+  @media(max-width: 280px) {
+        h1{
+          font-size: 2.8rem;
+        }
+  }
+
 `;
 
 export const LogoCircle = styled.div`
@@ -34,7 +54,7 @@ export const LogoCircle = styled.div`
     @media(max-width: 800px) {
         width: 8.4rem;
     height:1.9rem;
-    margin-top:5rem;
+    margin-top: 1.4rem;
   }
     span{
      
