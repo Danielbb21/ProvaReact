@@ -3,10 +3,17 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import ActionButton from "../components/ActionButton";
 import ButtonGame from "../components/ButtonGame";
+import { CartItems } from "../components/Cart";
+import { CartTitle, CartWrapper } from "../components/Cart/style";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { GameDescription, GameTitle } from "../components/New-Bet";
-import { ButtonInActionWrapper } from "../components/New-Bet/style";
+import {
+  BetNumbers,
+  BetPageWrapper,
+  ButtonInActionWrapper,
+  DescriptionTitle,
+} from "../components/New-Bet/style";
 import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
 import gameData from "../games.json";
@@ -20,6 +27,7 @@ interface Options {
   "max-number": number;
 }
 interface CartOptions {
+  id: string;
   price: number;
   numbers: number[];
   type: string;
@@ -164,6 +172,7 @@ const NewBet: React.FC = () => {
     setCartNumber((previus) => {
       const newArray = [...previus];
       newArray.push({
+        id: Math.random().toString(),
         color: gameOptions.color,
         numbers: chosedNumbers,
         price: gameOptions.price,
@@ -175,71 +184,97 @@ const NewBet: React.FC = () => {
     setChosedNumber([]);
   };
 
+  const removeItemHandler = (id: string) => {
+    console.log("id", id);
+    
+    setCartNumber((previus) => previus.filter((cart) => cart.id !== id));
+  };
+
   return (
     <>
       <Navbar hasHome={true} />
-      <ButtonInActionWrapper win={40}>
-        {gameData.types.map((game) => (
-          <ButtonGame
-            key={Math.random().toString()}
-            color={game.color}
-            background={game.color}
-            choseGame={handleClick.bind(this, game.type)}
-          >
-            {game.type}
-          </ButtonGame>
-        ))}
-      </ButtonInActionWrapper>
-      <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
-      <GameDescription description={gameOptions?.description} />
+      <BetPageWrapper>
+        <BetNumbers>
+          <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
+          <DescriptionTitle>Chose a game</DescriptionTitle>
+          <ButtonInActionWrapper win={40}>
+            {gameData.types.map((game) => (
+              <ButtonGame
+                key={Math.random().toString()}
+                color={game.color}
+                background={game.color}
+                choseGame={handleClick.bind(this, game.type)}
+              >
+                {game.type}
+              </ButtonGame>
+            ))}
+          </ButtonInActionWrapper>
 
-      <NumberPlace>
-        {numbersOfTheGame.length > 0
-          ? numbersOfTheGame.map((number) => {
-              if (chosedNumbers.find((num) => num === number)) {
-                return (
-                  <Numbers
-                    onChoseNumber={handleChoseNumber.bind(this, number)}
-                    isChosed={true}
-                  >
-                    {number}
-                  </Numbers>
-                );
-              }
-              return (
-                <Numbers onChoseNumber={handleChoseNumber.bind(this, number)}>
-                  {number}
-                </Numbers>
-              );
-            })
-          : ""}
-      </NumberPlace>
-      <ButtonInActionWrapper win={64.8}>
-        <ActionButton
-          win={16.4}
-          hei={5.2}
-          color="#27C383"
-          onAction={completeGameHandler}
-        >
-          Complet Game
-        </ActionButton>
-        <ActionButton
-          win={13.5}
-          hei={5.2}
-          color="#27C383"
-          onAction={clearGameHandler}
-        >
-          Clear Game
-        </ActionButton>
-        <ActionButton
-          win={20.9}
-          hei={5.2}
-          backgroung="#27C383"
-          onAction={addGameToCartHandler}
-        >
-          Add to Cart
-        </ActionButton>
-      </ButtonInActionWrapper>
+          <GameDescription description={gameOptions?.description} />
+
+          <NumberPlace>
+            {numbersOfTheGame.length > 0
+              ? numbersOfTheGame.map((number) => {
+                  if (chosedNumbers.find((num) => num === number)) {
+                    return (
+                      <Numbers
+                        onChoseNumber={handleChoseNumber.bind(this, number)}
+                        isChosed={true}
+                      >
+                        {number}
+                      </Numbers>
+                    );
+                  }
+                  return (
+                    <Numbers
+                      onChoseNumber={handleChoseNumber.bind(this, number)}
+                    >
+                      {number}
+                    </Numbers>
+                  );
+                })
+              : ""}
+          </NumberPlace>
+          <ButtonInActionWrapper win={64.8}>
+            <ActionButton
+              win={16.4}
+              hei={5.2}
+              color="#27C383"
+              onAction={completeGameHandler}
+            >
+              Complet Game
+            </ActionButton>
+            <ActionButton
+              win={13.5}
+              hei={5.2}
+              color="#27C383"
+              onAction={clearGameHandler}
+            >
+              Clear Game
+            </ActionButton>
+            <ActionButton
+              win={20.9}
+              hei={5.2}
+              backgroung="#27C383"
+              onAction={addGameToCartHandler}
+            >
+              Add to Cart
+            </ActionButton>
+          </ButtonInActionWrapper>
+        </BetNumbers>
+        <CartWrapper>
+          <CartTitle>Cart</CartTitle>
+          {cartNumbers.map((element) => (
+            <CartItems
+              key={element.id}
+              onRemove={removeItemHandler.bind(this, element.id)}
+              color={element.color}
+            >
+              {element.numbers.toString()}
+            </CartItems>
+          ))}
+        </CartWrapper>
+      </BetPageWrapper>
     </>
   );
 };

@@ -3,7 +3,19 @@ import styled from 'styled-components';
 interface ButtonProps{
     win: number;
 }
+export const BetPageWrapper = styled.div`
+    width: 100vw;
+    /* height: 75vh; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+`;
 
+export const BetNumbers = styled.div`
+    width: 50vw;
+    /* height: 100%; */
+    
+`;
 export const TitleWrapper = styled.h3`
     width: 30.8rem;
     
