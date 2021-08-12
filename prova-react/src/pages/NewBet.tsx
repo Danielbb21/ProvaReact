@@ -3,7 +3,10 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import ActionButton from "../components/ActionButton";
 import ButtonGame from "../components/ButtonGame";
+import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { GameDescription, GameTitle } from "../components/New-Bet";
+import { ButtonInActionWrapper } from "../components/New-Bet/style";
 import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
 import gameData from "../games.json";
@@ -174,19 +177,21 @@ const NewBet: React.FC = () => {
 
   return (
     <>
-      
       <Navbar hasHome={true} />
-      {gameData.types.map((game) => (
-        <ButtonGame
-          key={Math.random().toString()}
-          color={game.color}
-          background={game.color}
-          choseGame={handleClick.bind(this, game.type)}
-        >
-          {game.type}
-        </ButtonGame>
-      ))}
-      <h1>{gameOptions?.description}</h1>
+      <ButtonInActionWrapper win={40}>
+        {gameData.types.map((game) => (
+          <ButtonGame
+            key={Math.random().toString()}
+            color={game.color}
+            background={game.color}
+            choseGame={handleClick.bind(this, game.type)}
+          >
+            {game.type}
+          </ButtonGame>
+        ))}
+      </ButtonInActionWrapper>
+      <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
+      <GameDescription description={gameOptions?.description} />
 
       <NumberPlace>
         {numbersOfTheGame.length > 0
@@ -209,30 +214,32 @@ const NewBet: React.FC = () => {
             })
           : ""}
       </NumberPlace>
-      <ActionButton
-        win={16.4}
-        hei={5.2}
-        color="#27C383"
-        onAction={completeGameHandler}
-      >
-        Complet Game
-      </ActionButton>
-      <ActionButton
-        win={13.5}
-        hei={5.2}
-        color="#27C383"
-        onAction={clearGameHandler}
-      >
-        Clear Game
-      </ActionButton>
-      <ActionButton
-        win={20.9}
-        hei={5.2}
-        backgroung="#27C383"
-        onAction={addGameToCartHandler}
-      >
-        Add to Cart
-      </ActionButton>
+      <ButtonInActionWrapper win={64.8}>
+        <ActionButton
+          win={16.4}
+          hei={5.2}
+          color="#27C383"
+          onAction={completeGameHandler}
+        >
+          Complet Game
+        </ActionButton>
+        <ActionButton
+          win={13.5}
+          hei={5.2}
+          color="#27C383"
+          onAction={clearGameHandler}
+        >
+          Clear Game
+        </ActionButton>
+        <ActionButton
+          win={20.9}
+          hei={5.2}
+          backgroung="#27C383"
+          onAction={addGameToCartHandler}
+        >
+          Add to Cart
+        </ActionButton>
+      </ButtonInActionWrapper>
     </>
   );
 };
