@@ -11,20 +11,38 @@ export const NavbarWrapper = styled.div`
   
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex: 1;
 `;
 
+
+export const NavLogoWrapper = styled.div`
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  
+  align-items: center;
+`;
 
 export const NavLogo =styled.span`
   font-size: 4.4rem;
   color: #707070;
   font-weight: bold;
-  width: 60%;
+  /* width: 100%; */
+  
+  
   font-style: italic;
-  text-align: center;
-  text-align: center;
+  
 `;
 
+export const NavHome = styled(Link)`
+  text-decoration: none;
+  font-size: 2rem;
+  color: #707070;
+  font-weight: bold;
+  justify-content: flex-end;   
+  font-style: italic;
+`
 
 export const NavOptions = styled.div`
   display: flex;

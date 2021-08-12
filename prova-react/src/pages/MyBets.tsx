@@ -9,7 +9,7 @@ const MyBets: React.FC = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar hasHome = {false}/>
         <FilterGame />
         <Footer/>
      
