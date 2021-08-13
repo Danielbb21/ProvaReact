@@ -22,6 +22,9 @@ import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
 import gameData from "../games.json";
 import { VscArrowRight } from "react-icons/vsc";
+import { useAppDispatch, useAppSelector } from "../store/store-hooks";
+import { addToCart } from "../store/CartSlice";
+import { useHistory } from "react-router-dom";
 
 interface Options {
   type: string;
@@ -44,6 +47,9 @@ const NewBet: React.FC = () => {
   const [numbersOfTheGame, setNumbersOfTheGame] = useState<number[]>([]);
   const [chosedNumbers, setChosedNumber] = useState<number[]>([]);
   const [cartNumbers, setCartNumber] = useState<CartOptions[]>([]);
+  const cart = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+  const history = useHistory();
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -206,16 +212,32 @@ const NewBet: React.FC = () => {
     return `R$ ${num.toFixed(2).replace(".", ",")}`;
   };
 
-  const saveGameHandler = () =>{
-    if(totalPrice >= 30){
-      console.log('Game salvo', cartNumbers);
-      setCartNumber([]);
+  const saveGameHandler = () => {
+    if (totalPrice >= 30) {
+      console.log("Game salvo", cartNumbers);
+      cartNumbers.forEach((cart) => {
+        const teste = {
+          id: cart.id,
+          price: cart.price,
+          color: cart.color,
+          typeGame: cart.type,
+          numbers: cart.numbers,
+        };
 
+        dispatch(addToCart(teste));
+      });
+      console.log(
+        "teste",
+        cart.map((car) => car)
+      );
+      setCartNumber([]);
+      history.replace('/my-bets');
+
+      
+    } else {
+      console.log("Valor abaixo do mínimo: 30");
     }
-    else{
-      console.log('Valor abaixo do mínimo: 30');
-    }
-  }
+  };
 
   return (
     <>
@@ -240,7 +262,6 @@ const NewBet: React.FC = () => {
           <GameDescription description={gameOptions?.description} />
 
           <NumberPlace>
-          
             {numbersOfTheGame.length > 0
               ? numbersOfTheGame.map((number) => {
                   if (chosedNumbers.find((num) => num === number)) {
@@ -293,7 +314,7 @@ const NewBet: React.FC = () => {
         <CartWrapper>
           <CartTitle>Cart</CartTitle>
           <CartMax>
-          {totalPrice === 0 && <CartEmptyMessage />}
+            {totalPrice === 0 && <CartEmptyMessage />}
             {cartNumbers.map((element) => (
               <CartItems
                 key={element.id}
@@ -309,8 +330,14 @@ const NewBet: React.FC = () => {
             ))}
           </CartMax>
           <CartPrice>{formatNumberToBePresented(totalPrice)}</CartPrice>
-          
-          <ActionButton hei={9.6} win={31.7} color="#27C383" size="3.5" onAction = {saveGameHandler}>
+
+          <ActionButton
+            hei={9.6}
+            win={31.7}
+            color="#27C383"
+            size="3.5"
+            onAction={saveGameHandler}
+          >
             Save
             <VscArrowRight />
           </ActionButton>
