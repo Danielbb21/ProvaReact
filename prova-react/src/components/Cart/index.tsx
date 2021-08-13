@@ -2,6 +2,7 @@ import React from "react";
 import {
   BetInfo,
   BetNameAndPrice,
+  CartEmptyWraper,
   CartItemsWrapper,
   CartLine,
   CartRemoveButton,
@@ -47,6 +48,14 @@ export const CartPrice: React.FC = (props) => {
       </CartTitle>
     </CartValueWrapper>
   );
+};
+
+export const CartEmptyMessage: React.FC  = (props) =>{
+  return (
+    <CartEmptyWraper>
+      Cart Empty
+    </CartEmptyWraper>
+  )
 };
 
 export default Cart;

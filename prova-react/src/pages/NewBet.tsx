@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import ActionButton from "../components/ActionButton";
 import ButtonGame from "../components/ButtonGame";
-import { CartItems, CartPrice } from "../components/Cart";
+import { CartEmptyMessage, CartItems, CartPrice } from "../components/Cart";
 import {
   CartMax,
   CartNumbers,
@@ -240,6 +240,7 @@ const NewBet: React.FC = () => {
           <GameDescription description={gameOptions?.description} />
 
           <NumberPlace>
+          
             {numbersOfTheGame.length > 0
               ? numbersOfTheGame.map((number) => {
                   if (chosedNumbers.find((num) => num === number)) {
@@ -292,6 +293,7 @@ const NewBet: React.FC = () => {
         <CartWrapper>
           <CartTitle>Cart</CartTitle>
           <CartMax>
+          {totalPrice === 0 && <CartEmptyMessage />}
             {cartNumbers.map((element) => (
               <CartItems
                 key={element.id}
@@ -307,7 +309,7 @@ const NewBet: React.FC = () => {
             ))}
           </CartMax>
           <CartPrice>{formatNumberToBePresented(totalPrice)}</CartPrice>
-          {totalPrice === 0 && <p>Carrinho vazio</p>}
+          
           <ActionButton hei={9.6} win={31.7} color="#27C383" size="3.5" onAction = {saveGameHandler}>
             Save
             <VscArrowRight />

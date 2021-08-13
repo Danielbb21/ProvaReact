@@ -102,4 +102,13 @@ export const CartValueWrapper = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-`
+`;
+
+export const CartEmptyWraper = styled.span`
+    
+    text-align: center;
+    font-size: 2.2rem;
+    color: #707070;
+    font-weight: bold;
+    font-style: italic;
+`;
