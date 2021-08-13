@@ -11,10 +11,13 @@ import ButtonForm from "../ButtonForm";
 import Input from "../Input/index";
 import useForm from "../../hooks/use-form";
 import { useHistory } from "react-router";
+import { useAppSelector } from "../../store/store-hooks";
 
 const FormForgot: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-    const history = useHistory();
+  const users = useAppSelector((state) => state.user.users);
+  const [hasError, setHasError] = useState<boolean>(false);
+  const history = useHistory();
   const {
     value: enteredEmail,
     changeValueHandler: changeEmailHandler,
@@ -26,18 +29,33 @@ const FormForgot: React.FC = () => {
 
   const formIsValid = emailIsValid;
 
+  const validateEmail = (email: string): boolean => {
+    const emailExists = users.find((user) => user.email === email);
+    if (!emailExists) {
+      return false;
+    }
+    return true;
+  };
+
   const submitForgotPasswordHandler = (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      return;
+      let emailExist = validateEmail(enteredEmail);
+      if (!emailExist) {
+        setHasError(true);
+      }
+      else{
+        setHasError(false);
+        history.push('/');
+      }
     }
   };
 
-  const returnPageHandler =() =>{
-    history.push('/');
+  const returnPageHandler = () => {
+    history.push("/");
   };
 
   return (
@@ -54,12 +72,13 @@ const FormForgot: React.FC = () => {
           {emailError && isClicked && (
             <ErrorMessage>Email incorreto</ErrorMessage>
           )}
+          {hasError && <ErrorMessage>Email Not Found</ErrorMessage>}
           <ButtonForm color="#B5C401" position="ok">
             <span>Send Link</span>
             <VscArrowRight />
           </ButtonForm>
         </FormWrapper>
-        <ButtonForm handleClick = {returnPageHandler}>
+        <ButtonForm handleClick={returnPageHandler}>
           <VscArrowLeft />
           Back
         </ButtonForm>
