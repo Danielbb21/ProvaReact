@@ -1,4 +1,3 @@
-import { RootState } from './store';
 import { createSlice,  PayloadAction } from "@reduxjs/toolkit";
 
 interface CartObj{
@@ -8,24 +7,20 @@ interface CartObj{
     price: number;
     color: string;
     numbers: number[];
-    // date?: Date;
+    date?: string;
+}
+interface CartState{
+    items: CartObj[];
 }
 
-
-const initialState: CartObj[] = [
-   { id:'',
-    color: '',
-    
-    price: 0,
-    numbers: [],
-    typeGame: ''
+const initialStateCart: CartState = {
+   items : []
 }
-]
 
 
 export const cartSlice = createSlice({
     name: 'cart',
-    initialState,
+    initialState: initialStateCart,
     reducers:{
         addToCart: (state, action: PayloadAction<CartObj>) =>{
             const cartReturnObject = {
@@ -34,9 +29,9 @@ export const cartSlice = createSlice({
                 price: action.payload.price,
                 typeGame: action.payload.typeGame,
                 numbers: action.payload.numbers,
-                
+                date: action.payload.date
             }
-            state.push(cartReturnObject);
+            state.items.push(cartReturnObject);
         }
     }
 });

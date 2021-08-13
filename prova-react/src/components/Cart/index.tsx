@@ -4,7 +4,7 @@ import {
   BetNameAndPrice,
   CartEmptyWraper,
   CartItemsWrapper,
-  CartLine,
+  
   CartRemoveButton,
   CartTitle,
   CartValueWrapper,
@@ -13,7 +13,7 @@ import {
 import { VscTrash } from "react-icons/vsc";
 interface CartItemsProps {
   color: string;
-  onRemove: () => void;
+  onRemove?: () => void;
   type?: string;
   price?: string;
 }
@@ -25,11 +25,11 @@ const Cart: React.FC = () => {
 export const CartItems: React.FC<CartItemsProps> = (props) => {
   return (
     <CartItemsWrapper>
-      <CartRemoveButton onClick={props.onRemove}>
+     { props.onRemove && <CartRemoveButton onClick={props.onRemove}>
         <VscTrash />
-      </CartRemoveButton>
+      </CartRemoveButton>}
       {/* <CartLine colorLine={props.color} /> */}
-      <BetInfo>
+      <BetInfo borderColor  = {props.color}>
         {props.children}
         <BetNameAndPrice colorWord = {props.color}>
           <span>{props.type}</span>

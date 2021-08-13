@@ -212,9 +212,19 @@ const NewBet: React.FC = () => {
     return `R$ ${num.toFixed(2).replace(".", ",")}`;
   };
 
+  
+  const formatDate = (date: Date): string =>{
+    let month = date.getMonth() +1;
+    let year = date.getFullYear();
+    let day = date.getDay();
+    return day +'/'+month + '/' +year;
+  }
+
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
       console.log("Game salvo", cartNumbers);
+      const date = formatDate(new Date());
+
       cartNumbers.forEach((cart) => {
         const teste = {
           id: cart.id,
@@ -222,13 +232,14 @@ const NewBet: React.FC = () => {
           color: cart.color,
           typeGame: cart.type,
           numbers: cart.numbers,
+          date
         };
 
         dispatch(addToCart(teste));
       });
       console.log(
         "teste",
-        cart.map((car) => car)
+        cart.items.map((car) => car)
       );
       setCartNumber([]);
       history.replace('/my-bets');

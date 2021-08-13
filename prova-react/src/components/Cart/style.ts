@@ -8,6 +8,10 @@ interface BetInfoWordProps{
     colorWord: string;
 }
 
+interface BetInfoProps{
+    borderColor: string;
+}
+
 export const CartWrapper = styled.div` 
     height: 48.4rem;
     width: 31.7rem;
@@ -43,13 +47,13 @@ export const CartItemsWrapper =styled.div`
     
 `;
 
-export const BetInfo = styled.div`
+export const BetInfo = styled.div<BetInfoProps>`
     margin-left: 1.4rem;
     display: flex;
     flex-direction: column;
     
     padding-left: 1.4rem;
-    border-left: 4px solid red;
+    border-left: 4px solid ${(props) => props.borderColor};
    border-radius: .3rem;
 `;
 export const BetNameAndPrice = styled.div<BetInfoWordProps>`
