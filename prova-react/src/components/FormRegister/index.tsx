@@ -4,6 +4,8 @@ import Input from "../Input";
 import { useHistory } from "react-router";
 import { VscArrowRight, VscArrowLeft } from "react-icons/vsc";
 import ButtonForm from "../ButtonForm";
+import {useAppDispatch, useAppSelector} from '../../store/store-hooks';
+import {registerUser} from '../../store/UserSlice';
 
 import {
   ButtonAndForm,
@@ -14,7 +16,9 @@ import {
 
 const FormRegister: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-
+  const dispatch = useAppDispatch();
+  const users = useAppSelector(state =>  state.user.users);
+  const [hasError, setHasError] = useState<boolean>(false);
   const history = useHistory();
 
   const {
@@ -41,13 +45,33 @@ const FormRegister: React.FC = () => {
   } = useForm((value) => value.trim().length !== 0);
 
   const formIsValid = emailIsValid && passwordIsValid && nameIsValid;
+  
+  const verifyUser = (email: string) =>{
+      const emailExits = users.find(user => user.email === email);
+      if(emailExits){
+        return true;
+      }
+  }
 
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      console.log("Valid");
+      
       setIsClicked(false);
+      const user = {
+        id: Math.random().toString(),
+        email: enteredEmail,
+        name: enteredName,
+        password: enteredPassword
+      };
+
+      let userAlreadyBeeingInUse = verifyUser(user.email);
+      if(userAlreadyBeeingInUse){
+        setHasError(true);
+        return;
+      }
+      dispatch(registerUser(user));
       history.push("/");
       return;
     }
@@ -84,7 +108,7 @@ const FormRegister: React.FC = () => {
         {passwordError && isClicked && (
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
-
+        {hasError && <ErrorMessage>This Email is already be in use</ErrorMessage>}
         <ButtonForm color="#B5C401" position="ok">
           <span>Register</span>
           <VscArrowRight />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { VscArrowRight } from "react-icons/vsc";
 import data from "../../games.json";
 import ButtonGame from "../ButtonGame";
@@ -10,7 +10,7 @@ import {
   FilterWord,
   ToNewBetLink,
 } from "./style";
-import { useAppDispatch, useAppSelector } from "../../store/store-hooks";
+import {  useAppSelector } from "../../store/store-hooks";
 import { CartNumbers } from "../Cart/style";
 import { CartItems } from "../Cart";
 

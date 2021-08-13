@@ -4,6 +4,7 @@ import Input from "../Input";
 
 import { VscArrowRight } from "react-icons/vsc";
 import ButtonForm from "../ButtonForm";
+import { useAppSelector } from "../../store/store-hooks";
 
 import {
   ButtonAndForm,
@@ -15,6 +16,8 @@ import {
 import { useHistory } from "react-router";
 
 const Form: React.FC = () => {
+  const users = useAppSelector((state) => state.user.users);
+  const [hasError, setHasError] = useState(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
 
@@ -36,19 +39,41 @@ const Form: React.FC = () => {
 
   const formIsValid = emailIsValid && passwordIsValid;
 
+  const checkUserNotExists = (email: string, password: string): boolean => {
+    console.log(email, password);
+
+    const emailExists = users.find((user) => user.email === email);
+    console.log("user email", emailExists);
+    if (emailExists) {
+      const passwordMatch = emailExists.password === password;
+      console.log('password', emailExists.password === password);
+      if (passwordMatch) {
+        return false;
+      }
+    }
+      return true;
+    
+  };
+
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
       console.log("Valid");
       setIsClicked(false);
-      history.push("/my-bets");
+      const isUserValid = checkUserNotExists(enteredEmail, enteredPassword)
+      setHasError(isUserValid);
+      if(!isUserValid){
+
+        history.replace("/my-bets");
+      }
     }
   };
 
   const redirectToRegisterPageHandler = () => {
     history.push("/register");
   };
+
   return (
     <ButtonAndForm>
       <FormTitle>Authentication</FormTitle>
@@ -71,6 +96,9 @@ const Form: React.FC = () => {
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
         <FormText to="/forget">I forget my password</FormText>
+        { hasError && (
+          <ErrorMessage>Email password combination is wrong</ErrorMessage>
+        )}
         <ButtonForm color="#B5C401" position="ok">
           <span>Log In</span>
           <VscArrowRight />
