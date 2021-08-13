@@ -1,14 +1,20 @@
 import React from "react";
 import {
+  BetInfo,
+  BetNameAndPrice,
   CartItemsWrapper,
   CartLine,
   CartRemoveButton,
+  CartTitle,
+  CartValueWrapper,
   CartWrapper,
 } from "./style";
 import { VscTrash } from "react-icons/vsc";
 interface CartItemsProps {
   color: string;
   onRemove: () => void;
+  type?: string;
+  price?: string;
 }
 
 const Cart: React.FC = () => {
@@ -21,9 +27,25 @@ export const CartItems: React.FC<CartItemsProps> = (props) => {
       <CartRemoveButton onClick={props.onRemove}>
         <VscTrash />
       </CartRemoveButton>
-      <CartLine colorLine={props.color} />
-      {props.children}
+      {/* <CartLine colorLine={props.color} /> */}
+      <BetInfo>
+        {props.children}
+        <BetNameAndPrice colorWord = {props.color}>
+          <span>{props.type}</span>
+          {props.price}
+        </BetNameAndPrice>
+      </BetInfo>
     </CartItemsWrapper>
+  );
+};
+
+export const CartPrice: React.FC = (props) => {
+  return (
+    <CartValueWrapper>
+      <CartTitle>
+        Cart <span>Total: {props.children}</span>
+      </CartTitle>
+    </CartValueWrapper>
   );
 };
 

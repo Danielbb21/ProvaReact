@@ -3,9 +3,13 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import ActionButton from "../components/ActionButton";
 import ButtonGame from "../components/ButtonGame";
-import { CartItems } from "../components/Cart";
-import { CartTitle, CartWrapper } from "../components/Cart/style";
-import Footer from "../components/Footer";
+import { CartItems, CartPrice } from "../components/Cart";
+import {
+  CartMax,
+  CartNumbers,
+  CartTitle,
+  CartWrapper,
+} from "../components/Cart/style";
 import Navbar from "../components/Navbar";
 import { GameDescription, GameTitle } from "../components/New-Bet";
 import {
@@ -17,6 +21,7 @@ import {
 import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
 import gameData from "../games.json";
+import { VscArrowRight } from "react-icons/vsc";
 
 interface Options {
   type: string;
@@ -185,10 +190,32 @@ const NewBet: React.FC = () => {
   };
 
   const removeItemHandler = (id: string) => {
-    console.log("id", id);
-    
     setCartNumber((previus) => previus.filter((cart) => cart.id !== id));
   };
+
+  const cartValue: number[] = [];
+  for (const i of cartNumbers) {
+    cartValue.push(i.price);
+  }
+  console.log("cartValue", cartValue);
+  const totalPrice = cartValue.reduce((next, current) => {
+    return next + current;
+  }, 0);
+
+  const formatNumberToBePresented = (num: number): string => {
+    return `R$ ${num.toFixed(2).replace(".", ",")}`;
+  };
+
+  const saveGameHandler = () =>{
+    if(totalPrice >= 30){
+      console.log('Game salvo', cartNumbers);
+      setCartNumber([]);
+
+    }
+    else{
+      console.log('Valor abaixo do mínimo: 30');
+    }
+  }
 
   return (
     <>
@@ -264,15 +291,27 @@ const NewBet: React.FC = () => {
         </BetNumbers>
         <CartWrapper>
           <CartTitle>Cart</CartTitle>
-          {cartNumbers.map((element) => (
-            <CartItems
-              key={element.id}
-              onRemove={removeItemHandler.bind(this, element.id)}
-              color={element.color}
-            >
-              {element.numbers.toString()}
-            </CartItems>
-          ))}
+          <CartMax>
+            {cartNumbers.map((element) => (
+              <CartItems
+                key={element.id}
+                price={formatNumberToBePresented(element.price)}
+                type={element.type}
+                onRemove={removeItemHandler.bind(this, element.id)}
+                color={element.color}
+              >
+                <CartNumbers>
+                  {element.numbers.sort(comparaNumeros).toString()}
+                </CartNumbers>
+              </CartItems>
+            ))}
+          </CartMax>
+          <CartPrice>{formatNumberToBePresented(totalPrice)}</CartPrice>
+          {totalPrice === 0 && <p>Carrinho vazio</p>}
+          <ActionButton hei={9.6} win={31.7} color="#27C383" size="3.5" onAction = {saveGameHandler}>
+            Save
+            <VscArrowRight />
+          </ActionButton>
         </CartWrapper>
       </BetPageWrapper>
     </>

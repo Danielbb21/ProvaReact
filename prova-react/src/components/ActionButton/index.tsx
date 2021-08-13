@@ -7,6 +7,7 @@ interface ActionButtonProps {
   color?: string;
   backgroung?: string;
   onAction?: () => void;
+  size?: string;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = (props) => {
@@ -17,6 +18,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
       color={props.color}
       background={props.backgroung}
       onClick={props.onAction}
+      size = {props.size}
     >
       {props.children}
     </ButtonActionWrapper>
