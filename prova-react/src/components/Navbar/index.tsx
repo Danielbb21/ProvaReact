@@ -12,15 +12,17 @@ import {
 
 interface NavProps{
   hasHome: boolean;
+  id: string;
 }
 
 const Navbar: React.FC<NavProps>  = (props) => {
+  
   return (
     <NavLine>
       <NavbarWrapper>
         <NavLogoWrapper>
           <NavLogo>TGL</NavLogo>
-          {props.hasHome && <NavHome to = '/my-bets'>Home</NavHome>}
+          {props.hasHome && <NavHome to = {`/my-bets/${props.id}`}>Home</NavHome>}
         </NavLogoWrapper>
         <NavOptions>
           <NavLinks to="/">Account</NavLinks>

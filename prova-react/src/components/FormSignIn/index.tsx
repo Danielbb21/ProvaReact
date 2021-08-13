@@ -64,8 +64,8 @@ const Form: React.FC = () => {
       const isUserValid = checkUserNotExists(enteredEmail, enteredPassword)
       setHasError(isUserValid);
       if(!isUserValid){
-
-        history.replace("/my-bets");
+        const userId= users.find(user => user.email === enteredEmail);
+        history.replace(`/my-bets/${userId?.id}`);
       }
     }
   };

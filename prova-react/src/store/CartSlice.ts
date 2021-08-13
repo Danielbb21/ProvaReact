@@ -8,6 +8,7 @@ interface CartObj{
     color: string;
     numbers: number[];
     date?: string;
+    user_id: string;
 }
 interface CartState{
     items: CartObj[];
@@ -29,7 +30,8 @@ export const cartSlice = createSlice({
                 price: action.payload.price,
                 typeGame: action.payload.typeGame,
                 numbers: action.payload.numbers,
-                date: action.payload.date
+                date: action.payload.date,
+                user_id: action.payload.user_id
             }
             state.items.push(cartReturnObject);
         }

@@ -24,7 +24,7 @@ import gameData from "../games.json";
 import { VscArrowRight } from "react-icons/vsc";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
 import { addToCart } from "../store/CartSlice";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 interface Options {
   type: string;
@@ -42,6 +42,11 @@ interface CartOptions {
   color: string;
 }
 
+interface ParamTypes{
+  id: string;
+}
+
+
 const NewBet: React.FC = () => {
   const [gameOptions, setGameOptions] = useState<Options>();
   const [numbersOfTheGame, setNumbersOfTheGame] = useState<number[]>([]);
@@ -50,6 +55,7 @@ const NewBet: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const history = useHistory();
+  const {id} = useParams<ParamTypes>();
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -232,7 +238,8 @@ const NewBet: React.FC = () => {
           color: cart.color,
           typeGame: cart.type,
           numbers: cart.numbers,
-          date
+          date,
+          user_id: id
         };
 
         dispatch(addToCart(teste));
@@ -242,7 +249,7 @@ const NewBet: React.FC = () => {
         cart.items.map((car) => car)
       );
       setCartNumber([]);
-      history.replace('/my-bets');
+      history.replace(`/my-bets/${id}`);
 
       
     } else {
@@ -252,7 +259,7 @@ const NewBet: React.FC = () => {
 
   return (
     <>
-      <Navbar hasHome={true} />
+      <Navbar hasHome={true} id ={id}/>
       <BetPageWrapper>
         <BetNumbers>
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />

@@ -72,7 +72,7 @@ const FormForgot: React.FC = () => {
           {emailError && isClicked && (
             <ErrorMessage>Email incorreto</ErrorMessage>
           )}
-          {hasError && <ErrorMessage>Email Not Found</ErrorMessage>}
+          { enteredEmail.length > 0 && hasError && <ErrorMessage>Email Not Found</ErrorMessage>}
           <ButtonForm color="#B5C401" position="ok">
             <span>Send Link</span>
             <VscArrowRight />
