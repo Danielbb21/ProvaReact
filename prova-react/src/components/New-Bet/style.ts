@@ -7,7 +7,8 @@ export const BetPageWrapper = styled.div`
     width: 100vw;
     /* height: 75vh; */
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+    margin-top: 7.2rem;
     justify-content: space-evenly;
 `;
 
@@ -17,7 +18,7 @@ export const BetNumbers = styled.div`
     
 `;
 export const TitleWrapper = styled.h3`
-    width: 30.8rem;
+    /* width: 30.8rem; */
     
     font-size: 2.4rem;
     color: #707070;

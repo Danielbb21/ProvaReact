@@ -22,6 +22,7 @@ import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
 import gameData from "../games.json";
 import { VscArrowRight } from "react-icons/vsc";
+import { IoCartOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
 import { addToCart } from "../store/CartSlice";
 import { useHistory, useParams } from "react-router-dom";
@@ -42,10 +43,9 @@ interface CartOptions {
   color: string;
 }
 
-interface ParamTypes{
+interface ParamTypes {
   id: string;
 }
-
 
 const NewBet: React.FC = () => {
   const [gameOptions, setGameOptions] = useState<Options>();
@@ -55,7 +55,7 @@ const NewBet: React.FC = () => {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const history = useHistory();
-  const {id} = useParams<ParamTypes>();
+  const { id } = useParams<ParamTypes>();
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -218,13 +218,12 @@ const NewBet: React.FC = () => {
     return `R$ ${num.toFixed(2).replace(".", ",")}`;
   };
 
-  
-  const formatDate = (date: Date): string =>{
-    let month = date.getMonth() +1;
+  const formatDate = (date: Date): string => {
+    let month = date.getMonth() + 1;
     let year = date.getFullYear();
     let day = date.getDay();
-    return day +'/'+month + '/' +year;
-  }
+    return day + "/" + month + "/" + year;
+  };
 
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
@@ -239,7 +238,7 @@ const NewBet: React.FC = () => {
           typeGame: cart.type,
           numbers: cart.numbers,
           date,
-          user_id: id
+          user_id: id,
         };
 
         dispatch(addToCart(teste));
@@ -250,8 +249,6 @@ const NewBet: React.FC = () => {
       );
       setCartNumber([]);
       history.replace(`/my-bets/${id}`);
-
-      
     } else {
       console.log("Valor abaixo do mínimo: 30");
     }
@@ -259,7 +256,7 @@ const NewBet: React.FC = () => {
 
   return (
     <>
-      <Navbar hasHome={true} id ={id}/>
+      <Navbar hasHome={true} id={id} />
       <BetPageWrapper>
         <BetNumbers>
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
@@ -307,6 +304,7 @@ const NewBet: React.FC = () => {
               win={16.4}
               hei={5.2}
               color="#27C383"
+              border="#27C383"
               onAction={completeGameHandler}
             >
               Complet Game
@@ -316,6 +314,7 @@ const NewBet: React.FC = () => {
               hei={5.2}
               color="#27C383"
               onAction={clearGameHandler}
+              border="#27C383"
             >
               Clear Game
             </ActionButton>
@@ -323,9 +322,11 @@ const NewBet: React.FC = () => {
               win={20.9}
               hei={5.2}
               backgroung="#27C383"
+              border="#27C383"
               onAction={addGameToCartHandler}
             >
-              Add to Cart
+              <IoCartOutline size={25} />
+              <span>Add to Cart</span>
             </ActionButton>
           </ButtonInActionWrapper>
         </BetNumbers>
@@ -353,7 +354,9 @@ const NewBet: React.FC = () => {
             hei={9.6}
             win={31.7}
             color="#27C383"
+            backgroung = '#F4F4F4'
             size="3.5"
+            border="#E2E2E2"
             onAction={saveGameHandler}
           >
             Save

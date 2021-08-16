@@ -18,7 +18,7 @@ export const CartWrapper = styled.div`
     background: #FFFFFF;
     display: flex;
     flex-direction: column;
-    
+    border-radius: 1rem;
 `;
 
 export const CartTitle = styled.h2`
@@ -34,16 +34,16 @@ export const CartTitle = styled.h2`
 `;
 
 export const CartMax = styled.div`
-    /* max-height: 34.4rem; */
+    height: 25.4rem;
     overflow: scroll;
 `;
 export const CartItemsWrapper =styled.div`
     display: flex;
-    /* max-width: 95%; */
+    
     align-items: center;
     margin-bottom: 4rem;
     
-    /* height: 10%;; */
+    
     
 `;
 
@@ -115,4 +115,9 @@ export const CartEmptyWraper = styled.span`
     color: #707070;
     font-weight: bold;
     font-style: italic;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 `;
