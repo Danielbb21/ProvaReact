@@ -8,14 +8,14 @@ export const LogoWrapper = styled.div`
     justify-content: space-between;
     flex: 1;
     @media(max-width: 800px) {
-        height: 25vh;
+        /* height: 25vh; */
         width: 100%;
   }
 
-  @media(max-width: 280px) {
-        height: 1.1rem;
-        width: 90%;
-  }
+  /* @media(max-width: 280px) {
+        /* height: 1.1rem;
+        width: 90%; */
+  /* } */
 
 `;
 
@@ -35,11 +35,11 @@ export const LogoTitle = styled.div`
         font-size: 4.4rem;
     }
   }
-  @media(max-width: 280px) {
+  /* @media(max-width: 280px) {
         h1{
           font-size: 2.8rem;
         }
-  }
+  } */
 
 `;
 

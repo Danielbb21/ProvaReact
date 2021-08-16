@@ -10,34 +10,63 @@ import {
   FilterWord,
   ToNewBetLink,
 } from "./style";
-import {  useAppSelector } from "../../store/store-hooks";
+import { useAppSelector } from "../../store/store-hooks";
 import { CartNumbers } from "../Cart/style";
 import { CartItems } from "../Cart";
+import { useHistory, useLocation } from "react-router-dom";
 
-interface FilterGameProps{
+interface FilterGameProps {
   id: string;
 }
 
+interface CartInterface {
+  id: string;
+  typeGame: string;
+  price: number;
+  color: string;
+  numbers: number[];
+  date?: string;
+  user_id: string;
+}
+
+const sortGame = (arr: CartInterface[], typeOfSort: string | null, id: string) => {
+  console.log("typeOfSort", typeOfSort);
+  if (typeOfSort) {
+    console.log("array", arr.filter(cart => cart.user_id === id));
+    return arr.filter((cart) => cart.typeGame === typeOfSort ).filter(cart2 => cart2.user_id === id);
+  }
+  return arr.filter(cart=> cart.user_id === id);
+};
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const cartRedux = useAppSelector((state) => state.cart);
-  const [cartElements, setCartElements] = useState(cartRedux.items);
-  const users = useAppSelector(state => state.user.users);
-  const {id} = props;
+  const [cartElements, setCartElements] = useState<CartInterface[]>();
+  const users = useAppSelector((state) => state.user.users);
+  const history = useHistory();
+  const location = useLocation();
+  console.log("location", location);
+  const { id } = props;
 
-  useEffect(()=>{
-    
-    setCartElements(cartRedux.items.filter(cartElement => cartElement.user_id === id))
+  const queryParams = new URLSearchParams(location.search);
 
-  }, [cartRedux.items, id]);
-  const filterGame = (typeGame: string) =>{
-    console.log(typeGame);
-    // cartRedux.filter(cart => cart.typeGame === typeGame);
-  //   setCartElements((previus) =>
-  //   previus.find(cart => cart.typeGame === typeGame);
-  // );
-  
-  // setCartElements(cartRedux);
+  const isSortingName = queryParams.get("sort");
+
+  console.log("isSortingGame", isSortingName);
+  // useEffect(() => {
+  //   setCartElements(
+  //     cartRedux.items.filter((cartElement) => cartElement.user_id === id)
+  //   );
+
+  // }, [cartRedux.items, id]);
+
+  const arr = sortGame(cartRedux.items, isSortingName, id);
+
+  const filterGame = (gameName: string) => {
+    if (isSortingName === gameName) {
+      history.push(`/my-bets/${id}?sort=`);
+    } else {
+      history.push(`/my-bets/${id}?sort=${gameName}`);
+    }
   };
 
   return (
@@ -49,7 +78,7 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           <FilterButton>
             {data.types.map((game) => (
               <ButtonGame
-                choseGame = {filterGame.bind(this, game.type)}
+                choseGame={filterGame.bind(this, game.type)}
                 key={Math.random().toString()}
                 color={game.color}
                 background={game.color}
@@ -60,24 +89,22 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           </FilterButton>
         </FilterHeaderContent>
 
-        <ToNewBetLink to= {`/new-bet/${id}`}>
+        <ToNewBetLink to={`/new-bet/${id}`}>
           <span>New Bet</span>
           <VscArrowRight />
         </ToNewBetLink>
       </FilterHeaderWrapper>
-      {cartElements.map((element) => (
-       <CartItems
-       key={element.id}
-       price = {element.price.toString()}
-       type={element.typeGame}
-       
-       color={element.color}
-     >
-       <CartNumbers>
-         {element.numbers.toString()}
-       </CartNumbers>
-     </CartItems>
-      ))}
+      {arr.length === 0 && <h2>No Game found</h2>}
+      {arr.length > 0 ? arr.map((element) => (
+        <CartItems
+          key={element.id}
+          price={element.price.toString()}
+          type={element.typeGame}
+          color={element.color}
+        >
+          <CartNumbers>{element.numbers.toString()}</CartNumbers>
+        </CartItems>
+      )) : ''}
     </>
   );
 };

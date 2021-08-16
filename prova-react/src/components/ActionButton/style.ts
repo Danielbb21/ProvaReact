@@ -21,4 +21,5 @@ export const ButtonActionWrapper = styled.button<ButtonActionProps>`
     &:hover{
         cursor: pointer;
     }
+ 
 `;

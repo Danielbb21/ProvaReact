@@ -26,7 +26,7 @@ export const CartItems: React.FC<CartItemsProps> = (props) => {
   return (
     <CartItemsWrapper>
      { props.onRemove && <CartRemoveButton onClick={props.onRemove}>
-        <VscTrash />
+        <VscTrash size = {25} />
       </CartRemoveButton>}
       {/* <CartLine colorLine={props.color} /> */}
       <BetInfo borderColor  = {props.color}>

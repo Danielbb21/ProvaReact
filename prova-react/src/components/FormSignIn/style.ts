@@ -27,6 +27,7 @@ export const ButtonAndForm = styled.div`
     @media(max-width: 800px) {
         height: 25vh;
         width: 90%;
+        align-items: center;
   }
 
   @media(max-width: 280px) {
@@ -55,6 +56,13 @@ export const FormWrapper = styled.form<FormProps>`
         height: 250px;
         width: 95%;
   }
+
+  @media(max-width: 800px) {
+    height: 250px;
+        /* width: 90%; */
+        align-items: center;
+  }
+
 `;
 
 export const FormText = styled(Link)`

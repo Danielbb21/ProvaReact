@@ -40,7 +40,7 @@ export const CartMax = styled.div`
 export const CartItemsWrapper =styled.div`
     display: flex;
     /* max-width: 95%; */
-    
+    align-items: center;
     margin-bottom: 4rem;
     
     /* height: 10%;; */

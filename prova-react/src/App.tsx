@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
+import Account from "./pages/Account";
 import Home from "./pages/Home";
 import MyBets from "./pages/MyBets";
 import NewBet from "./pages/NewBet";
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route path="/new-bet/:id">
           <NewBet/>
+        </Route>
+        <Route path="/account/:id">
+          <Account/>
         </Route>
       </Switch>
     </div>

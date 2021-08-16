@@ -10,12 +10,15 @@ const HomeWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  height: 35vw;
+  height: 100%;
+  width: 100%;
+  flex: 1;
 
 
-  @media(max-width: 800px) {
+  @media(max-width: 700px) {
     flex-direction: column;
-    /* position: relative; */
+    flex: 1;
+    margin: 0 auto;
   }
   
 `;

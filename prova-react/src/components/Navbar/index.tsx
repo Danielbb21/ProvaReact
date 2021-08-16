@@ -25,7 +25,7 @@ const Navbar: React.FC<NavProps>  = (props) => {
           {props.hasHome && <NavHome to = {`/my-bets/${props.id}`}>Home</NavHome>}
         </NavLogoWrapper>
         <NavOptions>
-          <NavLinks to="/">Account</NavLinks>
+          <NavLinks to={`/account/${props.id}`}>Account</NavLinks>
           <NavLinks to="/">
             {" "}
             <span>Sair</span>
