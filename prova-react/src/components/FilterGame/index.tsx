@@ -98,7 +98,7 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
         <CartItems
           key={element.id}
           size = '2'
-          price={element.price.toString()}
+          price={element.price.toFixed(2).toString().replace('.', ',')}
           type={element.typeGame}
           color={element.color}
           isList = {true}

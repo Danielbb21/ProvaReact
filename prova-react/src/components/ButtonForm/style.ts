@@ -32,7 +32,18 @@ export const FormButonWrapper = styled.button<ButtonProps>`
     &:hover{
         cursor: pointer;
     }
+    @media(max-width: 1000px) {
+        height: 4.5rem;
+        font-size: 2.4rem;
+        span{
+            font-size: 2.4rem;
+        }
+  }
     @media(max-width: 800px) {
         height: 4.5rem;
+        font-size: 1.8rem;
+        span{
+            font-size: 1.8rem;
+        }
   }
 `;

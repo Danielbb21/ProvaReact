@@ -26,13 +26,13 @@ export const ButtonAndForm = styled.div`
     flex: 1;
 
     @media(max-width: 800px) {
-        height: 25vh;
+        height: 100vh;
         width: 90%;
         align-items: center;
   }
 
   @media(max-width: 280px) {
-        height: 1.1rem;
+        /* height: 1.1rem; */
         width: 90%;
         margin-top: 10rem;
   }
@@ -68,11 +68,11 @@ export const FormWrapper = styled.form<FormProps>`
 
 export const FormText = styled(Link)`
     align-self: flex-end;
-    font-size:17px;
+    font-size: 1.7rem;
     text-decoration: none;
-    margin-right: 27px;
+    margin-right: 2.7rem;
     color:#C1C1C1;
-    margin-top: 26px;
+    margin-top: 2.6rem;
 
 `;
 
@@ -82,4 +82,10 @@ export const FormText = styled(Link)`
 export const ErrorMessage = styled.span`
     font-size: 1.5rem;
     color: red;
+    font-weight: bold;
+    font-style: italic;
+    @media(max-width: 800px) {
+      font-size: 1rem;
+  }
+    
 `

@@ -116,7 +116,7 @@ const FormRegister: React.FC = () => {
       </FormWrapper>
       <ButtonForm handleClick={returnPageHandler}>
         <VscArrowLeft />
-        Back
+        <span>Back</span>
       </ButtonForm>
     </ButtonAndForm>
   );

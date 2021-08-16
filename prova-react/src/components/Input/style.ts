@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const InputWrapper = styled.input`
     padding-bottom: 1.5rem;
     padding-top: 2.5rem;
-    padding-left:3rem;
+    padding-left: 1.5rem;
     border: none;
     font-size: 1.7rem;
     border-bottom: .2rem solid #EBEBEB;
@@ -22,9 +22,20 @@ export const InputWrapper = styled.input`
          
     }
 
-    @media(max-width: 280px) {
-        height: auto;
-        width: 100%;
+    @media(max-width: 800px) {
+        
+        padding-bottom: .5rem;
+    padding-top: 1.5rem;
   }
+    /* @media(max-width: 600px) {
+        
+        width:  100%;
+        padding-left:1.5rem;
+  }
+  @media(max-width: 1024px) {
+        
+        width:  100%;
+        padding-left:1.5rem;
+  } */
 
 `;

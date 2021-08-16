@@ -26,6 +26,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
 import { addToCart } from "../store/CartSlice";
 import { useHistory, useParams } from "react-router-dom";
+import { ErrorMessage } from "../components/FormSignIn/style";
 
 interface Options {
   type: string;
@@ -56,6 +57,7 @@ const NewBet: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -138,9 +140,12 @@ const NewBet: React.FC = () => {
       return false;
     }
     if (isAlreadyIntheLimit) {
-      console.log("You already chosed all the numbers");
+      
+      
+      setErrorMessage('You already chosed all the numbers');
       return false;
     }
+    setErrorMessage('');
     return true;
   };
 
@@ -183,7 +188,8 @@ const NewBet: React.FC = () => {
 
   const addGameToCartHandler = () => {
     if (chosedNumbers.length !== gameOptions?.["max-number"]) {
-      console.log("ainda faltam números no jogo");
+      
+      setErrorMessage('Still missing numbers in your game')
       return;
     }
     setCartNumber((previus) => {
@@ -195,6 +201,7 @@ const NewBet: React.FC = () => {
         price: gameOptions.price,
         type: gameOptions.type,
       });
+      setErrorMessage('');
       return newArray;
     });
 
@@ -250,7 +257,8 @@ const NewBet: React.FC = () => {
       setCartNumber([]);
       history.replace(`/my-bets/${id}`);
     } else {
-      console.log("Valor abaixo do mínimo: 30");
+      // console.log("Valor abaixo do mínimo: 30");
+      setErrorMessage('Value of game is lower than R$ 30,00')
     }
   };
 
@@ -329,6 +337,7 @@ const NewBet: React.FC = () => {
               <span>Add to Cart</span>
             </ActionButton>
           </ButtonInActionWrapper>
+          {errorMessage.length > 0  && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </BetNumbers>
         <CartWrapper>
           <CartTitle>Cart</CartTitle>
@@ -363,6 +372,7 @@ const NewBet: React.FC = () => {
             Save
             <VscArrowRight />
           </ActionButton>
+          
         </CartWrapper>
       </BetPageWrapper>
     </>

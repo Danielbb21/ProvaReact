@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const FooterWrapeer = styled.div`
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 3.5rem;
+    /* height: 10vh; */
 
     border-top: 2px solid #EBEBEB;
     text-align: center;
@@ -18,4 +18,4 @@ export const FooterWrapeer = styled.div`
         height: 0.1vh;
     }
 
-`
+`;

@@ -31,7 +31,7 @@ const Register: React.FC = () => {
         <FormRegister />
         
       </HomeWrapper>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
