@@ -1,37 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Form from "../components/FormSignIn";
 
 import Logo from "../components/Logo";
 
-const HomeWrapper = styled.div`
-  display: flex;
-  /* align-items: center; */
-  /* justify-content: space-evenly; */
-  /* height: 50vh; */
-  width: 100%;
-  flex: 1;
-
-  margin-top: 15.4rem;
-  @media(max-width: 700px) {
-    margin-top: 0rem;
-    flex-direction: column;
-    flex: 1;
-    align-items: center;
-    /* margin: 0 auto; */
-  }
-  
-`;
 
 const Home: React.FC = () => {
   return (
     <>
-      <HomeWrapper>
+      <Card>
         <Logo />
         <Form />
         
-      </HomeWrapper>
+      </Card>
       {/* <Footer /> */}
     </>
   );
