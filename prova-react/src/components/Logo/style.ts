@@ -22,7 +22,7 @@ export const LogoWrapper = styled.div`
 
 export const LogoTitle = styled.div`
   width: 24.4rem;
-  height: 21.7rem;
+  /* height: 21.7rem; */
 
   h1 {
     margin: 0;
@@ -53,16 +53,18 @@ export const LogoCircle = styled.div`
     text-align: center;
     width: 14.4rem;
     height:3.9rem;
-    /* margin-top:10rem; */
+    margin-top: 3rem;
+    margin-bottom: 2rem;
     border-radius: 10rem;
     background: #B5C401;
     display: flex;
     align-items: center;
     justify-content: center;
+
     @media(max-width: 800px) {
         width: 8.4rem;
     height:1.9rem;
-    margin-top: 1.4rem;
+   
   }
     span{
         font-weight: bold;
@@ -72,6 +74,7 @@ export const LogoCircle = styled.div`
     }
     @media(max-width: 800px) {
        span{
+        
         font-size: 1.3rem;
             
         }
@@ -95,7 +98,7 @@ export const LotoWord = styled.div`
     @media(max-width: 800px) {
         h1{
           margin:0;
-        font-size: 2.3rem;
+          font-size: 4.4rem;
             
         }
   }

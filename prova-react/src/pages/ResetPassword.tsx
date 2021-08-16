@@ -9,13 +9,15 @@ import Logo from "../components/Logo";
 const HomeWrapper = styled.div`
   display: flex;
   /* align-items: center; */
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   /* height: 50vh; */
   width: 100%;
   flex: 1;
+  align-items: center;
 
   margin-top: 15.4rem;
   @media(max-width: 700px) {
+    margin-top: 0rem;
     flex-direction: column;
     flex: 1;
     margin: 0 auto;

@@ -34,8 +34,9 @@ export const ButtonAndForm = styled.div`
   @media(max-width: 280px) {
         /* height: 1.1rem; */
         width: 90%;
-        margin-top: 10rem;
+        /* margin-top: 10rem; */
   }
+ 
 
 `;
 
@@ -62,6 +63,13 @@ export const FormWrapper = styled.form<FormProps>`
     height: 250px;
         /* width: 90%; */
         align-items: center;
+  }
+  @media(max-height: 600px) {
+        /* height: 1.1rem; */
+        width: 90%;
+        /* margin-top: 10rem; */
+        height: 22rem;
+        /* background-color: red; */
   }
 
 `;
