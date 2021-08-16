@@ -14,6 +14,7 @@ export const UserInfoWrapper = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    word-wrap: break-word;
    
 `;
 
@@ -25,8 +26,11 @@ export const UserInfoTitle = styled.span`
     color: #707070;
     font-size: 2.8rem;
 
-    @media(max-width: 800px) {
+    @media(max-width: 600px) {
+        /* margin: 0 auto;
+         */
         font-size: 1.4rem;
+        text-align: center;
     }
 `;
 export const UserLabel = styled.div`
@@ -41,6 +45,11 @@ export const UserLabel = styled.div`
         padding: 1rem;
         border-radius: .6rem;
 
+    }
+    @media(max-width: 600px) {
+        /* margin: 0 auto;
+         */
+        font-size: 1.2rem;
     }
 
 `;

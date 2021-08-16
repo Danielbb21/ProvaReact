@@ -92,7 +92,7 @@ const UserInfo: React.FC<UserinfoProps> = (props) => {
         {userGameInfo.map((user) => {
           return (
             <UserLabel>
-              {user.type}:<span>{!perPrice? user.quantity: `R$ ${user.price?.toFixed(2).toString().replace('.', ',')}`}</span>
+              {user.type}:  <span>{!perPrice? user.quantity: `R$ ${user.price?.toFixed(2).toString().replace('.', ',')}`}</span>
             </UserLabel>
           );
         })}

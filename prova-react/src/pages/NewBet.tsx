@@ -337,12 +337,13 @@ const NewBet: React.FC = () => {
             {cartNumbers.map((element) => (
               <CartItems
                 key={element.id}
+
                 price={formatNumberToBePresented(element.price)}
                 type={element.type}
                 onRemove={removeItemHandler.bind(this, element.id)}
                 color={element.color}
               >
-                <CartNumbers>
+                <CartNumbers wid = '80'>
                   {element.numbers.sort(comparaNumeros).toString()}
                 </CartNumbers>
               </CartItems>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface ButtonProps{
+interface ButtonProps {
     win: number;
 }
 export const BetPageWrapper = styled.div`
@@ -10,6 +10,14 @@ export const BetPageWrapper = styled.div`
     
     margin-top: 7.2rem;
     justify-content: space-evenly;
+    @media(max-width: 1111px) {
+        /* margin: 0 auto;
+         */
+        /* justify-content: center; */
+        flex-direction: column;
+        /* flex-direction: row; */
+      
+    }
 `;
 
 export const BetNumbers = styled.div`
@@ -51,7 +59,7 @@ export const DescriptionInfo = styled.span`
 
 export const ButtonInActionWrapper = styled.div<ButtonProps>`
     display: flex;
-    width: ${(props) => props.win+ 'rem' };
+    width: ${(props) => props.win + 'rem'};
     align-items: center;
     justify-content: space-between;
 `;

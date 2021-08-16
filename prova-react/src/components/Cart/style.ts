@@ -21,6 +21,16 @@ export const CartWrapper = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
+    @media(max-width: 1111px) {
+        
+        /* margin: 0 auto;
+         */
+        /* order: 1; */
+        width: 31.7rem;
+        margin-left: 50%;
+        margin-top: 2.7rem;
+        /* flex-direction: column; */
+    }  
 `;
 
 export const CartTitle = styled.h2`
@@ -37,6 +47,7 @@ export const CartTitle = styled.h2`
 
 export const CartMax = styled.div`
     height: 25.4rem;
+    width: 100%;
     overflow: scroll;
 `;
 export const CartItemsWrapper =styled.div`
@@ -44,8 +55,6 @@ export const CartItemsWrapper =styled.div`
     
     align-items: center;
     margin-bottom: 4rem;
-    
-    
     
 `;
 
