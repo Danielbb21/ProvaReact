@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 7.3rem;
+  margin-left: 14.1rem;
+  justify-content: flex-start;
+`;
 
 export const FilterHeaderWrapper = styled.div`
-
+    
     display: flex;
     /* width: 100%; */
     @media(max-width: 800px) {
@@ -34,7 +41,7 @@ export const FilterTitle = styled.span`
     font-weight: bold;
     font-style: italic;
     margin-right:4.5rem;
-    margin-left:4.5rem;
+    margin-bottom: 3.5rem;
 
     @media(max-width: 800px) {
         font-size: 1.8rem;

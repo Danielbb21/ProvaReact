@@ -9,13 +9,17 @@ import {
   CartTitle,
   CartValueWrapper,
   CartWrapper,
+  DateAndPriceWrapper,
 } from "./style";
 import { VscTrash } from "react-icons/vsc";
 interface CartItemsProps {
   color: string;
   onRemove?: () => void;
   type?: string;
+  size?: string;
   price?: string;
+  isList?:boolean;
+  date?:string;
 }
 
 const Cart: React.FC = () => {
@@ -28,13 +32,23 @@ export const CartItems: React.FC<CartItemsProps> = (props) => {
      { props.onRemove && <CartRemoveButton onClick={props.onRemove}>
         <VscTrash size = {25} />
       </CartRemoveButton>}
-      {/* <CartLine colorLine={props.color} /> */}
-      <BetInfo borderColor  = {props.color}>
+      
+      <BetInfo borderColor  = {props.color} isList = {props.isList}>
         {props.children}
-        <BetNameAndPrice colorWord = {props.color}>
+        {!props.isList && <BetNameAndPrice colorWord = {props.color} size = {props.size}>
           <span>{props.type}</span>
           {props.price}
+        </BetNameAndPrice>}
+        {props.isList && 
+        <>
+        <DateAndPriceWrapper>
+          {props.date} - (R$ {props.price})
+        </DateAndPriceWrapper>
+        <BetNameAndPrice colorWord = {props.color} size = {props.size}>
+          <span>{props.type}</span>
+          
         </BetNameAndPrice>
+        </>}
       </BetInfo>
     </CartItemsWrapper>
   );
@@ -57,5 +71,7 @@ export const CartEmptyMessage: React.FC  = (props) =>{
     </CartEmptyWraper>
   )
 };
+
+
 
 export default Cart;

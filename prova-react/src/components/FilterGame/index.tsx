@@ -4,6 +4,7 @@ import data from "../../games.json";
 import ButtonGame from "../ButtonGame";
 import {
   FilterButton,
+  FilterContainer,
   FilterHeaderContent,
   FilterHeaderWrapper,
   FilterTitle,
@@ -70,7 +71,7 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   };
 
   return (
-    <>
+    <FilterContainer >
       <FilterHeaderWrapper>
         <FilterHeaderContent>
           <FilterTitle>Recent Games</FilterTitle>
@@ -98,14 +99,17 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
       {arr.length > 0 ? arr.map((element) => (
         <CartItems
           key={element.id}
+          size = '2'
           price={element.price.toString()}
           type={element.typeGame}
           color={element.color}
+          isList = {true}
+          date = {element.date}
         >
-          <CartNumbers>{element.numbers.toString()}</CartNumbers>
+          <CartNumbers wid = '100' size = '2'>{element.numbers.toString()}</CartNumbers>
         </CartItems>
       )) : ''}
-    </>
+    </FilterContainer>
   );
 };
 

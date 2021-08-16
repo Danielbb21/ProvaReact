@@ -8,7 +8,7 @@ export const NavLine = styled.div`
 export const NavbarWrapper = styled.div`
   width: 80%;
 
-  
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,10 +17,10 @@ export const NavbarWrapper = styled.div`
 
 
 export const NavLogoWrapper = styled.div`
-  width: 60%;
+  /* width: 60%;s */
   display: flex;
   justify-content: space-evenly;
-  
+  margin-left: 14.1rem;
   align-items: center;
 `;
 
@@ -42,6 +42,7 @@ export const NavHome = styled(Link)`
   font-weight: bold;
   justify-content: flex-end;   
   font-style: italic;
+  margin-left: 7.4rem;
 `
 
 export const NavOptions = styled.div`

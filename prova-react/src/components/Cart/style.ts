@@ -6,10 +6,12 @@ interface LineProps{
 
 interface BetInfoWordProps{
     colorWord: string;
+    size?: string;
 }
 
 interface BetInfoProps{
     borderColor: string;
+    isList?: boolean;
 }
 
 export const CartWrapper = styled.div` 
@@ -47,28 +49,42 @@ export const CartItemsWrapper =styled.div`
     
 `;
 
+export const DateAndPriceWrapper = styled.span`  
+
+    color: #868686;
+    font-size: 1.7rem;
+    font-weight: normal;
+    margin-top: 1.5rem;
+    margin-bottom:1.1rem;
+`;
+
 export const BetInfo = styled.div<BetInfoProps>`
-    margin-left: 1.4rem;
+
+    margin-left: ${props => props.isList ? '0rem' : '1.4rem'};
+    height: ${props => props.isList? '9.4rem' : ''};
     display: flex;
     flex-direction: column;
     
     padding-left: 1.4rem;
     border-left: 4px solid ${(props) => props.borderColor};
    border-radius: .3rem;
+   
 `;
 export const BetNameAndPrice = styled.div<BetInfoWordProps>`
     /* width: 90%; */
     color: #868686;
     
     display: flex;
-    font-size: 1.6rem;
-    font-weight: normal;
+    font-size: ${props => props.size ? props.size + 'rem' : '1.6rem'};
+    font-weight: ${props => props.size ? 'bold' : 'normal'};
+    font-style:${props => props.size ? 'italic' : ''};
     
     span{
         color: ${(props) => props.colorWord};
         font-weight: bold;
         font-style: italic;
         margin-right: .4rem;
+
     }
 
 `;
@@ -92,9 +108,15 @@ export const CartLine = styled.div<LineProps>`
     /* margin: 0 1.2rem; */
 `
 
-export const CartNumbers = styled.span`
-        width: 90%;  
-    font-size:1.5rem;
+interface CartNumberProps{
+    wid?: string;
+    size?: string;
+
+}
+
+export const CartNumbers = styled.span<CartNumberProps>`
+    width:${(props) => props.wid ? props.wid+'%' : '90%'} ;  
+    font-size: ${(props) => props.size ? props.size + 'rem' : '1.5rem'};
     font-style: italic;
     font-weight: bold;
     word-wrap: break-word;

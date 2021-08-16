@@ -221,7 +221,7 @@ const NewBet: React.FC = () => {
   const formatDate = (date: Date): string => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    let day = date.getDay();
+    let day = date.toDateString().split(' ')[2];
     return day + "/" + month + "/" + year;
   };
 
