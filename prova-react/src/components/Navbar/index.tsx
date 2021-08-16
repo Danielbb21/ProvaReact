@@ -13,6 +13,7 @@ import {
 interface NavProps{
   hasHome: boolean;
   id: string;
+  hasNav?: boolean;
 }
 
 const Navbar: React.FC<NavProps>  = (props) => {
@@ -25,7 +26,7 @@ const Navbar: React.FC<NavProps>  = (props) => {
           {props.hasHome && <NavHome to = {`/my-bets/${props.id}`}>Home</NavHome>}
         </NavLogoWrapper>
         <NavOptions>
-          <NavLinks to={`/account/${props.id}`}>Account</NavLinks>
+          {!props.hasNav &&  <NavLinks to={`/account/${props.id}`}>Account</NavLinks>}
           <NavLinks to="/">
             {" "}
             <span>Sair</span>

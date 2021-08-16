@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import UserInfo from "../components/UserInfo";
 import { useAppSelector } from "../store/store-hooks";
 
 interface ParamTypes {
@@ -50,12 +51,9 @@ const Account: React.FC = () => {
  const money = formatMoneyToBepresented(totalMoney);
 
   return (
-    <>
-      <h1>Email: {userInfo?.email}</h1>
-      <h1>Nome: {userInfo?.name}</h1>
-      <h1>Total Of Games: {cartInfo.length}</h1>
-      <h1>Total Gasto: R$ {money}</h1>
-    </>
+    <UserInfo id = {id}>
+     
+    </UserInfo>
   );
 };
 

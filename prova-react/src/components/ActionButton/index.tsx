@@ -9,6 +9,7 @@ interface ActionButtonProps {
   onAction?: () => void;
   size?: string;
   border: string;
+  end?: boolean;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = (props) => {
@@ -21,6 +22,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
       onClick={props.onAction}
       size = {props.size}
       border = {props.border}
+      end = {props.end}
     >
       {props.children}
     </ButtonActionWrapper>
