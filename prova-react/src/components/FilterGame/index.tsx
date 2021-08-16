@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { VscArrowRight } from "react-icons/vsc";
 import data from "../../games.json";
 import ButtonGame from "../ButtonGame";
@@ -41,8 +41,6 @@ const sortGame = (arr: CartInterface[], typeOfSort: string | null, id: string) =
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const cartRedux = useAppSelector((state) => state.cart);
-  const [cartElements, setCartElements] = useState<CartInterface[]>();
-  const users = useAppSelector((state) => state.user.users);
   const history = useHistory();
   const location = useLocation();
   console.log("location", location);

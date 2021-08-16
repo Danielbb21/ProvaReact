@@ -8,13 +8,13 @@ import Logo from "../components/Logo";
 
 const HomeWrapper = styled.div`
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-evenly;
-  height: 100%;
+  /* height: 50vh; */
   width: 100%;
   flex: 1;
 
-
+  margin-top: 15.4rem;
   @media(max-width: 700px) {
     flex-direction: column;
     flex: 1;

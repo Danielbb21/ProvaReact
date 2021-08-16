@@ -8,6 +8,7 @@ interface FormProps{
 
 export const FormTitle = styled.h3`
     font-size: 35px;
+    margin: 0;
     text-align: center;
     color: #707070;
     @media(max-width: 280px) {
