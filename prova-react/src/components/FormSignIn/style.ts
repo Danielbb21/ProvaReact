@@ -7,12 +7,12 @@ interface FormProps{
 
 
 export const FormTitle = styled.h3`
-    font-size: 35px;
+    font-size: 3.5rem;
     margin: 0;
     text-align: center;
     color: #707070;
     @media(max-width: 280px) {
-        font-size: 2.8rem;
+        /* font-size: 2.8rem; */
   }
 
 `;
@@ -26,14 +26,19 @@ export const ButtonAndForm = styled.div`
     flex: 1;
 
     @media(max-width: 800px) {
-        height: 100vh;
+        
+        /* height: 45.4rem; */
         width: 90%;
         align-items: center;
+        /* justify-content: center; */
+        /* justify-content: center; */
+        
   }
 
   @media(max-width: 280px) {
         /* height: 1.1rem; */
         width: 90%;
+        /* height: 45.4rem; */
         /* margin-top: 10rem; */
   }
  
@@ -94,6 +99,7 @@ export const ErrorMessage = styled.span`
     font-style: italic;
     @media(max-width: 800px) {
       font-size: 1rem;
+      margin:0;
   }
     
 `

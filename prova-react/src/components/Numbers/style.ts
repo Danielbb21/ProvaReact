@@ -7,13 +7,17 @@ interface NumberProps{
 export const NumberPlace = styled.div`
     display: flex;
     flex-direction: row;
-    
+
     max-width: 67rem;
     /* height: 100%; */
     width: 64.4rem;
     margin-top: 2.7rem;
     margin-bottom: 4.4rem;
     flex-wrap: wrap;
+
+    @media(max-width: 1111px) {
+        max-width: 50rem;
+    }
 `;
 export const NumbersWrapper = styled.div<NumberProps>`
     width:6.3rem;

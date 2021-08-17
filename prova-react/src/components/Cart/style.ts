@@ -27,7 +27,7 @@ export const CartWrapper = styled.div`
          */
         /* order: 1; */
         width: 31.7rem;
-        margin-left: 50%;
+        
         margin-top: 2.7rem;
         /* flex-direction: column; */
     }  

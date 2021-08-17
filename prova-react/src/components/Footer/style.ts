@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const FooterWrapeer = styled.div`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    /* height: 10vh; */
+     position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   /* height: 10vh; */
+   text-align: center;
 
     border-top: 2px solid #EBEBEB;
     text-align: center;
@@ -13,9 +14,11 @@ export const FooterWrapeer = styled.div`
     span{
         color: #707070;
         font-size: 1.5rem;
+        padding-bottom: 2.8rem;
+        
     }
     @media(max-width: 280px) {
-        height: 0.1vh;
+        /* height: 0.1vh; */
     }
 
 `;

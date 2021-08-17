@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const NavLine = styled.div`
   width: 100vw;
+
   border-bottom: 2px solid #ebebeb;
 `
 export const NavbarWrapper = styled.div`
@@ -13,6 +14,7 @@ export const NavbarWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  
 `;
 
 
@@ -21,6 +23,7 @@ export const NavLogoWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin-left: 14.1rem;
+  
   align-items: center;
 `;
 

@@ -14,7 +14,7 @@ export const BetPageWrapper = styled.div`
         /* margin: 0 auto;
          */
         /* justify-content: center; */
-        flex-direction: column;
+        flex-direction: column-reverse;
         /* flex-direction: row; */
       
     }
@@ -32,7 +32,7 @@ export const TitleWrapper = styled.h3`
     color: #707070;
     font-weight: bold;
     font-style: italic;
-
+    width: 100vw;
     span{
         font-weight: lighter;
     }

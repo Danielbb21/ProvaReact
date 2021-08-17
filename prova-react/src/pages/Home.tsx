@@ -15,7 +15,7 @@ const Home: React.FC = () => {
         <Form />
         
       </Card>
-      {/* <Footer /> */}
+      {/* <Footer />   */}
     </>
   );
 };

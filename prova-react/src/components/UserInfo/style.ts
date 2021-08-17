@@ -29,7 +29,7 @@ export const UserInfoTitle = styled.span`
     @media(max-width: 600px) {
         /* margin: 0 auto;
          */
-        font-size: 1.4rem;
+        /* font-size: 1.4rem; */
         text-align: center;
     }
 `;
@@ -49,7 +49,7 @@ export const UserLabel = styled.div`
     @media(max-width: 600px) {
         /* margin: 0 auto;
          */
-        font-size: 1.2rem;
+        /* font-size: 1.2rem; */
     }
 
 `;

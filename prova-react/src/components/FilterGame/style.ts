@@ -7,16 +7,23 @@ export const FilterContainer = styled.div`
   margin-top: 7.3rem;
   margin-left: 14.1rem;
   justify-content: flex-start;
+  @media(max-width: 800px) {
+        /* width: 50%; */
+    margin: 0;
+
+  }
 `;
 
 export const FilterHeaderWrapper = styled.div`
     
     display: flex;
     /* width: 100%; */
-    @media(max-width: 800px) {
-        width: 50%;
+    @media(max-width: 800px) {  
         align-items: center;
-
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin-top: 1.4rem;
+        margin-bottom: 1.4rem;
   }
     
 `
@@ -30,7 +37,11 @@ export const FilterHeaderContent = styled.div`
 
     @media(max-width: 800px) {
       flex-direction: column;
-      width: 50%;
+      /* width: 50%; */
+      justify-content: center;
+      align-items: center;
+      margin :0;
+      
       
   }
 `;
@@ -46,6 +57,9 @@ export const FilterTitle = styled.span`
     @media(max-width: 800px) {
         font-size: 1.8rem;
         align-items: center;
+        margin: 0;
+        
+        text-align: center;
   }
 `;
 export const FilterWord = styled.span`
@@ -54,6 +68,10 @@ export const FilterWord = styled.span`
     color: #868686;
 
     margin-right: 1.7rem;
+    @media(max-width: 800px) {
+       margin: 1.4rem 0;
+       
+  }
 `;
 
 export const FilterButton = styled.div`
@@ -63,6 +81,8 @@ export const FilterButton = styled.div`
     @media(max-width: 800px) {
        flex-direction: column;
        height: 14rem;
+       /* justify-content: center; */
+       align-items: center;
   }
 `;
 
@@ -77,6 +97,15 @@ export const ToNewBetLink = styled(Link)`
         padding-right:.3rem;
     }
     @media(max-width: 700px) {
-       justify-content: flex-end;
+      
+       /* justify-content: flex-end; */
+        margin-bottom: 1.4rem;
+        /* margin-left: -3rem; */
+        justify-content: flex-end;  
+        align-items: flex-end;  
+        span{
+          margin: 0;
+
+        }
   }
 `;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardWrapper = styled.div`
   display: flex;
-
+  height: 90%;
   width: 100%;
   flex: 1;
 
@@ -11,6 +11,7 @@ export const CardWrapper = styled.div`
     margin-top: 0rem;
     flex-direction: column;
     flex: 1;
+    
     align-items: center;
     
   }
