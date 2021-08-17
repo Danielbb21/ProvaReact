@@ -10,6 +10,7 @@ interface ActionButtonProps {
   size?: string;
   border: string;
   end?: boolean;
+  isSave?:boolean;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = (props) => {
@@ -23,6 +24,7 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
       size = {props.size}
       border = {props.border}
       end = {props.end}
+      isSave = {props.isSave}
     >
       {props.children}
     </ButtonActionWrapper>

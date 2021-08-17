@@ -5,20 +5,17 @@ export const LogoWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
     height: 100%;
+   
     flex: 1;
     @media(max-width: 800px) {
-        /* height: 25vh; */
+        justify-content: center;
         width: 100%;
         
         
   }
 
-  /* @media(max-width: 280px) {
-        /* height: 1.1rem;
-        width: 90%; */
-  /* } */
 
 `;
 

@@ -8,10 +8,11 @@ interface ButtonActionProps {
     size?: string;
     border: string;
     end?: boolean;
+    isSave?: boolean;
 }
 
 export const ButtonActionWrapper = styled.button<ButtonActionProps>`
-    width: ${(props) => props.win + 'rem'};
+    width: ${(props) => props.isSave ? '100%' : props.win + 'rem'};
     height:${(props) => props.hei + 'rem'};
     display: flex;
     align-items: center;
@@ -31,4 +32,5 @@ export const ButtonActionWrapper = styled.button<ButtonActionProps>`
         margin-left: 1.4rem;
     }
  
+   
 `;

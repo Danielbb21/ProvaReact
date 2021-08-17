@@ -16,12 +16,13 @@ export const NumberPlace = styled.div`
     flex-wrap: wrap;
 
     @media(max-width: 1111px) {
-        max-width: 50rem;
+        width: 90%;
+        /* max-width: 50rem; */
     }
 `;
 export const NumbersWrapper = styled.div<NumberProps>`
     width:6.3rem;
-    margin: 0.3rem;
+    margin: 1rem 0.6rem;
    
       
     height: 6.5rem;

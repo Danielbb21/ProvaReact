@@ -11,7 +11,14 @@ const GlobalStyle = createGlobalStyle`
   html{
     font-size: 62.5%;
   }
-  @media(max-width: 800px) {
+  
+  @media(max-width: 1024px) {
+        
+        html{
+          font-size: 50%;
+        }
+  }
+  @media(max-width: 812px) {
         
         html{
           font-size: 40%;
@@ -20,7 +27,7 @@ const GlobalStyle = createGlobalStyle`
   @media(min-height: 1024px) {
         
         html{
-          font-size: 75%;
+          font-size: 85%;
         }
   }
 

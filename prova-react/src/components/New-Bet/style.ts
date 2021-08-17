@@ -4,15 +4,18 @@ interface ButtonProps {
     win: number;
 }
 export const BetPageWrapper = styled.div`
-    width: 100vw;
-    
+    width: 90vw;
+    /* margin:0; */
     display: flex;
     
+    flex: 1;
     margin-top: 7.2rem;
     justify-content: space-evenly;
     @media(max-width: 1111px) {
         /* margin: 0 auto;
          */
+        margin: 0;
+        width: 100vw;
         /* justify-content: center; */
         flex-direction: column-reverse;
         /* flex-direction: row; */
@@ -24,6 +27,10 @@ export const BetNumbers = styled.div`
     width: 50vw;
     /* height: 100%; */
     
+    @media(max-width: 800px) {
+       width: 85%;
+       margin: 0 auto;
+  }
 `;
 export const TitleWrapper = styled.h3`
     
@@ -41,6 +48,11 @@ export const TitleWrapper = styled.h3`
 export const DescriptionWrapper = styled.div`
     width: 64.8rem;
     
+    @media(max-width: 800px) {
+        width: 90%;
+        
+
+  }
 `;
 
 export const DescriptionTitle = styled.p`
@@ -55,6 +67,7 @@ export const DescriptionInfo = styled.span`
     font-style: italic;
     color: #868686;
     word-wrap: break-word;
+
 `;
 
 export const ButtonInActionWrapper = styled.div<ButtonProps>`
@@ -62,5 +75,11 @@ export const ButtonInActionWrapper = styled.div<ButtonProps>`
     width: ${(props) => props.win + 'rem'};
     align-items: center;
     justify-content: space-between;
+
+    @media(max-width: 800px) {
+       /* width: 90vw; */
+       width: ${(props) => props.win-20 + 'rem'};
+  }
+
 `;
 

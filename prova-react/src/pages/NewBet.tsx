@@ -307,6 +307,7 @@ const NewBet: React.FC = () => {
                 })
               : ""}
           </NumberPlace>
+          {errorMessage.length > 0  && <ErrorMessage>{errorMessage}</ErrorMessage>}
           <ButtonInActionWrapper win={64.8}>
             <ActionButton
               win={16.4}
@@ -337,7 +338,7 @@ const NewBet: React.FC = () => {
               <span>Add to Cart</span>
             </ActionButton>
           </ButtonInActionWrapper>
-          {errorMessage.length > 0  && <ErrorMessage>{errorMessage}</ErrorMessage>}
+       
         </BetNumbers>
         <CartWrapper>
           <CartTitle>Cart</CartTitle>
@@ -367,6 +368,7 @@ const NewBet: React.FC = () => {
             backgroung = '#F4F4F4'
             size="3.5"
             border="#E2E2E2"
+            isSave = {true}
             onAction={saveGameHandler}
           >
             Save

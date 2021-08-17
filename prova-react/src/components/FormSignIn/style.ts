@@ -41,6 +41,8 @@ export const ButtonAndForm = styled.div`
         /* height: 45.4rem; */
         /* margin-top: 10rem; */
   }
+
+  
  
 
 `;
@@ -59,16 +61,18 @@ export const FormWrapper = styled.form<FormProps>`
         margin-top: 10px;
         width: 91%;
     }
-    @media(max-width: 800px) {
-        height: 250px;
-        width: 95%;
-  }
 
-  @media(max-width: 800px) {
-    height: 250px;
-        /* width: 90%; */
+    @media(max-width: 1100px) {
+        width: 90%;
+        height: 100%;
+  }
+    @media(max-width: 800px) {
+        height: 25rem;
+        width: 80%;
         align-items: center;
   }
+
+ 
   @media(max-height: 600px) {
         /* height: 1.1rem; */
         width: 90%;
@@ -76,6 +80,8 @@ export const FormWrapper = styled.form<FormProps>`
         height: 22rem;
         /* background-color: red; */
   }
+
+
 
 `;
 
@@ -98,7 +104,6 @@ export const ErrorMessage = styled.span`
     font-weight: bold;
     font-style: italic;
     @media(max-width: 800px) {
-      font-size: 1rem;
       margin:0;
   }
     

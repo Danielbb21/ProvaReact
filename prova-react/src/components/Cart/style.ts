@@ -26,9 +26,32 @@ export const CartWrapper = styled.div`
         /* margin: 0 auto;
          */
         /* order: 1; */
-        width: 31.7rem;
+        width: 50%;
         
-        margin-top: 2.7rem;
+        margin: 0 auto;
+        margin-top: 2.5rem;
+        margin-bottom: 1.4rem;
+        /* flex-direction: column; */
+    }  
+    @media(max-width: 600px) {
+        
+        /* margin: 0 auto;
+         */
+        /* order: 1; */
+        width: 65%;
+        
+     
+        /* flex-direction: column; */
+    }  
+
+    @media(max-width: 300px) {
+        
+        /* margin: 0 auto;
+         */
+        /* order: 1; */
+        width: 75%;
+        
+     
         /* flex-direction: column; */
     }  
 `;
@@ -106,6 +129,9 @@ export const CartRemoveButton = styled.div`
     /* border: none; */
     &:hover{
         cursor: pointer;
+    }
+    span{
+        font-size: 2.4rem;
     }
 `;
 
