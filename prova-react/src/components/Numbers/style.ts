@@ -16,7 +16,9 @@ export const NumberPlace = styled.div`
     flex-wrap: wrap;
 
     @media(max-width: 1111px) {
+        
         width: 90%;
+        margin: 0 auto;
         /* max-width: 50rem; */
     }
 `;

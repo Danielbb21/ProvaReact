@@ -96,15 +96,20 @@ export const FormText = styled(Link)`
 `;
 
 
-
+export const ErrorContentWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
 export const ErrorMessage = styled.span`
     font-size: 1.5rem;
     color: red;
     font-weight: bold;
     font-style: italic;
+    text-align: center;
     @media(max-width: 800px) {
       margin:0;
   }
+  
     
 `

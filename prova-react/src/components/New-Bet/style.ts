@@ -7,10 +7,22 @@ export const BetPageWrapper = styled.div`
    margin-top: 7.2rem;
     /* margin:0; */
     display: flex;
+    justify-content: space-evenly;
     width: 90vw;
     overflow-x: hidden;
     flex: 1;
     
+    @media(max-width: 1300px) {
+        /* margin: 0 auto;
+         */
+        width: 50vw;
+        margin: 0 auto;
+        
+        /* justify-content: center; */
+        flex-direction: column-reverse;
+        /* flex-direction: row; */
+      
+    }
     
     @media(max-width: 1111px) {
         /* margin: 0 auto;
@@ -29,7 +41,7 @@ export const BetNumbers = styled.div`
     width: 50%;
     /* height: 100%; */
     
-    margin-left: 14.4rem;
+    
     @media(max-width: 800px) {
        width: 85%;
        margin: 0 auto;
@@ -51,7 +63,7 @@ export const TitleWrapper = styled.h3`
 export const DescriptionWrapper = styled.div`
     width: 64.8rem;
     
-    @media(max-width: 800px) {
+    @media(max-width: 1100px) {
         width: 90%;
         
 
@@ -71,6 +83,7 @@ export const DescriptionInfo = styled.span`
     color: #868686;
     word-wrap: break-word;
 
+
 `;
 
 export const ButtonInActionWrapper = styled.div<ButtonProps>`
@@ -79,9 +92,16 @@ export const ButtonInActionWrapper = styled.div<ButtonProps>`
     align-items: center;
     justify-content: space-between;
 
-    @media(max-width: 800px) {
+    @media(max-width: 1100px) {
        /* width: 90vw; */
        width: ${(props) => props.win-20 + 'rem'};
+       margin: 0 auto;
+  }
+
+
+  @media(max-width: 300px) {
+       /* width: 90vw; */
+       width: ${(props) => props.win-30 + 'rem'};
   }
 
 `;

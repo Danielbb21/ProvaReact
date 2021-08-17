@@ -57,7 +57,8 @@ const NewBet: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [submitError, setSubmitError] = useState<boolean>(false);
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -140,18 +141,17 @@ const NewBet: React.FC = () => {
       return false;
     }
     if (isAlreadyIntheLimit) {
-      
-      
-      setErrorMessage('You already chosed all the numbers');
+      setErrorMessage("You already chosed all the numbers");
       return false;
     }
-    setErrorMessage('');
+    setErrorMessage("");
+    setSubmitError(false);
     return true;
   };
 
   const handleChoseNumber = (numberChosed: number) => {
     const isPosibleToChose = isPosibleToChoseTheNumber(numberChosed);
-
+    setSubmitError(false);
     if (isPosibleToChose) {
       console.log(chosedNumbers);
       setChosedNumber((previusState) => {
@@ -188,8 +188,8 @@ const NewBet: React.FC = () => {
 
   const addGameToCartHandler = () => {
     if (chosedNumbers.length !== gameOptions?.["max-number"]) {
-      
-      setErrorMessage('Still missing numbers in your game')
+      setErrorMessage("Still missing numbers in your game");
+      setSubmitError(false);
       return;
     }
     setCartNumber((previus) => {
@@ -201,7 +201,8 @@ const NewBet: React.FC = () => {
         price: gameOptions.price,
         type: gameOptions.type,
       });
-      setErrorMessage('');
+      setErrorMessage("");
+      setSubmitError(false);
       return newArray;
     });
 
@@ -228,7 +229,7 @@ const NewBet: React.FC = () => {
   const formatDate = (date: Date): string => {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
-    let day = date.toDateString().split(' ')[2];
+    let day = date.toDateString().split(" ")[2];
     return day + "/" + month + "/" + year;
   };
 
@@ -258,13 +259,14 @@ const NewBet: React.FC = () => {
       history.replace(`/my-bets/${id}`);
     } else {
       // console.log("Valor abaixo do mínimo: 30");
-      setErrorMessage('Value of game is lower than R$ 30,00')
+      setErrorMessage("Value of game is lower than R$ 30,00");
+      setSubmitError(true);
     }
   };
 
   return (
     <>
-      <Navbar hasHome={true} id={id} />
+      {/* <Navbar hasHome={true} id={id} /> */}
       <BetPageWrapper>
         <BetNumbers>
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
@@ -307,7 +309,9 @@ const NewBet: React.FC = () => {
                 })
               : ""}
           </NumberPlace>
-          {errorMessage.length > 0  && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          {errorMessage.length > 0 && !submitError && (
+            <ErrorMessage>{errorMessage}</ErrorMessage>
+          )}
           <ButtonInActionWrapper win={64.8}>
             <ActionButton
               win={16.4}
@@ -338,44 +342,46 @@ const NewBet: React.FC = () => {
               <span>Add to Cart</span>
             </ActionButton>
           </ButtonInActionWrapper>
-       
         </BetNumbers>
-        <CartWrapper>
-          <CartTitle>Cart</CartTitle>
-          <CartMax>
-            {totalPrice === 0 && <CartEmptyMessage />}
-            {cartNumbers.map((element) => (
-              <CartItems
-                key={element.id}
+        <ErrorMessage>
+          <CartWrapper>
+            <CartTitle>Cart</CartTitle>
+            <CartMax>
+              {totalPrice === 0 && <CartEmptyMessage />}
+              {cartNumbers.map((element) => (
+                <CartItems
+                  key={element.id}
+                  price={formatNumberToBePresented(element.price)}
+                  type={element.type}
+                  onRemove={removeItemHandler.bind(this, element.id)}
+                  color={element.color}
+                >
+                  <CartNumbers wid="80">
+                    {element.numbers.sort(comparaNumeros).toString()}
+                  </CartNumbers>
+                </CartItems>
+              ))}
+            </CartMax>
+            <CartPrice>{formatNumberToBePresented(totalPrice)}</CartPrice>
 
-                price={formatNumberToBePresented(element.price)}
-                type={element.type}
-                onRemove={removeItemHandler.bind(this, element.id)}
-                color={element.color}
-              >
-                <CartNumbers wid = '80'>
-                  {element.numbers.sort(comparaNumeros).toString()}
-                </CartNumbers>
-              </CartItems>
-            ))}
-          </CartMax>
-          <CartPrice>{formatNumberToBePresented(totalPrice)}</CartPrice>
-
-          <ActionButton
-            hei={9.6}
-            win={31.7}
-            color="#27C383"
-            backgroung = '#F4F4F4'
-            size="3.5"
-            border="#E2E2E2"
-            isSave = {true}
-            onAction={saveGameHandler}
-          >
-            Save
-            <VscArrowRight />
-          </ActionButton>
-          
-        </CartWrapper>
+            <ActionButton
+              hei={9.6}
+              win={31.7}
+              color="#27C383"
+              backgroung="#F4F4F4"
+              size="3.5"
+              border="#E2E2E2"
+              isSave={true}
+              onAction={saveGameHandler}
+            >
+              Save
+              <VscArrowRight />
+            </ActionButton>
+          </CartWrapper>
+          {errorMessage.length > 0 && submitError && (
+            <ErrorMessage>{errorMessage}</ErrorMessage>
+          )}
+        </ErrorMessage>
       </BetPageWrapper>
     </>
   );
