@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavLine = styled.div`
-  width: 100vw;
+  /* width: 100vw; */
 
   border-bottom: 2px solid #ebebeb;
 `

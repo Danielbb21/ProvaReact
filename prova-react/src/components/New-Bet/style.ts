@@ -4,16 +4,18 @@ interface ButtonProps {
     win: number;
 }
 export const BetPageWrapper = styled.div`
-    width: 90vw;
+   margin-top: 7.2rem;
     /* margin:0; */
     display: flex;
-    
+    width: 90vw;
+    overflow-x: hidden;
     flex: 1;
-    margin-top: 7.2rem;
-    justify-content: space-evenly;
+    
+    
     @media(max-width: 1111px) {
         /* margin: 0 auto;
          */
+        
         margin: 0;
         width: 100vw;
         /* justify-content: center; */
@@ -24,9 +26,10 @@ export const BetPageWrapper = styled.div`
 `;
 
 export const BetNumbers = styled.div`
-    width: 50vw;
+    width: 50%;
     /* height: 100%; */
     
+    margin-left: 14.4rem;
     @media(max-width: 800px) {
        width: 85%;
        margin: 0 auto;

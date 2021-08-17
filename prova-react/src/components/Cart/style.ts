@@ -14,6 +14,7 @@ interface BetInfoProps{
     isList?: boolean;
 }
 
+
 export const CartWrapper = styled.div` 
     height: 48.4rem;
     width: 31.7rem;
