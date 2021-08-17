@@ -9,6 +9,7 @@ import {
   FilterHeaderWrapper,
   FilterTitle,
   FilterWord,
+  MessageWrapper,
   ToNewBetLink,
 } from "./style";
 import { useAppSelector } from "../../store/store-hooks";
@@ -93,7 +94,7 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           <VscArrowRight />
         </ToNewBetLink>
       </FilterHeaderWrapper>
-      {arr.length === 0 && <h2>No Game found</h2>}
+      {arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
       {arr.length > 0 ? arr.map((element) => (
         <CartItems
           key={element.id}

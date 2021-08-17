@@ -25,7 +25,7 @@ export const UserInfoTitle = styled.span`
     font-style: italic;
     color: #707070;
     font-size: 2.8rem;
-
+    text-align: center;
     @media(max-width: 600px) {
         /* margin: 0 auto;
          */
@@ -47,6 +47,7 @@ export const UserLabel = styled.div`
 
     }
     @media(max-width: 600px) {
+        text-align: center;
         /* margin: 0 auto;
          */
         /* font-size: 1.2rem; */

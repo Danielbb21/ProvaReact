@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import AppCard, { AppContent } from "./components/AppCard";
+import Footer from "./components/Footer";
 import GlobalStyle from "./GlobalStyle";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
@@ -12,6 +14,7 @@ function App() {
   return (
     <div>
       <GlobalStyle />
+    
       <Switch>
         <Route path="/" exact>
           <Home />
@@ -26,12 +29,14 @@ function App() {
           <MyBets />
         </Route>
         <Route path="/new-bet/:id">
-          <NewBet/>
+          <NewBet />
         </Route>
         <Route path="/account/:id">
-          <Account/>
+          <Account />
         </Route>
       </Switch>
+      
+      <Footer />
     </div>
   );
 }

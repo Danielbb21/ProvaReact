@@ -6,6 +6,7 @@ export const FilterContainer = styled.div`
   flex-direction: column;
   margin-top: 7.3rem;
   margin-left: 14.1rem;
+  
   justify-content: flex-start;
   @media(max-width: 800px) {
         /* width: 50%; */
@@ -28,6 +29,17 @@ export const FilterHeaderWrapper = styled.div`
     
 `
 
+export const MessageWrapper = styled.h2`
+  margin: 0;
+  text-align: center;
+  
+  margin-top: 1.4rem;
+  color: #707070;
+    font-size: 2.4rem;
+    font-weight: bold;
+    font-style: italic;
+
+`;
 export const FilterHeaderContent = styled.div`
     display: flex;
     align-items: center;

@@ -7,13 +7,20 @@ export const NavLine = styled.div`
   border-bottom: 2px solid #ebebeb;
 `
 export const NavbarWrapper = styled.div`
-  width: 80%;
+  width: 90%;
+  /* max-width: 980px; */
 
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex: 1;
+
+  @media(max-width: 280px) {
+        
+      width: 100vw;
+      background-color: red;
+  }
   
 `;
 
