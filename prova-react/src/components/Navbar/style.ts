@@ -10,7 +10,7 @@ export const NavbarWrapper = styled.div`
   width: 90%;
   /* max-width: 980px; */
 
-  margin-top: 1.5rem;
+  margin-top: 4.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,14 +38,25 @@ export const NavLogoWrapper = styled.div`
   align-items: center;
 `;
 
-export const NavLogo =styled.span`
-  font-size: 4.4rem;
-  color: #707070;
-  font-weight: bold;
-  /* width: 100%; */
-  
-  
-  font-style: italic;
+export const NavLogo =styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 4.4rem;
+    font-weight: bold;
+    margin: -5rem 7.4rem -2.5rem 0rem;
+    font-style: italic;
+    color: #707070;
+    
+  div {
+        top: 4rem;
+        left: 13rem;
+        width: 10.7rem;
+        height: .7rem;
+        background: #b5c401 ;
+        border-radius: .6rem;
+        opacity: 1;
+    }
   
 `;
 

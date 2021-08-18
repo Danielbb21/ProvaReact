@@ -22,7 +22,7 @@ const Navbar: React.FC<NavProps>  = (props) => {
     <NavLine>
       <NavbarWrapper>
         <NavLogoWrapper>
-          <NavLogo>TGL</NavLogo>
+          <NavLogo>TGL<div></div></NavLogo>
           {props.hasHome && <NavHome to = {`/my-bets/${props.id}`}>Home</NavHome>}
         </NavLogoWrapper>
         <NavOptions>
