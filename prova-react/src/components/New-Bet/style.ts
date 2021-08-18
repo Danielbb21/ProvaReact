@@ -12,16 +12,19 @@ export const BetPageWrapper = styled.div`
     overflow-x: hidden;
     flex: 1;
     
-    @media(max-width: 1300px) {
-        /* margin: 0 auto;
-         */
-        width: 50vw;
+    @media(max-width: 1400px) and (max-height: 1100px){
+        width: 75vw;
+        /* background-color: blue; */
         margin: 0 auto;
+        /* max-width: 50rem; */
         
-        /* justify-content: center; */
-        flex-direction: column-reverse;
-        /* flex-direction: row; */
+    }
+    @media(max-width: 1440px) {
       
+        align-items: center;
+        width: 100vw;
+        flex-direction: column-reverse;
+       
     }
     
     @media(max-width: 1111px) {
@@ -41,7 +44,7 @@ export const BetNumbers = styled.div`
     width: 50%;
     /* height: 100%; */
     
-    
+   
     @media(max-width: 800px) {
        width: 85%;
        margin: 0 auto;

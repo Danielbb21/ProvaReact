@@ -19,6 +19,7 @@ export const FilterHeaderWrapper = styled.div`
     
     display: flex;
     /* width: 100%; */
+    margin-bottom: 2.4rem;
     @media(max-width: 800px) {  
         align-items: center;
         justify-content: flex-start;
@@ -46,7 +47,7 @@ export const FilterHeaderContent = styled.div`
     width: 60%;
     
     margin-right: 13rem;
-
+  
     @media(max-width: 800px) {
       flex-direction: column;
       /* width: 50%; */
@@ -64,7 +65,7 @@ export const FilterTitle = styled.span`
     font-weight: bold;
     font-style: italic;
     margin-right:4.5rem;
-    margin-bottom: 3.5rem;
+    
 
     @media(max-width: 800px) {
         font-size: 1.8rem;

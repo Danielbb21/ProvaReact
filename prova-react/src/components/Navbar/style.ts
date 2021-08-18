@@ -16,11 +16,15 @@ export const NavbarWrapper = styled.div`
   align-items: center;
   flex: 1;
 
-  @media(max-width: 280px) {
+  
+
+  /* @media(max-width: 280px) {
         
       width: 100vw;
       background-color: red;
-  }
+  } */
+
+  
   
 `;
 
@@ -62,6 +66,12 @@ export const NavOptions = styled.div`
   align-items: center;
   
   text-align: right;
+
+  @media(max-width: 540px) {
+        
+        width: 40%;
+        
+    }
   
 `;
 

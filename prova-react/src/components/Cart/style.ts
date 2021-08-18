@@ -22,12 +22,22 @@ export const CartWrapper = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
+
+    @media(max-width: 1440px){
+        width: 50vw;
+        /* background-color: blue; */
+        
+        margin: 0 auto;
+        margin-top: 2.4rem;
+        /* max-width: 50rem; */
+        
+    }
     @media(max-width: 1111px) {
         
         /* margin: 0 auto;
          */
         /* order: 1; */
-        width: 50%;
+        width: 50vw;
         
         margin: 0 auto;
         margin-top: 2.5rem;
@@ -39,7 +49,7 @@ export const CartWrapper = styled.div`
         /* margin: 0 auto;
          */
         /* order: 1; */
-        width: 65%;
+        width: 50vw;
         
      
         /* flex-direction: column; */
@@ -50,7 +60,7 @@ export const CartWrapper = styled.div`
         /* margin: 0 auto;
          */
         /* order: 1; */
-        width: 75%;
+        width: 50vw;
         
      
         /* flex-direction: column; */

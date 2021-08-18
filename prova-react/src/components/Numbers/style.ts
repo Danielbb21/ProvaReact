@@ -10,14 +10,17 @@ export const NumberPlace = styled.div`
 
     max-width: 67rem;
     /* height: 100%; */
+    max-height: 54rem;
+    overflow: scroll;
     width: 64.4rem;
     margin-top: 2.7rem;
     margin-bottom: 4.4rem;
     flex-wrap: wrap;
 
+  
     @media(max-width: 1111px) {
         
-        width: 90%;
+        width: 100%;
         margin: 0 auto;
         /* max-width: 50rem; */
     }

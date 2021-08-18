@@ -266,7 +266,7 @@ const NewBet: React.FC = () => {
 
   return (
     <>
-      {/* <Navbar hasHome={true} id={id} /> */}
+      <Navbar hasHome={true} id={id} />
       <BetPageWrapper>
         <BetNumbers>
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
