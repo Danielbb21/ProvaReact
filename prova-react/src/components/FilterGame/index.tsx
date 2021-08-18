@@ -32,9 +32,9 @@ interface CartInterface {
 }
 
 const sortGame = (arr: CartInterface[], typeOfSort: string | null, id: string) => {
-  console.log("typeOfSort", typeOfSort);
+  
   if (typeOfSort) {
-    console.log("array", arr.filter(cart => cart.user_id === id));
+    
     return arr.filter((cart) => cart.typeGame === typeOfSort ).filter(cart2 => cart2.user_id === id);
   }
   return arr.filter(cart=> cart.user_id === id);
@@ -44,20 +44,13 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   const cartRedux = useAppSelector((state) => state.cart);
   const history = useHistory();
   const location = useLocation();
-  console.log("location", location);
+  
   const { id } = props;
 
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingName = queryParams.get("sort");
 
-  console.log("isSortingGame", isSortingName);
-  // useEffect(() => {
-  //   setCartElements(
-  //     cartRedux.items.filter((cartElement) => cartElement.user_id === id)
-  //   );
-
-  // }, [cartRedux.items, id]);
 
   const arr = sortGame(cartRedux.items, isSortingName, id);
 

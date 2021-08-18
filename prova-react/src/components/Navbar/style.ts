@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const NavLine = styled.div`
-  /* width: 100vw; */
+  
 
   border-bottom: 2px solid #ebebeb;
   @media(max-width: 500px) {
@@ -14,7 +14,7 @@ export const NavLine = styled.div`
 `
 export const NavbarWrapper = styled.div`
   width: 90%;
-  /* max-width: 980px; */
+  
    
   margin-top: 4.5rem;
   display: flex;
@@ -26,7 +26,7 @@ export const NavbarWrapper = styled.div`
 
   @media(max-width: 500px) {
        
-      /* width: 100vw; */
+      
       margin-bottom: 1.4rem;
       max-width: 100vw;
   }
@@ -70,11 +70,7 @@ export const NavLogo =styled.div`
         border-radius: .6rem;
         opacity: 1;
     }
-    /* @media(max-width: 280px) {
-        
-      font-size: 2.4rem;
-        margin: 0;
-    } */
+ 
   
 `;
 

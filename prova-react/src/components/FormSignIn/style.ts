@@ -12,9 +12,7 @@ export const FormTitle = styled.h3`
     margin: 0;
     text-align: center;
     color: #707070;
-    @media(max-width: 280px) {
-        /* font-size: 2.8rem; */
-  }
+  
 
 `;
 
@@ -33,20 +31,17 @@ export const ButtonAndForm = styled.div`
         
   }
     @media(max-width: 800px) {
-        
-        /* height: 45.4rem; */
+
         width: 90%;
         align-items: center;
-        /* justify-content: center; */
-        /* justify-content: center; */
+   
         
   }
 
   @media(max-width: 280px) {
-        /* height: 1.1rem; */
+        
         width: 90%;
-        /* height: 45.4rem; */
-        /* margin-top: 10rem; */
+ 
   }
 
   
@@ -82,15 +77,9 @@ export const FormWrapper = styled.form<FormProps>`
 
  
   @media(max-height: 600px) {
-        /* height: 1.1rem; */
-        width: 90%;
-        /* margin-top: 10rem; */
-        height:  ${props => props.isRegister ? '10rem': '22rem'};
-        
-        /* background-color: red; */
+        width: 90%;        
+        height:  ${props => props.isRegister ? '10rem': '22rem'};    
   }
-
-
 
 `;
 

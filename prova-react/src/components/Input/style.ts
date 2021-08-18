@@ -7,11 +7,7 @@ export const InputWrapper = styled.input`
     border: none;
     font-size: 1.7rem;
     border-bottom: .2rem solid #EBEBEB;
-    /* &::-webkit-input-placeholder{
-        
-        
-        font-style: bold;
-    } */
+
     &:focus {
         box-shadow: 0 0 0 0;
         border: 0 none;
@@ -34,15 +30,6 @@ export const InputWrapper = styled.input`
    padding: 0;
   }
 
-    /* @media(max-width: 600px) {
-        
-        width:  100%;
-        padding-left:1.5rem;
-  }
-  @media(max-width: 1024px) {
-        
-        width:  100%;
-        padding-left:1.5rem;
-  } */
+
 
 `;

@@ -53,7 +53,6 @@ const NewBet: React.FC = () => {
   const [numbersOfTheGame, setNumbersOfTheGame] = useState<number[]>([]);
   const [chosedNumbers, setChosedNumber] = useState<number[]>([]);
   const [cartNumbers, setCartNumber] = useState<CartOptions[]>([]);
-  const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
@@ -68,7 +67,7 @@ const NewBet: React.FC = () => {
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
     const sortedArray = arrayOfNumbers.sort(comparaNumeros);
-    console.log("sortedNumbers", sortedArray);
+    
     setNumbersOfTheGame(sortedArray);
   }, []);
 
@@ -158,7 +157,7 @@ const NewBet: React.FC = () => {
     const isPosibleToChose = isPosibleToChoseTheNumber(numberChosed);
     setSubmitError(false);
     if (isPosibleToChose) {
-      console.log(chosedNumbers);
+      
       setChosedNumber((previusState) => {
         let newArray = [...previusState];
         newArray.push(numberChosed);
@@ -174,7 +173,7 @@ const NewBet: React.FC = () => {
     }
     while (arrayOfChosenNumbers.length !== gameOptions?.["max-number"]) {
       let numberSorted = Math.floor(Math.random() * gameOptions?.range) + 1;
-      console.log("number", numberSorted);
+      
       let isAlreadyChosed = arrayOfChosenNumbers.find(
         (number) => number === numberSorted
       );
@@ -222,7 +221,7 @@ const NewBet: React.FC = () => {
   for (const i of cartNumbers) {
     cartValue.push(i.price);
   }
-  console.log("cartValue", cartValue);
+  
   const totalPrice = cartValue.reduce((next, current) => {
     return next + current;
   }, 0);
@@ -240,7 +239,7 @@ const NewBet: React.FC = () => {
 
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
-      console.log("Game salvo", cartNumbers);
+      
       const date = formatDate(new Date());
 
       cartNumbers.forEach((cart) => {
@@ -256,14 +255,11 @@ const NewBet: React.FC = () => {
 
         dispatch(addToCart(teste));
       });
-      console.log(
-        "teste",
-        cart.items.map((car) => car)
-      );
+    
       setCartNumber([]);
       history.replace(`/my-bets/${id}`);
     } else {
-      // console.log("Valor abaixo do mínimo: 30");
+      
       setErrorMessage("Value of game is lower than R$ 30,00");
       setSubmitError(true);
     }

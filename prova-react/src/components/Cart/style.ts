@@ -25,45 +25,27 @@ export const CartWrapper = styled.div`
 
     @media(max-width: 1440px){
         width: 50vw;
-        /* background-color: blue; */
-        
+
         margin: 0 auto;
-        margin-top: 2.4rem;
-        /* max-width: 50rem; */
-        
+        margin-top: 2.4rem;     
     }
     @media(max-width: 1111px) {
         
-        /* margin: 0 auto;
-         */
-        /* order: 1; */
         width: 50vw;
         
         margin: 0 auto;
         margin-top: 2.5rem;
         margin-bottom: 1.4rem;
-        /* flex-direction: column; */
+
     }  
-    @media(max-width: 600px) {
-        
-        /* margin: 0 auto;
-         */
-        /* order: 1; */
+    @media(max-width: 600px) {        
         width: 50vw;
-        
-     
-        /* flex-direction: column; */
     }  
 
     @media(max-width: 300px) {
-        
-        /* margin: 0 auto;
-         */
-        /* order: 1; */
+
         width: 50vw;
         
-     
-        /* flex-direction: column; */
     }  
 `;
 
@@ -114,7 +96,7 @@ export const BetInfo = styled.div<BetInfoProps>`
    
 `;
 export const BetNameAndPrice = styled.div<BetInfoWordProps>`
-    /* width: 90%; */
+    
     color: #868686;
     
     display: flex;
@@ -137,7 +119,7 @@ export const CartRemoveButton = styled.div`
     color: #888888;
     width: 2rem;
     height: 2.4rem;
-    /* border: none; */
+    
     &:hover{
         cursor: pointer;
     }
@@ -147,11 +129,11 @@ export const CartRemoveButton = styled.div`
 `;
 
 export const CartLine = styled.div<LineProps>`
-    /* max-height: 100%; */
+    
     width: .4rem;
     background: ${(props) => props.colorLine};
     border-radius: .4rem;
-    /* margin: 0 1.2rem; */
+    
 `
 
 interface CartNumberProps{

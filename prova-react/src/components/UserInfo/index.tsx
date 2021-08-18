@@ -75,7 +75,7 @@ const UserInfo: React.FC<UserinfoProps> = (props) => {
       price: price * quantity
     });
   });
-  console.log("Quantity by game", userGameInfo);
+  
 
   return (
     <>

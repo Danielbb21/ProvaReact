@@ -9,7 +9,7 @@ export const NumberPlace = styled.div`
     flex-direction: row;
 
     max-width: 67rem;
-    /* height: 100%; */
+    
     max-height: 54rem;
     overflow: scroll;
     width: 64.4rem;
@@ -22,7 +22,7 @@ export const NumberPlace = styled.div`
         
         width: 100%;
         margin: 0 auto;
-        /* max-width: 50rem; */
+        
     }
 `;
 export const NumbersWrapper = styled.div<NumberProps>`

@@ -12,10 +12,9 @@ const MyBets: React.FC = () => {
   const users = useAppSelector(state => state.user.users);
   const {id} = useParams<ParamTypes>();
   const history = useHistory();
-  console.log(users)
-  console.log(id);
-  const user = users.find(us => us.id === id);
-  console.log(user);
+  
+  
+ 
   const userFond = users.find(user=>user.id === id);
   if(!userFond){
     history.replace('/');

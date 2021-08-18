@@ -40,13 +40,13 @@ const Form: React.FC = () => {
   const formIsValid = emailIsValid && passwordIsValid;
 
   const checkUserNotExists = (email: string, password: string): boolean => {
-    console.log(email, password);
+    
 
     const emailExists = users.find((user) => user.email === email);
-    console.log("user email", emailExists);
+    
     if (emailExists) {
       const passwordMatch = emailExists.password === password;
-      console.log('password', emailExists.password === password);
+      
       if (passwordMatch) {
         return false;
       }
@@ -59,7 +59,7 @@ const Form: React.FC = () => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      console.log("Valid");
+      
       setIsClicked(false);
       const isUserValid = checkUserNotExists(enteredEmail, enteredPassword)
       setHasError(isUserValid);

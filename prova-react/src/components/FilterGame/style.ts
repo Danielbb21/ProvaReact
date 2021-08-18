@@ -9,7 +9,7 @@ export const FilterContainer = styled.div`
   
   justify-content: flex-start;
   @media(max-width: 800px) {
-        /* width: 50%; */
+        
     margin: 0;
 
   }
@@ -18,7 +18,7 @@ export const FilterContainer = styled.div`
 export const FilterHeaderWrapper = styled.div`
     
     display: flex;
-    /* width: 100%; */
+    
     margin-bottom: 2.4rem;
     @media(max-width: 800px) {  
         align-items: center;
@@ -50,7 +50,7 @@ export const FilterHeaderContent = styled.div`
   
     @media(max-width: 800px) {
       flex-direction: column;
-      /* width: 50%; */
+      
       justify-content: center;
       align-items: center;
       margin :0;
@@ -94,7 +94,6 @@ export const FilterButton = styled.div`
     @media(max-width: 800px) {
        flex-direction: column;
        height: 14rem;
-       /* justify-content: center; */
        align-items: center;
   }
 `;
@@ -111,9 +110,7 @@ export const ToNewBetLink = styled(Link)`
     }
     @media(max-width: 700px) {
       
-       /* justify-content: flex-end; */
         margin-bottom: 1.4rem;
-        /* margin-left: -3rem; */
         justify-content: flex-end;  
         align-items: flex-end;  
         span{

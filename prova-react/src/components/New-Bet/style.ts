@@ -43,13 +43,11 @@ export const BetPageWrapper = styled.div`
 
 export const BetNumbers = styled.div`
     width: 50%;
-    /* height: 100%; */
     
     
     @media(max-width: 800px) {
        width: 85%;
-       /* margin: 0 auto; */
-       /* background-color: red; */
+
        
   }
 `;

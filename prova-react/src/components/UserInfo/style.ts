@@ -8,7 +8,7 @@ export const UserInfoWrapper = styled.div`
     background: #fff;
     width: 50vw;
     height: 60vh;  
-    /* margin-top: 17.5rem; */
+    
     border-radius: 1.6rem;
     position: fixed;
     left: 50%;
@@ -31,9 +31,6 @@ export const UserInfoTitle = styled.span`
     font-size: 2.8rem;
     text-align: center;
     @media(max-width: 600px) {
-        /* margin: 0 auto;
-         */
-        /* font-size: 1.4rem; */
         text-align: center;
     }
 `;
@@ -52,9 +49,7 @@ export const UserLabel = styled.div`
     }
     @media(max-width: 600px) {
         text-align: center;
-        /* margin: 0 auto;
-         */
-        /* font-size: 1.2rem; */
+
     }
 
 `;

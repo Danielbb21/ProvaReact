@@ -18,8 +18,6 @@ export const FooterWrapeer = styled.div`
         
         
     }
-    @media(max-width: 280px) {
-        /* height: 0.1vh; */
-    }
+   
 
 `;
