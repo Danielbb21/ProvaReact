@@ -1,7 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Footer from "../components/Footer";
 import UserInfo from "../components/UserInfo";
+import { useAppSelector } from "../store/store-hooks";
 
 
 interface ParamTypes {
@@ -12,7 +13,12 @@ interface ParamTypes {
 
 const Account: React.FC = () => {
   const { id } = useParams<ParamTypes>();
-  
+  const users = useAppSelector(state => state.user.users);
+  const history = useHistory();
+  const userFond = users.find(user=>user.id === id);
+  if(!userFond){
+    history.replace('/');
+  }
 
   return (
     <>

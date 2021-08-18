@@ -1,6 +1,6 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
-import AppCard, { AppContent } from "./components/AppCard";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 import Footer from "./components/Footer";
 import GlobalStyle from "./GlobalStyle";
 import Account from "./pages/Account";
@@ -19,20 +19,23 @@ function App() {
         <Route path="/" exact>
           <Home />
         </Route>
-        <Route path="/forget">
+        <Route path="/forget" exact>
           <ResetPassword />
         </Route>
-        <Route path="/register">
+        <Route path="/register" exact>
           <Register />
         </Route>
-        <Route path="/my-bets/:id">
+        <Route path="/my-bets/:id" >
           <MyBets />
         </Route>
-        <Route path="/new-bet/:id">
+        <Route path="/new-bet/:id" >
           <NewBet />
         </Route>
-        <Route path="/account/:id">
+        <Route path="/account/:id" >
           <Account />
+        </Route>
+        <Route path='*'>
+          { < Redirect to='/' />}
         </Route>
       </Switch>
       

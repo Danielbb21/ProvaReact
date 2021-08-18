@@ -25,6 +25,12 @@ export const ButtonAndForm = styled.div`
     height: 55rem;
     flex: 1;
 
+
+    @media(max-height: 400px) {
+      height: 100%;
+        
+        
+  }
     @media(max-width: 800px) {
         
         /* height: 45.4rem; */
@@ -109,6 +115,13 @@ export const ErrorMessage = styled.span`
     text-align: center;
     @media(max-width: 800px) {
       margin:0;
+  }
+
+  
+  @media(max-height: 400px) and (max-width: 700px){
+    line-height: .6;
+    margin: 0;
+   
   }
   
     

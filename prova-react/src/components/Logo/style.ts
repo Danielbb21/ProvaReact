@@ -9,6 +9,17 @@ export const LogoWrapper = styled.div`
     height: 100%;
    
     flex: 1;
+
+    @media(max-height: 400px) and (max-width: 700px){
+      flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        max-height: 25vh;
+       margin: 0;
+   
+  }
+
+  
     @media(max-width: 800px) {
         justify-content: center;
         width: 100%;
@@ -34,6 +45,7 @@ export const LogoTitle = styled.div`
     font-weight: bold;
     font-style: italic
   }
+
   @media(max-width: 800px) {
     h1{
       margin: 0;
@@ -94,6 +106,7 @@ export const LotoWord = styled.div`
         font-size: 8.3rem;
         text-align: center;
     }
+
     @media(max-width: 800px) {
         h1{
           margin:0;
