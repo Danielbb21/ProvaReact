@@ -27,6 +27,13 @@ export const InputWrapper = styled.input`
         padding-bottom: .5rem;
     padding-top: 1.5rem;
   }
+  
+
+  @media(max-height: 400px) {
+   margin: 0;
+   padding: 0;
+  }
+
     /* @media(max-width: 600px) {
         
         width:  100%;

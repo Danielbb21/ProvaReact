@@ -14,7 +14,7 @@ const ResetPassword: React.FC = () => {
     <>
       <Card>
         <Logo />
-        <FormForgot />
+        <FormForgot isRegister = {true}/>
         
       </Card>
       {/* <Footer /> */}

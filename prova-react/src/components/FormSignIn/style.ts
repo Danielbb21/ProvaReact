@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 interface FormProps{
     size: number;
+    isRegister?:boolean;
 }
 
 
@@ -73,7 +74,8 @@ export const FormWrapper = styled.form<FormProps>`
         height: 100%;
   }
     @media(max-width: 800px) {
-        height: 25rem;
+        height:  ${props => props.isRegister ? '15rem': '25rem'};
+
         width: 80%;
         align-items: center;
   }
@@ -83,7 +85,8 @@ export const FormWrapper = styled.form<FormProps>`
         /* height: 1.1rem; */
         width: 90%;
         /* margin-top: 10rem; */
-        height: 22rem;
+        height:  ${props => props.isRegister ? '10rem': '22rem'};
+        
         /* background-color: red; */
   }
 

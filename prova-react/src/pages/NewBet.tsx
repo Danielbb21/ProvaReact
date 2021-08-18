@@ -378,6 +378,7 @@ const NewBet: React.FC = () => {
               border="#E2E2E2"
               isSave={true}
               onAction={saveGameHandler}
+              
             >
               Save
               <VscArrowRight />

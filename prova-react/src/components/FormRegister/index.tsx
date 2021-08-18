@@ -14,7 +14,9 @@ import {
   FormWrapper,
 } from "../FormSignIn/style";
 
-const FormRegister: React.FC = () => {
+
+
+const FormRegister: React.FC = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const users = useAppSelector(state =>  state.user.users);
@@ -83,7 +85,7 @@ const FormRegister: React.FC = () => {
   return (
     <ButtonAndForm>
       <FormTitle>Registration</FormTitle>
-      <FormWrapper size={90} onSubmit={submitLoginHandler}>
+      <FormWrapper size={90} onSubmit={submitLoginHandler} >
         <Input
           type="text"
           text="Name"

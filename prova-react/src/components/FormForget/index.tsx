@@ -13,7 +13,11 @@ import useForm from "../../hooks/use-form";
 import { useHistory } from "react-router";
 import { useAppSelector } from "../../store/store-hooks";
 
-const FormForgot: React.FC = () => {
+interface FormProps{
+  isRegister?: boolean;
+}
+
+const FormForgot: React.FC<FormProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const users = useAppSelector((state) => state.user.users);
   const [hasError, setHasError] = useState<boolean>(false);
@@ -62,7 +66,7 @@ const FormForgot: React.FC = () => {
     <>
       <ButtonAndForm>
         <FormTitle>Reset Password</FormTitle>
-        <FormWrapper onSubmit={submitForgotPasswordHandler} size={35}>
+        <FormWrapper onSubmit={submitForgotPasswordHandler} size={35} isRegister = {props.isRegister}>
           <Input
             type="email"
             text="Email"

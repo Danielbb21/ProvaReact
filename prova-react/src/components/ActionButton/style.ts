@@ -32,5 +32,12 @@ export const ButtonActionWrapper = styled.button<ButtonActionProps>`
         margin-left: 1.4rem;
     }
  
+    
+    @media(max-height: 700px) {
+       
+        
+    height:${(props) =>props.isSave ? props.hei+5 + 'rem' :props.hei + 'rem' };
+       
+   }
    
 `;

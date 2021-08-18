@@ -16,6 +16,7 @@ export const LogoWrapper = styled.div`
         width: 100%;
         max-height: 25vh;
        margin: 0;
+       margin-top: 1.4rem;
    
   }
 

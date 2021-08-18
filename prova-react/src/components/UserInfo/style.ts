@@ -15,7 +15,11 @@ export const UserInfoWrapper = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     word-wrap: break-word;
-   
+    @media(max-height: 400px) {
+        margin-top: 1.4rem;
+      height: 70vh;
+      
+  }
 `;
 
 export const UserInfoTitle = styled.span`

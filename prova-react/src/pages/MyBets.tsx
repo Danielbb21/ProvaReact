@@ -1,8 +1,6 @@
 import React from "react";
-import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import FilterGame from "../components/FilterGame";
-import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { useAppSelector } from "../store/store-hooks";
 

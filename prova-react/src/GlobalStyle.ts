@@ -48,7 +48,19 @@ const GlobalStyle = createGlobalStyle`
           font-size: 85%;
         }
   }
+  @media(max-height: 300px) {
+        
+        html{
+          font-size: 30%;
+        }
+  }
 
+  @media(max-height: 300px) and (max-width: 600px){
+        
+        html{
+          font-size: 25%;
+        }
+  }
 `;
 
 export default GlobalStyle;

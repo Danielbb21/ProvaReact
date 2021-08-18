@@ -5,11 +5,17 @@ export const NavLine = styled.div`
   /* width: 100vw; */
 
   border-bottom: 2px solid #ebebeb;
+  @media(max-width: 500px) {
+       
+       border: none;
+       
+       
+   }
 `
 export const NavbarWrapper = styled.div`
   width: 90%;
   /* max-width: 980px; */
-
+   
   margin-top: 4.5rem;
   display: flex;
   justify-content: space-between;
@@ -18,11 +24,12 @@ export const NavbarWrapper = styled.div`
 
   
 
-  /* @media(max-width: 280px) {
-        
-      width: 100vw;
-      background-color: red;
-  } */
+  @media(max-width: 500px) {
+       
+      /* width: 100vw; */
+      margin-bottom: 1.4rem;
+      max-width: 100vw;
+  }
 
   
   
@@ -30,12 +37,18 @@ export const NavbarWrapper = styled.div`
 
 
 export const NavLogoWrapper = styled.div`
-  /* width: 60%;s */
+  
   display: flex;
   justify-content: space-evenly;
   margin-left: 14.1rem;
   
   align-items: center;
+
+  @media(max-width: 500px) {
+       
+       margin-left: 0;
+       
+   }
 `;
 
 export const NavLogo =styled.div`
@@ -57,6 +70,11 @@ export const NavLogo =styled.div`
         border-radius: .6rem;
         opacity: 1;
     }
+    /* @media(max-width: 280px) {
+        
+      font-size: 2.4rem;
+        margin: 0;
+    } */
   
 `;
 
@@ -97,6 +115,7 @@ export const NavLinks = styled(Link)`
   text-decoration: none;
   span{
     padding-right: .9rem;
+    
   }
 
 `;

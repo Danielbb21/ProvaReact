@@ -4,6 +4,7 @@ interface ButtonProps {
     win: number;
 }
 export const BetPageWrapper = styled.div`
+
    margin-top: 7.2rem;
     /* margin:0; */
     display: flex;
@@ -44,10 +45,12 @@ export const BetNumbers = styled.div`
     width: 50%;
     /* height: 100%; */
     
-   
+    
     @media(max-width: 800px) {
        width: 85%;
-       margin: 0 auto;
+       /* margin: 0 auto; */
+       /* background-color: red; */
+       
   }
 `;
 export const TitleWrapper = styled.h3`
@@ -58,6 +61,7 @@ export const TitleWrapper = styled.h3`
     font-weight: bold;
     font-style: italic;
     width: 100vw;
+    
     span{
         font-weight: lighter;
     }
