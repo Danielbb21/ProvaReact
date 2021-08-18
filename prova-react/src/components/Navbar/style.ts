@@ -5,7 +5,7 @@ export const NavLine = styled.div`
   
 
   border-bottom: 2px solid #ebebeb;
-  @media(max-width: 500px) {
+  @media(max-width: 400px) {
        
        border: none;
        
@@ -29,6 +29,7 @@ export const NavbarWrapper = styled.div`
       
       margin-bottom: 1.4rem;
       max-width: 100vw;
+      /* margin: 3.4rem auto; */
   }
 
   @media(max-width: 300px) {
@@ -37,6 +38,7 @@ export const NavbarWrapper = styled.div`
        margin-bottom: 1.4rem;
        /* max-width: 40vw; */
        max-width: 30vw;
+       
        
    }
  

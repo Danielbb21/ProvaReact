@@ -55,6 +55,8 @@ export const CartTitle = styled.h2`
     font-weight: bold;
     font-style: italic;
     padding-left: 1.9rem;
+    text-align: left;
+    text-transform: uppercase;
     span{
         font-weight: lighter;
 
@@ -64,7 +66,9 @@ export const CartTitle = styled.h2`
 export const CartMax = styled.div`
     height: 25.4rem;
     width: 100%;
-    overflow: scroll;
+    
+    overflow-y: auto;
+    overflow-x:hidden;
 `;
 export const CartItemsWrapper =styled.div`
     display: flex;

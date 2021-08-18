@@ -11,7 +11,7 @@ export const NumberPlace = styled.div`
     max-width: 67rem;
     
     max-height: 54rem;
-    overflow: scroll;
+    overflow: auto;
     width: 64.4rem;
     margin-top: 2.7rem;
     margin-bottom: 4.4rem;
