@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import Footer from "../components/Footer";
 import UserInfo from "../components/UserInfo";
 import { useAppSelector } from "../store/store-hooks";
 

@@ -1,7 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 import Card from "../components/Card";
-import Footer from "../components/Footer";
 import FormForgot from "../components/FormForget";
 
 
@@ -17,7 +15,6 @@ const ResetPassword: React.FC = () => {
         <FormForgot isRegister = {true}/>
         
       </Card>
-      {/* <Footer /> */}
     </>
   );
 };
