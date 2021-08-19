@@ -361,7 +361,7 @@ const NewBet: React.FC = () => {
                   onRemove={removeItemHandler.bind(this, element.id)}
                   color={element.color}
                 >
-                  <CartNumbers wid="80">
+                  <CartNumbers wid="90">
                     {element.numbers.sort(comparaNumeros).toString()}
                   </CartNumbers>
                 </CartItems>

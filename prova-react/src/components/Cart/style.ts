@@ -147,7 +147,9 @@ interface CartNumberProps{
 }
 
 export const CartNumbers = styled.span<CartNumberProps>`
-    width:${(props) => props.wid ? props.wid+'%' : '90%'} ;  
+    max-width:${(props) => props.wid ? props.wid+'%' : '90%'} ; 
+    height: 100%;
+    text-align: left;   
     font-size: ${(props) => props.size ? props.size + 'rem' : '1.5rem'};
     font-style: italic;
     font-weight: bold;
