@@ -30,6 +30,7 @@ const GlobalStyle = createGlobalStyle`
     
   }
   
+
   @media(max-width: 1024px) {
         
         html{

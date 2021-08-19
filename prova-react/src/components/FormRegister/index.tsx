@@ -6,7 +6,8 @@ import { VscArrowRight, VscArrowLeft } from "react-icons/vsc";
 import ButtonForm from "../ButtonForm";
 import {useAppDispatch, useAppSelector} from '../../store/store-hooks';
 import {registerUser} from '../../store/UserSlice';
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   ButtonAndForm,
   ErrorMessage,
@@ -20,7 +21,7 @@ const FormRegister: React.FC = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const users = useAppSelector(state =>  state.user.users);
-  const [hasError, setHasError] = useState<boolean>(false);
+  
   const history = useHistory();
 
   const {
@@ -70,7 +71,8 @@ const FormRegister: React.FC = (props) => {
 
       let userAlreadyBeeingInUse = verifyUser(user.email);
       if(userAlreadyBeeingInUse){
-        setHasError(true);
+       
+        toast.error('This Email is already been in use', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
         return;
       }
       dispatch(registerUser(user));
@@ -110,7 +112,7 @@ const FormRegister: React.FC = (props) => {
         {passwordError && isClicked && (
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
-        {hasError && <ErrorMessage>This Email is already be in use</ErrorMessage>}
+        
         <ButtonForm color="#B5C401" position="ok">
           <span>Register</span>
           <VscArrowRight />

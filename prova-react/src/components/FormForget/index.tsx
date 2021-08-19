@@ -12,6 +12,8 @@ import Input from "../Input/index";
 import useForm from "../../hooks/use-form";
 import { useHistory } from "react-router";
 import { useAppSelector } from "../../store/store-hooks";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface FormProps{
   isRegister?: boolean;
@@ -20,7 +22,7 @@ interface FormProps{
 const FormForgot: React.FC<FormProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const users = useAppSelector((state) => state.user.users);
-  const [hasError, setHasError] = useState<boolean>(false);
+  
   const history = useHistory();
   const {
     value: enteredEmail,
@@ -49,10 +51,11 @@ const FormForgot: React.FC<FormProps> = (props) => {
     if (formIsValid) {
       let emailExist = validateEmail(enteredEmail);
       if (!emailExist) {
-        setHasError(true);
+        
+        toast.error('Email Not Found', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
       }
       else{
-        setHasError(false);
+        
         history.push('/');
       }
     }
@@ -76,7 +79,7 @@ const FormForgot: React.FC<FormProps> = (props) => {
           {emailError && isClicked && (
             <ErrorMessage>Email incorreto</ErrorMessage>
           )}
-          { enteredEmail.length > 0 && hasError && <ErrorMessage>Email Not Found</ErrorMessage>}
+        
           <ButtonForm color="#B5C401" position="ok">
             <span>Send Link</span>
             <VscArrowRight />

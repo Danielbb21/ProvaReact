@@ -14,10 +14,12 @@ import {
   FormWrapper,
 } from "./style";
 import { useHistory } from "react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Form: React.FC = () => {
   const users = useAppSelector((state) => state.user.users);
-  const [hasError, setHasError] = useState(false);
+  
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
 
@@ -62,10 +64,14 @@ const Form: React.FC = () => {
       
       setIsClicked(false);
       const isUserValid = checkUserNotExists(enteredEmail, enteredPassword)
-      setHasError(isUserValid);
+      
+      
       if(!isUserValid){
         const userId= users.find(user => user.email === enteredEmail);
         history.replace(`/my-bets/${userId?.id}`);
+      }
+      else{
+        toast.error('Email password combination is wrong', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
       }
     }
   };
@@ -96,9 +102,7 @@ const Form: React.FC = () => {
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
         <FormText to="/forget">I forget my password</FormText>
-        { hasError && (
-          <ErrorMessage>Email password combination is wrong</ErrorMessage>
-        )}
+       
         <ButtonForm color="#B5C401" position="ok">
           <span>Log In</span>
           <VscArrowRight />

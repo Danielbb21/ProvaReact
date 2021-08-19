@@ -9,12 +9,14 @@ import MyBets from "./pages/MyBets";
 import NewBet from "./pages/NewBet";
 import Register from "./pages/RegisterUser";
 import ResetPassword from "./pages/ResetPassword";
+import {ToastContainer} from 'react-toastify';
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-    
+      <ToastContainer style ={{fontSize: "14px"}}/>
+
       <Switch>
         <Route path="/" exact>
           <Home />

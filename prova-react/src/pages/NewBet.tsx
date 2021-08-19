@@ -27,6 +27,8 @@ import { useAppDispatch, useAppSelector } from "../store/store-hooks";
 import { addToCart } from "../store/CartSlice";
 import { useHistory, useParams } from "react-router-dom";
 import { ErrorMessage } from "../components/FormSignIn/style";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface Options {
   type: string;
@@ -56,8 +58,7 @@ const NewBet: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [submitError, setSubmitError] = useState<boolean>(false);
+
   const users = useAppSelector((state) => state.user.users);
 
   const userFond = users.find((user) => user.id === id);
@@ -145,17 +146,21 @@ const NewBet: React.FC = () => {
       return false;
     }
     if (isAlreadyIntheLimit) {
-      setErrorMessage("You already chosed all the numbers");
+      
+      
+      toast.error("You already chosed all the numbers", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
       return false;
     }
-    setErrorMessage("");
-    setSubmitError(false);
+    
     return true;
   };
 
   const handleChoseNumber = (numberChosed: number) => {
     const isPosibleToChose = isPosibleToChoseTheNumber(numberChosed);
-    setSubmitError(false);
+    
     if (isPosibleToChose) {
       setChosedNumber((previusState) => {
         let newArray = [...previusState];
@@ -171,7 +176,6 @@ const NewBet: React.FC = () => {
     if (arrayOfChosenNumbers.length === gameOptions?.["max-number"]) {
       console.log(arrayOfChosenNumbers.length, gameOptions?.["max-number"]);
       arrayOfChosenNumbers = [];
-
     }
     if (!gameOptions) {
       return;
@@ -198,8 +202,12 @@ const NewBet: React.FC = () => {
 
   const addGameToCartHandler = () => {
     if (chosedNumbers.length !== gameOptions?.["max-number"]) {
-      setErrorMessage("Still missing numbers in your game");
-      setSubmitError(false);
+      
+      toast.error("Still missing numbers in your game", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
+      
       return;
     }
     setCartNumber((previus) => {
@@ -211,8 +219,6 @@ const NewBet: React.FC = () => {
         price: gameOptions.price,
         type: gameOptions.type,
       });
-      setErrorMessage("");
-      setSubmitError(false);
       return newArray;
     });
 
@@ -264,8 +270,12 @@ const NewBet: React.FC = () => {
       setCartNumber([]);
       history.replace(`/my-bets/${id}`);
     } else {
-      setErrorMessage("Value of game is lower than R$ 30,00");
-      setSubmitError(true);
+      
+      toast.error("Value of game is lower than R$ 30,00", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
+      
     }
   };
 
@@ -314,9 +324,7 @@ const NewBet: React.FC = () => {
                 })
               : ""}
           </NumberPlace>
-          {errorMessage.length > 0 && !submitError && (
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-          )}
+        
           <ButtonInActionWrapper win={64.8}>
             <ActionButton
               win={16.4}
@@ -361,7 +369,7 @@ const NewBet: React.FC = () => {
                   onRemove={removeItemHandler.bind(this, element.id)}
                   color={element.color}
                 >
-                  <CartNumbers wid="90">
+                  <CartNumbers wid="95">
                     {element.numbers.sort(comparaNumeros).toString()}
                   </CartNumbers>
                 </CartItems>
@@ -383,9 +391,7 @@ const NewBet: React.FC = () => {
               <VscArrowRight />
             </ActionButton>
           </CartWrapper>
-          {errorMessage.length > 0 && submitError && (
-            <ErrorMessage>{errorMessage}</ErrorMessage>
-          )}
+       
         </ErrorMessage>
       </BetPageWrapper>
     </>
