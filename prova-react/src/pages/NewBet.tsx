@@ -58,16 +58,16 @@ const NewBet: React.FC = () => {
   const { id } = useParams<ParamTypes>();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [submitError, setSubmitError] = useState<boolean>(false);
-  const users = useAppSelector(state => state.user.users);
-  
-  const userFond = users.find(user=>user.id === id);
-  if(!userFond){
-    history.replace('/');
+  const users = useAppSelector((state) => state.user.users);
+
+  const userFond = users.find((user) => user.id === id);
+  if (!userFond) {
+    history.replace("/");
   }
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
     const sortedArray = arrayOfNumbers.sort(comparaNumeros);
-    
+
     setNumbersOfTheGame(sortedArray);
   }, []);
 
@@ -157,7 +157,6 @@ const NewBet: React.FC = () => {
     const isPosibleToChose = isPosibleToChoseTheNumber(numberChosed);
     setSubmitError(false);
     if (isPosibleToChose) {
-      
       setChosedNumber((previusState) => {
         let newArray = [...previusState];
         newArray.push(numberChosed);
@@ -167,13 +166,20 @@ const NewBet: React.FC = () => {
   };
 
   const completeGameHandler = () => {
-    const arrayOfChosenNumbers = [...chosedNumbers];
+    let arrayOfChosenNumbers = [...chosedNumbers];
+
+    if (arrayOfChosenNumbers.length === gameOptions?.["max-number"]) {
+      console.log(arrayOfChosenNumbers.length, gameOptions?.["max-number"]);
+      arrayOfChosenNumbers = [];
+
+    }
     if (!gameOptions) {
       return;
     }
+
     while (arrayOfChosenNumbers.length !== gameOptions?.["max-number"]) {
       let numberSorted = Math.floor(Math.random() * gameOptions?.range) + 1;
-      
+
       let isAlreadyChosed = arrayOfChosenNumbers.find(
         (number) => number === numberSorted
       );
@@ -221,7 +227,7 @@ const NewBet: React.FC = () => {
   for (const i of cartNumbers) {
     cartValue.push(i.price);
   }
-  
+
   const totalPrice = cartValue.reduce((next, current) => {
     return next + current;
   }, 0);
@@ -239,7 +245,6 @@ const NewBet: React.FC = () => {
 
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
-      
       const date = formatDate(new Date());
 
       cartNumbers.forEach((cart) => {
@@ -255,11 +260,10 @@ const NewBet: React.FC = () => {
 
         dispatch(addToCart(teste));
       });
-    
+
       setCartNumber([]);
       history.replace(`/my-bets/${id}`);
     } else {
-      
       setErrorMessage("Value of game is lower than R$ 30,00");
       setSubmitError(true);
     }
@@ -374,7 +378,6 @@ const NewBet: React.FC = () => {
               border="#E2E2E2"
               isSave={true}
               onAction={saveGameHandler}
-              
             >
               Save
               <VscArrowRight />

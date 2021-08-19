@@ -22,14 +22,12 @@ export const NavbarWrapper = styled.div`
   align-items: center;
   flex: 1;
 
-  
-
   @media(max-width: 500px) {
        
       
       margin-bottom: 1.4rem;
       max-width: 100vw;
-      /* margin: 3.4rem auto; */
+      
   }
 
   @media(max-width: 300px) {
