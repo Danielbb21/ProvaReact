@@ -1,28 +1,30 @@
 import { createSlice,  PayloadAction } from "@reduxjs/toolkit";
 
-interface UserObj{
-    id: string;
-    email: string;
-    name: string;
-    password: string;
+
+const localToken = localStorage.getItem('token') || null;
+
+const logged = !!localToken;
+
+const UserObj =  {
+    token: localToken,
+    isLoggedIn: logged
 }
 
-interface UserState{
-    users: UserObj[];
-}
 
-const InitialUserState: UserState = {
-    users: []
-}
+
+
 
 export const UserSlice = createSlice({
     name: 'user',
-    initialState: InitialUserState,
+    initialState: UserObj,
     reducers:{
-        registerUser:(state, action: PayloadAction<UserObj>) =>{
+        login:(state, action: PayloadAction<string>) =>{
+            console.log('Aquiii');
             const data = action.payload;
-            state.users.push(data);
-            
+            console.log('DATAAA', data);
+            localStorage.setItem('token', data);
+            state.token = data;
+            state.isLoggedIn = true;
         },
 
         
@@ -30,5 +32,5 @@ export const UserSlice = createSlice({
 });
 
 
-export const {registerUser} = UserSlice.actions;
+export const {login} = UserSlice.actions;
 export default UserSlice.reducer;

@@ -17,11 +17,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Loader from "../Loader";
+import { useAppDispatch } from "../../store/store-hooks";
+import { login} from '../../store/UserSlice';
 
 const Form: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   const {
     value: enteredEmail,
@@ -45,6 +48,7 @@ const Form: React.FC = () => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
+      let token = '';
       setIsLoading(true);
       axios
         .post("http://127.0.0.1:3333/session", {
@@ -53,6 +57,9 @@ const Form: React.FC = () => {
         })
         .then((response) => {
           console.log("ok", response.data);
+          token = response.data.token;
+          dispatch(login(token));
+          
           setIsLoading(false);
         })
         .catch((err) => {
@@ -63,6 +70,8 @@ const Form: React.FC = () => {
           setIsLoading(false);
 
         });
+        
+        
       setIsClicked(false);
     }
   };
