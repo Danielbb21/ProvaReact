@@ -4,7 +4,6 @@ import Input from "../Input";
 
 import { VscArrowRight } from "react-icons/vsc";
 import ButtonForm from "../ButtonForm";
-import { useAppSelector } from "../../store/store-hooks";
 
 import {
   ButtonAndForm,
@@ -16,12 +15,13 @@ import {
 import { useHistory } from "react-router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import Loader from "../Loader";
 
 const Form: React.FC = () => {
-  const users = useAppSelector((state) => state.user.users);
-  
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const {
     value: enteredEmail,
@@ -41,38 +41,29 @@ const Form: React.FC = () => {
 
   const formIsValid = emailIsValid && passwordIsValid;
 
-  const checkUserNotExists = (email: string, password: string): boolean => {
-    
-
-    const emailExists = users.find((user) => user.email === email);
-    
-    if (emailExists) {
-      const passwordMatch = emailExists.password === password;
-      
-      if (passwordMatch) {
-        return false;
-      }
-    }
-      return true;
-    
-  };
-
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      
+      setIsLoading(true);
+      axios
+        .post("http://127.0.0.1:3333/session", {
+          email: enteredEmail,
+          password: enteredPassword,
+        })
+        .then((response) => {
+          console.log("ok", response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          toast.error('Sommeting Went Wrong', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+          });
+          setIsLoading(false);
+
+        });
       setIsClicked(false);
-      const isUserValid = checkUserNotExists(enteredEmail, enteredPassword)
-      
-      
-      if(!isUserValid){
-        const userId= users.find(user => user.email === enteredEmail);
-        history.replace(`/my-bets/${userId?.id}`);
-      }
-      else{
-        toast.error('Email password combination is wrong', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
-      }
     }
   };
 
@@ -83,6 +74,7 @@ const Form: React.FC = () => {
   return (
     <ButtonAndForm>
       <FormTitle>Authentication</FormTitle>
+      {isLoading && <Loader />}
       <FormWrapper size={60} onSubmit={submitLoginHandler}>
         <Input
           type="email"
@@ -102,7 +94,7 @@ const Form: React.FC = () => {
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
         <FormText to="/forget">I forget my password</FormText>
-       
+
         <ButtonForm color="#B5C401" position="ok">
           <span>Log In</span>
           <VscArrowRight />
