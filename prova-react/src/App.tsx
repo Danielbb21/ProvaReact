@@ -9,13 +9,15 @@ import MyBets from "./pages/MyBets";
 import NewBet from "./pages/NewBet";
 import Register from "./pages/RegisterUser";
 import ResetPassword from "./pages/ResetPassword";
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from "react-toastify";
+import UpdatePassword from "./pages/UpdatePassword";
+import UpdateUser from "./pages/UpdateUser";
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <ToastContainer style ={{fontSize: "14px"}}/>
+      <ToastContainer style={{ fontSize: "14px" }} />
 
       <Switch>
         <Route path="/" exact>
@@ -27,20 +29,24 @@ function App() {
         <Route path="/register" exact>
           <Register />
         </Route>
-        <Route path="/my-bets/:id" >
+        <Route path="/reset" exact>
+          <UpdatePassword />
+        </Route>
+        <Route path="/update" exact>
+          <UpdateUser />
+        </Route>
+        <Route path="/my-bets/:id">
           <MyBets />
         </Route>
-        <Route path="/new-bet/:id" >
+        <Route path="/new-bet/:id">
           <NewBet />
         </Route>
-        <Route path="/account/:id" >
+        <Route path="/account/:id">
           <Account />
         </Route>
-        <Route path='*'>
-          { < Redirect to='/' />}
-        </Route>
+        <Route path="*">{<Redirect to="/" />}</Route>
       </Switch>
-      
+
       <Footer />
     </div>
   );
