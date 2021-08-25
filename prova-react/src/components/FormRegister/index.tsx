@@ -4,8 +4,7 @@ import Input from "../Input";
 import { useHistory } from "react-router";
 import { VscArrowRight, VscArrowLeft } from "react-icons/vsc";
 import ButtonForm from "../ButtonForm";
-import {useAppDispatch, useAppSelector} from '../../store/store-hooks';
-import {registerUser} from '../../store/UserSlice';
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -14,13 +13,17 @@ import {
   FormTitle,
   FormWrapper,
 } from "../FormSignIn/style";
+import axios from "axios";
+import Loader from "../Loader";
 
 
 
 const FormRegister: React.FC = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const dispatch = useAppDispatch();
-  const users = useAppSelector(state =>  state.user.users);
+  
+  const [isLoadding, setIsLoading] = useState<boolean>(false);
+
+  // const users = useAppSelector(state =>  state.user.users);
   
   const history = useHistory();
 
@@ -49,34 +52,29 @@ const FormRegister: React.FC = (props) => {
 
   const formIsValid = emailIsValid && passwordIsValid && nameIsValid;
   
-  const verifyUser = (email: string) =>{
-      const emailExits = users.find(user => user.email === email);
-      if(emailExits){
-        return true;
-      }
-  }
+ 
 
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      
+      setIsLoading(true);
+      axios.post('http://127.0.0.1:3333/user', {name: enteredName, email: enteredEmail, password: enteredPassword})
+          .then(reposne => {
+            console.log('finalizado');
+            setIsLoading(false);
+            console.log(reposne.data);
+            toast.success('User creater', {position: toast.POSITION.TOP_RIGHT, autoClose: 1000});
+            history.push("/");
+          })
+          .catch(err =>{
+            setIsLoading(false);
+            toast.error('Sommeting went wrong', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
+            console.log(err.message);
+            return 
+          })
       setIsClicked(false);
-      const user = {
-        id: Math.random().toString(),
-        email: enteredEmail,
-        name: enteredName,
-        password: enteredPassword
-      };
-
-      let userAlreadyBeeingInUse = verifyUser(user.email);
-      if(userAlreadyBeeingInUse){
-       
-        toast.error('This Email is already been in use', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
-        return;
-      }
-      dispatch(registerUser(user));
-      history.push("/");
+      
       return;
     }
   };
@@ -87,6 +85,7 @@ const FormRegister: React.FC = (props) => {
   return (
     <ButtonAndForm>
       <FormTitle>Registration</FormTitle>
+        {isLoadding && <Loader />}
       <FormWrapper size={90} onSubmit={submitLoginHandler} >
         <Input
           type="text"
