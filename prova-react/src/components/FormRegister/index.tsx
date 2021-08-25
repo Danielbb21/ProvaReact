@@ -22,8 +22,6 @@ const FormRegister: React.FC = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   
   const [isLoadding, setIsLoading] = useState<boolean>(false);
-
-  // const users = useAppSelector(state =>  state.user.users);
   
   const history = useHistory();
 

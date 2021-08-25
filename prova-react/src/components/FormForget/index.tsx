@@ -11,18 +11,20 @@ import ButtonForm from "../ButtonForm";
 import Input from "../Input/index";
 import useForm from "../../hooks/use-form";
 import { useHistory } from "react-router";
-import { useAppSelector } from "../../store/store-hooks";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import Loader from "../Loader";
 
-interface FormProps{
+interface FormProps {
   isRegister?: boolean;
 }
 
 const FormForgot: React.FC<FormProps> = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  const users = useAppSelector((state) => state.user.users);
   
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const history = useHistory();
   const {
     value: enteredEmail,
@@ -35,13 +37,7 @@ const FormForgot: React.FC<FormProps> = (props) => {
 
   const formIsValid = emailIsValid;
 
-  const validateEmail = (email: string): boolean => {
-    const emailExists = users.find((user) => user.email === email);
-    if (!emailExists) {
-      return false;
-    }
-    return true;
-  };
+
 
   const submitForgotPasswordHandler = (
     event: React.FormEvent<HTMLFormElement>
@@ -49,15 +45,24 @@ const FormForgot: React.FC<FormProps> = (props) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      let emailExist = validateEmail(enteredEmail);
-      if (!emailExist) {
-        
-        toast.error('Email Not Found', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
-      }
-      else{
-        
-        history.push('/');
-      }
+      setIsLoading(true);
+      axios
+        .post("http://127.0.0.1:3333/passwords", {
+          email: enteredEmail,
+          redirect_url: "http://localhost:3000/reset",
+        })
+        .then((response) => {
+          setIsLoading(false);
+          
+          toast.success('A email was sended to your account', {position: toast.POSITION.TOP_RIGHT, autoClose: 1500});
+          history.replace('/');
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.log(err);
+          toast.error('Sommeting Went Wrong', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
+          return;
+        });
     }
   };
 
@@ -69,7 +74,12 @@ const FormForgot: React.FC<FormProps> = (props) => {
     <>
       <ButtonAndForm>
         <FormTitle>Reset Password</FormTitle>
-        <FormWrapper onSubmit={submitForgotPasswordHandler} size={35} isRegister = {props.isRegister}>
+        {isLoading && <Loader />}
+        <FormWrapper
+          onSubmit={submitForgotPasswordHandler}
+          size={35}
+          isRegister={props.isRegister}
+        >
           <Input
             type="email"
             text="Email"
@@ -79,7 +89,7 @@ const FormForgot: React.FC<FormProps> = (props) => {
           {emailError && isClicked && (
             <ErrorMessage>Email incorreto</ErrorMessage>
           )}
-        
+
           <ButtonForm color="#B5C401" position="ok">
             <span>Send Link</span>
             <VscArrowRight />
