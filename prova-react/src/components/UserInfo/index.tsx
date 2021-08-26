@@ -41,12 +41,12 @@ interface UserGame {
 }
 
 const UserInfo: React.FC<UserinfoProps> = (props) => {
-  const users = useAppSelector((state) => state.user.users);
+  // const users = useAppSelector((state) => state.user.users);
   const cartItems = useAppSelector((state) => state.cart.items);
   const typesOfGame = gameInfo.types.map((game) => game.type);
   const userGameInfo: UserGame[] = [];
   const [perPrice, setPerPrice] = useState<boolean>(false);
-  const userInfo = getUserInfo(users, props.id);
+  // const userInfo = getUserInfo(users, props.id);
   const cartInfo = getCartOfTheUser(cartItems, props.id);
 
   const perPriceHandler = () => {
@@ -83,10 +83,10 @@ const UserInfo: React.FC<UserinfoProps> = (props) => {
       <UserInfoWrapper>
         <UserInfoTitle>Your information</UserInfoTitle>
         <UserLabel>
-          Email: <span>{userInfo?.email}</span>
+          {/* Email: <span>{userInfo?.email}</span> */}
         </UserLabel>
         <UserLabel>
-          Nome: <span>{userInfo?.name}</span>
+          {/* Nome: <span>{userInfo?.name}</span> */}
         </UserLabel>
         <UserInfoTitle>{!perPrice? "Number of games per game type" : 'Value spent in each type of game'}</UserInfoTitle>
         {userGameInfo.map((user) => {

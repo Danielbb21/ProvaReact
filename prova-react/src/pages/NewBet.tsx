@@ -59,12 +59,12 @@ const NewBet: React.FC = () => {
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
 
-  const users = useAppSelector((state) => state.user.users);
+  // const users = useAppSelector((state) => state.user.users);
 
-  const userFond = users.find((user) => user.id === id);
-  if (!userFond) {
-    history.replace("/");
-  }
+  // const userFond = users.find((user) => user.id === id);
+  // if (!userFond) {
+  //   history.replace("/");
+  // }
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
     const sortedArray = arrayOfNumbers.sort(comparaNumeros);

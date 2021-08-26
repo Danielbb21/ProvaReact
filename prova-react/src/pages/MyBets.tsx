@@ -9,16 +9,16 @@ interface ParamTypes{
 }
 
 const MyBets: React.FC = () => {
-  const users = useAppSelector(state => state.user.users);
+  // const users = useAppSelector(state => state.user.users);
   const {id} = useParams<ParamTypes>();
   const history = useHistory();
   
   
  
-  const userFond = users.find(user=>user.id === id);
-  if(!userFond){
-    history.replace('/');
-  }
+  // const userFond = users.find(user=>user.id === id);
+  // if(!userFond){
+  //   history.replace('/');
+  // }
   
   return (
     <>

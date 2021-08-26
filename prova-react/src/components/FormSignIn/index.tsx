@@ -18,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Loader from "../Loader";
 import { useAppDispatch } from "../../store/store-hooks";
-import { login} from '../../store/UserSlice';
+import { login, logUser} from '../../store/UserSlice';
 
 const Form: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -50,27 +50,8 @@ const Form: React.FC = () => {
     if (formIsValid) {
       let token = '';
       setIsLoading(true);
-      axios
-        .post("http://127.0.0.1:3333/session", {
-          email: enteredEmail,
-          password: enteredPassword,
-        })
-        .then((response) => {
-          console.log("ok", response.data);
-          token = response.data.token;
-          dispatch(login(token));
-          
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          toast.error('Sommeting Went Wrong', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 1500,
-          });
-          setIsLoading(false);
-
-        });
-        
+      dispatch(logUser( enteredEmail,enteredPassword));
+        setIsLoading(false);
         
       setIsClicked(false);
     }
