@@ -29,6 +29,7 @@ export const gameSlice = createSlice({
     reducers: {
         addGames: (state, action: PayloadAction<GameObj[]>) => {
             console.log('Actionnn', action.payload)
+            state.items = [];
             action.payload.forEach((game) => {
                 state.items.push(game);
             });

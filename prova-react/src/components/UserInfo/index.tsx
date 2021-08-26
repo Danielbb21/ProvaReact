@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useAppSelector } from "../../store/store-hooks";
 import Navbar from "../Navbar";
 import { UserInfoTitle, UserInfoWrapper, UserLabel } from "./style";
-import gameInfo from "../../games.json";
 import ActionButton from "../ActionButton";
 import { useState } from "react";
 import { useAppDispatch } from "../../store/store";
@@ -11,29 +10,6 @@ import { getGameData } from "../../store/GameSlice";
 
 
 
-interface UserInterface {
-  id: string;
-  email: string;
-  name: string;
-  password: string;
-}
-
-interface CartInterface {
-  id: string;
-  typeGame: string;
-  price: number;
-  color: string;
-  numbers: number[];
-  date?: string;
-  user_id: string;
-}
-
-// const getUserInfo = (users: UserInterface[], id: string) => {
-//   return users.find((user) => user.id === id);
-// };
-const getCartOfTheUser = (cart: CartInterface[], id: string) => {
-  return cart.filter((items) => items.user_id === id);
-};
 
 interface UserGame {
   type: string;
@@ -41,58 +17,87 @@ interface UserGame {
   price: number | null;
 }
 
+
 const UserInfo: React.FC = (props) => {
   // const users = useAppSelector((state) => state.user.users);
-  const cartItems = useAppSelector((state) => state.cart.items);
-  const typesOfGame = gameInfo.types.map((game) => game.type);
+
   const userGameInfo: UserGame[] = [];
   const [perPrice, setPerPrice] = useState<boolean>(false);
-  const games = useAppSelector(state => state.game.items);
-
+  const games = useAppSelector((state) => state.game.items);
+  
+  console.log(userGameInfo);
   // const userInfo = getUserInfo(users, props.id);
   // const cartInfo = getCartOfTheUser(cartItems, props.id);
   const token = useAppSelector((state) => state.user.token);
   const dispatch = useAppDispatch();
-  const user = useAppSelector(state => state.user.info);
+  const user = useAppSelector((state) => state.user.info);
+  
+  
+
 
   useEffect(() => {
     const getUserData = () => {
-      if (token) {
+      
+      if (token ) {
+        console.log('loading');
         dispatch(getUserInfo(token));
         dispatch(getGameData(token));
+        console.log('finish')
+        
+        
       }
+      
     };
+
     getUserData();
+    
   }, [token, dispatch]);
-console.log('USERRRR', user);
-console.log('GAMESSS', games);
+  
+  console.log('GAMESSS', games);
+  
+  const typeOfGames = games.map((game) => game.type);
+  
   const perPriceHandler = () => {
-    setPerPrice(previus => !previus);
+    console.log(userGameInfo);
+    
+    setPerPrice((previus) => !previus);
   };
 
-  // const checkPrice = (typeGame: string  | null | undefined): number => {
-  //   if (typeGame) {
-  //     const gameValue = cartInfo.find(
-  //       (cart) => cart.typeGame === typeGame
-  //     )?.price;
-  //     if(gameValue){
-  //       return gameValue;
-  //     }
-  //     return 0;
-     
-  //   }
-  //   return 0;
-  // };
-  // typesOfGame.forEach((game) => {
-  //     let price = checkPrice(game);
-  //     let quantity = cartInfo.filter((cart) => cart.typeGame === game).length;
-  //   userGameInfo.push({
-  //     type: game,
-  //     quantity: quantity,
-  //     price: price * quantity
-  //   });
-  // });
+  const checkPrice = (typeGame: string  | null | undefined): number => {
+    console.log('typeGame', typeGame);
+    if (typeGame) {
+      let price = 0;
+      const gameValue = user.gambles.filter(
+        (cart) => cart['game']['type'] === typeGame
+      );
+       gameValue.forEach((game) => {
+         price += game['price'];
+        
+      } )
+      
+      if(price){
+        return price;
+      }
+      return 0;
+
+    }
+    return 0;
+  };
+
   
+   typeOfGames.forEach((game) => {
+     
+      let price = checkPrice(game);
+      
+      let quantity = user.gambles.filter((cart) => cart['game']['type'] === game).length;
+    userGameInfo.push({
+      type: game,
+      quantity: quantity,
+      price: price
+    });
+    
+  });
+
 
   return (
     <>
@@ -105,11 +110,20 @@ console.log('GAMESSS', games);
         <UserLabel>
           Nome: <span>{user.name}</span>
         </UserLabel>
-        <UserInfoTitle>{!perPrice? "Number of games per game type" : 'Value spent in each type of game'}</UserInfoTitle>
-        {userGameInfo.map((user) => {
+        <UserInfoTitle>
+          {!perPrice
+            ? "Number of games per game type"
+            : "Value spent in each type of game"}
+        </UserInfoTitle>
+        { userGameInfo && userGameInfo.map((user) => {
           return (
             <UserLabel>
-              {user.type}:  <span>{!perPrice? user.quantity: `R$ ${user.price?.toFixed(2).toString().replace('.', ',')}`}</span>
+              {user.type}:{" "}
+              <span>
+                {!perPrice
+                  ? user.quantity
+                  : `R$ ${user.price?.toFixed(2).toString().replace(".", ",")}`}
+              </span>
             </UserLabel>
           );
         })}
@@ -121,7 +135,7 @@ console.log('GAMESSS', games);
           end={true}
           onAction={perPriceHandler}
         >
-          {!perPrice ? "Get by price" : 'Get by quantity'}
+          {!perPrice ? "Get by price" : "Get by quantity"}
         </ActionButton>
       </UserInfoWrapper>
     </>
