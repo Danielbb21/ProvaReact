@@ -13,8 +13,11 @@ import { ToastContainer } from "react-toastify";
 import UpdatePassword from "./pages/UpdatePassword";
 import UpdateUser from "./pages/UpdateUser";
 import { CookiesProvider } from "react-cookie";
+import { useAppSelector } from "./store/store-hooks";
 
 function App() {
+  const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
+
   return (
     <div>
       <CookiesProvider>
@@ -37,14 +40,20 @@ function App() {
           <Route path="/update" exact>
             <UpdateUser />
           </Route>
-          <Route path="/my-bets/:id">
-            <MyBets />
+          
+          <Route path="/my-bets">
+            {isLoggedIn && <MyBets />}
+            {!isLoggedIn && <Redirect to= '/' />}
+            
           </Route>
           <Route path="/new-bet/:id">
             <NewBet />
           </Route>
-          <Route path="/account/:id">
-            <Account />
+          <Route path="/account">
+          {isLoggedIn && <Account />}
+            {!isLoggedIn && <Redirect to= '/' />}
+            
+            
           </Route>
           <Route path="*">{<Redirect to="/" />}</Route>
         </Switch>

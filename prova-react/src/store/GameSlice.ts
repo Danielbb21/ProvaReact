@@ -1,0 +1,66 @@
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
+import { AppDispatch, AppThunk } from "./store";
+
+interface GameObj {
+    id: string;
+    type: string;
+    description: string;
+    range: number;
+    price: number;
+    "max-number": number;
+    color: number;
+    "min-cart-value": number;
+    "created_at": Date;
+    "updated_at": Date;
+}
+
+interface GameState {
+    items: GameObj[];
+}
+
+const initialStateGame: GameState = {
+    items: []
+}
+
+export const gameSlice = createSlice({
+    name: 'cart',
+    initialState: initialStateGame,
+    reducers: {
+        addGames: (state, action: PayloadAction<GameObj[]>) => {
+            console.log('Actionnn', action.payload)
+            action.payload.forEach((game) => {
+                state.items.push(game);
+            });
+
+        }
+    }
+});
+
+export const { addGames } = gameSlice.actions;
+export default gameSlice.reducer;
+
+export function getGameData(token: string): AppThunk {
+    return async function (dispatch: AppDispatch) {
+        
+        axios
+            .get("http://127.0.0.1:3333/game", {
+                headers: { Authorization: `Bearer ${token}` }
+
+            })
+            .then((response) => {
+                console.log("ok teste", response.data);
+
+
+                dispatch(addGames(response.data));
+
+
+            })
+            .catch((err) => {
+                console.log(err.message);
+
+            });
+    }
+
+
+}

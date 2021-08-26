@@ -13,19 +13,22 @@ import {
   FormWrapper,
 } from "./style";
 import { useHistory } from "react-router";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios";
 import Loader from "../Loader";
-import { useAppDispatch } from "../../store/store-hooks";
-import { login, logUser} from '../../store/UserSlice';
+import { useAppDispatch, useAppSelector } from "../../store/store-hooks";
+import {  logUser} from '../../store/UserSlice';
 
 const Form: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
+  const user = useAppSelector(state => state.user.isLoggedIn);
+  
+  
+  if(user){
+    history.replace('my-bets');
+  }
   const {
     value: enteredEmail,
     changeValueHandler: changeEmailHandler,
@@ -44,14 +47,16 @@ const Form: React.FC = () => {
 
   const formIsValid = emailIsValid && passwordIsValid;
 
-  const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
+  const submitLoginHandler =  async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-      let token = '';
-      setIsLoading(true);
-      dispatch(logUser( enteredEmail,enteredPassword));
-        setIsLoading(false);
+     
+      
+     dispatch(logUser( enteredEmail,enteredPassword));
+
+      
+      
         
       setIsClicked(false);
     }

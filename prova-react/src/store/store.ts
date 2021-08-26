@@ -1,11 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
-import  cartSliceReducer  from "./CartSlice";
+import cartSliceReducer from "./CartSlice";
 import UserSlice from "./UserSlice";
+import gameSlice from './GameSlice';
+
 export const store = configureStore({
-    reducer:{
+    reducer: {
         cart: cartSliceReducer,
-        user: UserSlice
+        user: UserSlice,
+        game: gameSlice
     }
 });
 
