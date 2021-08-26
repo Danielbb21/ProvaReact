@@ -39,6 +39,7 @@ export const UserLabel = styled.div`
     font-size: 1.8rem;
     font-weight: bold;
     font-style: italic;
+    
     color: #707070;
     margin-bottom: 2.5rem;
     span{

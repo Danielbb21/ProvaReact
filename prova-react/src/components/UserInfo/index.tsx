@@ -43,8 +43,7 @@ const UserInfo: React.FC = (props) => {
         dispatch(getUserInfo(token));
         dispatch(getGameData(token));
         console.log('finish')
-        
-        
+
       }
       
     };

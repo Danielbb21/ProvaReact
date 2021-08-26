@@ -2,8 +2,8 @@ import React from "react";
 import { ButtonGameWrapper } from "./style";
 
 interface ButtonProps {
-  background?: string;
-  color?: string;
+  background?: string | undefined;
+  color?: string | undefined;
   choseGame?: () => void
 }
 

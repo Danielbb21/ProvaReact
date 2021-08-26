@@ -12,10 +12,12 @@ import {
   MessageWrapper,
   ToNewBetLink,
 } from "./style";
-import { useAppSelector } from "../../store/store-hooks";
+import { useAppDispatch, useAppSelector } from "../../store/store-hooks";
 import { CartNumbers } from "../Cart/style";
 import { CartItems } from "../Cart";
 import { useHistory, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { getGameData } from "../../store/GameSlice";
 
 interface FilterGameProps {
   id: string;
@@ -40,18 +42,28 @@ const sortGame = (arr: CartInterface[], typeOfSort: string | null, id: string) =
   return arr.filter(cart=> cart.user_id === id);
 };
 
+
+
 const FilterGame: React.FC<FilterGameProps> = (props) => {
+  const games = useAppSelector(state => state.game.items);
   const cartRedux = useAppSelector((state) => state.cart);
   const history = useHistory();
   const location = useLocation();
-  
+  const dispatch = useAppDispatch();
+  const token = useAppSelector(state =>  state.user.token);
+
+  useEffect(()=>{
+    if(!token) return;
+    dispatch(getGameData(token));
+    console.log('aquiii');
+  }, [dispatch, token]);
   const { id } = props;
 
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingName = queryParams.get("sort");
 
-
+  console.log('CART REDUX', cartRedux.items);
   const arr = sortGame(cartRedux.items, isSortingName, id);
 
   const filterGame = (gameName: string) => {
@@ -69,7 +81,7 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           <FilterTitle>Recent Games</FilterTitle>
           <FilterWord>Filters</FilterWord>
           <FilterButton>
-            {data.types.map((game) => (
+            {games.map((game) => (
               <ButtonGame
                 choseGame={filterGame.bind(this, game.type)}
                 key={Math.random().toString()}

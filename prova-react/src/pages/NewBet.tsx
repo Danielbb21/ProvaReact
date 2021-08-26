@@ -29,6 +29,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { ErrorMessage } from "../components/FormSignIn/style";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getGameData } from "../store/GameSlice";
 
 interface Options {
   type: string;
@@ -58,13 +59,9 @@ const NewBet: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
+  const games = useAppSelector(state =>  state.game.items);
+  const token = useAppSelector(state => state.user.token);
 
-  // const users = useAppSelector((state) => state.user.users);
-
-  // const userFond = users.find((user) => user.id === id);
-  // if (!userFond) {
-  //   history.replace("/");
-  // }
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
     const sortedArray = arrayOfNumbers.sort(comparaNumeros);
@@ -72,8 +69,18 @@ const NewBet: React.FC = () => {
     setNumbersOfTheGame(sortedArray);
   }, []);
 
+  useEffect(()=>{
+    if(!token) return;
+    dispatch(getGameData(token));
+    console.log('aquiii');
+  }, [dispatch, token]);
+
   useEffect(() => {
-    let gameOne = gameData.types[0];
+   
+    
+    if(games.length === 0) return;
+    let gameOne = games[0];
+    console.log('Games', games)
     const {
       price,
       color,
@@ -91,7 +98,7 @@ const NewBet: React.FC = () => {
       "max-number": maxNumber,
     });
     pickNumbersOfTheArray(range);
-  }, [pickNumbersOfTheArray]);
+  }, [pickNumbersOfTheArray, games, dispatch, token]);
 
   const fillNumbers = (maxNumbers: number, range: number): number[] => {
     var numeros = [];
@@ -110,7 +117,7 @@ const NewBet: React.FC = () => {
   };
 
   const handleClick = (typeGame: string) => {
-    const gameChosed = gameData.types.filter((game) => game.type === typeGame);
+    const gameChosed = games.filter((game) => game.type === typeGame);
     if (typeGame !== gameOptions?.type) {
       setChosedNumber([]);
     }
@@ -287,7 +294,7 @@ const NewBet: React.FC = () => {
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
           <DescriptionTitle>Chose a game</DescriptionTitle>
           <ButtonInActionWrapper win={40}>
-            {gameData.types.map((game) => (
+            {games.map((game) => (
               <ButtonGame
                 key={Math.random().toString()}
                 color={game.color}
