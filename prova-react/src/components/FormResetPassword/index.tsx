@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -45,17 +46,34 @@ const FormResetPassword: React.FC = () => {
     if (formIsValid) {
       setIsClicked(false);
       if (enteredPassword !== enteredConfirmPassword) {
+      
+
         toast.error("Password aren't identical", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1500,
         });
       } else {
-        toast.success("Password Changed", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 1500,
-        });
+        axios.put('http://127.0.0.1:3333/passwords/reset', {
+          token: token,
+          password: enteredPassword,
+          password_confirmation: enteredConfirmPassword
+        })
+        .then(response => {
+          toast.success("Password Changed", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 1500,
+          });
+          history.replace("/");
+        })
+        .catch(err => {
+          toast.error("Sommeting went wrong", {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 1500,
+          });
+        })
+       
 
-        history.replace("/");
+        
       }
     }
   };
