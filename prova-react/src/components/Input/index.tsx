@@ -6,6 +6,7 @@ interface InputProps {
   type: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
+  display?: boolean;
 }
 
 const Input: React.FC<InputProps> = (props) => {
@@ -15,6 +16,7 @@ const Input: React.FC<InputProps> = (props) => {
       type={props.type}
       onChange={props.onChange}
       value={props.value}
+      display = {props.display}
     ></InputWrapper>
   );
 };

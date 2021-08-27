@@ -32,11 +32,14 @@ const Navbar: React.FC<NavProps> = (props) => {
           <NavLogo>
             TGL<div></div>
           </NavLogo>
-          {props.hasHome && <NavHome to={`/my-bets/${props.id}`}>Home</NavHome>}
+          {props.hasHome && <NavHome to={`/my-bets/`}>Home</NavHome>}
         </NavLogoWrapper>
         <NavOptions>
           {!props.hasNav && (
-            <NavLinks to={`/account/${props.id}`}>Account</NavLinks>
+            <NavLinks to={`/account`}>Account</NavLinks>
+          )}
+           {props.hasNav && (
+            <NavLinks to={`/update`}>Update Data</NavLinks>
           )}
           <NavLinks to="/" onClick={removeUserTokenHandler}>
             {" "}

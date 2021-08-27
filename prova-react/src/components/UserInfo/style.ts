@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
-export const UserInfoWrapper = styled.div`
+interface UserInfoProps{
+    hei?: number; 
+    wid?:number;
+}
+export const UserInfoWrapper = styled.div<UserInfoProps>`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;    
     background: #fff;
-    width: 50vw;
-    height: 60vh;  
+    width: ${props => props.wid ? props.wid + 'vw' : '50vw'};
+    height: ${props => props.hei ? props.hei + 'vh' : '60vh'};  
     
     border-radius: 1.6rem;
     position: fixed;

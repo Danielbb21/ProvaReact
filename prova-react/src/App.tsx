@@ -46,7 +46,7 @@ function App() {
             {!isLoggedIn && <Redirect to= '/' />}
             
           </Route>
-          <Route path="/new-bet/:id">
+          <Route path="/new-bet">
             <NewBet />
           </Route>
           <Route path="/account">
