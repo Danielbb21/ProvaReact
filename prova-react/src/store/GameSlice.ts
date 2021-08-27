@@ -33,7 +33,7 @@ export const gameSlice = createSlice({
             action.payload.forEach((game) => {
                 state.items.push(game);
             });
-
+            
         }
     }
 });

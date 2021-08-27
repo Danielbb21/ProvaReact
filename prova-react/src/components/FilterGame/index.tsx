@@ -24,34 +24,36 @@ interface FilterGameProps {
 }
 
 interface CartInterface {
-  id: string;
-  typeGame: string;
-  price: number;
+  maxNumber: number;
+  type: string;
+  price: string;
   color: string;
-  numbers: number[];
-  date?: string;
-  user_id: string;
+  gameNumbers: string;
+  date_game?: string;
+  game_date: string;
+  game_id: number;
+  user_id: number;
 }
 
 const sortGame = (arr: CartInterface[], typeOfSort: string | null, id: string) => {
   
   if (typeOfSort) {
     
-    return arr.filter((cart) => cart.typeGame === typeOfSort ).filter(cart2 => cart2.user_id === id);
+    return arr.filter((cart) => cart.type === typeOfSort );
   }
-  return arr.filter(cart=> cart.user_id === id);
+  return arr;
 };
 
 
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const games = useAppSelector(state => state.game.items);
-  const cartRedux = useAppSelector((state) => state.cart);
+  const cartRedux = useAppSelector((state) => state.cart.items);
   const history = useHistory();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const token = useAppSelector(state =>  state.user.token);
-
+  console.log('CART_REDUX', cartRedux);
   useEffect(()=>{
     if(!token) return;
     dispatch(getGameData(token));
@@ -63,8 +65,8 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
 
   const isSortingName = queryParams.get("sort");
 
-  console.log('CART REDUX', cartRedux.items);
-  const arr = sortGame(cartRedux.items, isSortingName, id);
+  console.log('CART REDUX', cartRedux)
+  const arr = sortGame(cartRedux, isSortingName, id);
 
   const filterGame = (gameName: string) => {
     if (isSortingName === gameName) {
@@ -102,15 +104,15 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
       {arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
       {arr.length > 0 ? arr.map((element) => (
         <CartItems
-          key={element.id}
+          key={Math.random().toString()}
           size = '2'
-          price={element.price.toFixed(2).toString().replace('.', ',')}
-          type={element.typeGame}
+          price={element.price}
+          type={element.type}
           color={element.color}
           isList = {true}
-          date = {element.date}
+          date = {element.date_game}
         >
-          <CartNumbers wid = '100' size = '2'>{element.numbers.toString()}</CartNumbers>
+          <CartNumbers wid = '100' size = '2'>{element.gameNumbers.toString()}</CartNumbers>
         </CartItems>
       )) : ''}
     </FilterContainer>

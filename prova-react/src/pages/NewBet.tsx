@@ -301,7 +301,7 @@ const NewBet: React.FC = () => {
           user_id: id,
         };
 
-        dispatch(addToCart(teste));
+        
       });
 
       setCartNumber([]);

@@ -1,63 +1,62 @@
-import { createSlice,  PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { AppDispatch, AppThunk } from "./store";
 
-interface CartObj{
-    
-    id: string;
-    typeGame: string;
-    price: number;
-    color: string;
-    numbers: number[];
-    date?: string;
-    user_id: string;
+interface CartObj {
+
+  maxNumber: number;
+  type: string;
+  price: string;
+  color: string;
+  gameNumbers: string;
+  date_game?: string;
+  game_date: string;
+  game_id: number;
+  user_id: number;
 }
-interface CartState{
-    items: CartObj[];
+interface CartState {
+  items: CartObj[];
 }
 
 const initialStateCart: CartState = {
-   items : []
+  items: []
 }
 
 
 export const cartSlice = createSlice({
-    name: 'cart',
-    initialState: initialStateCart,
-    reducers:{
-        addToCart: (state, action: PayloadAction<CartObj>) =>{
-            const cartReturnObject = {
-                id: action.payload.id,
-                color: action.payload.color,
-                price: action.payload.price,
-                typeGame: action.payload.typeGame,
-                numbers: action.payload.numbers,
-                date: action.payload.date,
-                user_id: action.payload.user_id
-            }
-            state.items.push(cartReturnObject);
-        }
+  name: 'cart',
+  initialState: initialStateCart,
+  reducers: {
+    addToCart: (state, action: PayloadAction<CartObj[]>) => {
+      console.log('action', action.payload);
+      action.payload.forEach((game) => {
+        state.items.push(game);
+    });
+      console.log('SATE', state.items);
+      
     }
+  }
 });
 
-export const{addToCart} = cartSlice.actions;
+export const { addToCart } = cartSlice.actions;
 
 // export const selectCart = (state: RootState) => state.cart.;
-interface GameData{
-    gameNumbers: number[];
-          price: number,
-          game_date: string,
-          game_id: string;
+interface GameData {
+  gameNumbers: number[];
+  price: number,
+  game_date: string,
+  game_id: string;
 }
 
 
 export function getBetData(token: string, data: GameData[]): AppThunk {
-    return async function (dispatch: AppDispatch) {
-        
-        axios.post('http://127.0.0.1:3333/gamble', {data}, { headers: {Authorization: `Bearer ${token}`}})
-      .then(response =>  {
+  return async function (dispatch: AppDispatch) {
+
+    axios.post('http://127.0.0.1:3333/gamble', { data }, { headers: { Authorization: `Bearer ${token}` } })
+      .then(response => {
         console.log(response.data);
+        dispatch(addToCart(response.data));
         toast.success("bets saved sucesfully", {
           position: toast.POSITION.TOP_RIGHT,
           autoClose: 1500,
@@ -70,7 +69,7 @@ export function getBetData(token: string, data: GameData[]): AppThunk {
         });
         console.log(err.message);
       })
-    }
+  }
 
 
 }
