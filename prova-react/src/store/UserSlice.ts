@@ -12,6 +12,7 @@ const UserObj = {
     token: localToken,
     isLoggedIn: logged,
     info:{
+        id: '',
         email: '',
         name: '',
         password: '',
@@ -23,6 +24,7 @@ const UserObj = {
 
 
 interface UserInformation{
+    id: string;
     name:string;
     email: string;
     password?:string;
@@ -53,6 +55,7 @@ export const UserSlice = createSlice({
         setUserInfo: (state, action: PayloadAction<UserInformation>) => {
             state.info.email = action.payload.email;
             state.info.name = action.payload.name;
+            state.info.id = action.payload.id;
             if(action.payload.password){
                 state.info.password = action.payload.password;
             }
@@ -102,7 +105,7 @@ export function getUserInfo(token: string): AppThunk  {
             headers: {Authorization: `Bearer ${token}`}
           }).then(response => {
             console.log(response.data);
-            dispatch(setUserInfo({email: response.data[0].email, name: response.data[0].name, gamble: response.data[0].gambles}));
+            dispatch(setUserInfo({email: response.data[0].email, name: response.data[0].name, gamble: response.data[0].gambles, id: response.data[0].id}));
     
           })
           .catch(err =>{

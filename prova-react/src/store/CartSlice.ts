@@ -30,6 +30,7 @@ export const cartSlice = createSlice({
   reducers: {
     addToCart: (state, action: PayloadAction<CartObj[]>) => {
       console.log('action', action.payload);
+      
       action.payload.forEach((game) => {
         state.items.push(game);
     });
