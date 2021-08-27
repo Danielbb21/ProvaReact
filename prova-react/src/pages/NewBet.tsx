@@ -23,13 +23,13 @@ import { NumberPlace } from "../components/Numbers/style";
 import { VscArrowRight } from "react-icons/vsc";
 import { IoCartOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
-import { addToCart } from "../store/CartSlice";
+import { addToCart, getBetData } from "../store/CartSlice";
 import { useHistory, useParams } from "react-router-dom";
 import { ErrorMessage } from "../components/FormSignIn/style";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getGameData } from "../store/GameSlice";
-import axios from "axios";
+
 
 interface Options {
   type: string;
@@ -284,22 +284,11 @@ const NewBet: React.FC = () => {
         };
       });
 
-      axios.post('http://127.0.0.1:3333/gamble', {data}, { headers: {Authorization: `Bearer ${token}`}})
-      .then(response =>  {
-        console.log(response.data);
-        toast.success("bets saved sucesfully", {
-          position: toast.POSITION.TOP_RIGHT,
-          autoClose: 1500,
-        });
-      })
-      .catch(err => {
-        toast.error("sommeting went wrong", {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
-        console.log(err.message);
-      })
-      
+    
+      if(token){
+
+        dispatch(getBetData(token, data));
+      }
 
       cartNumbers.forEach((cart) => {
         const teste = {
