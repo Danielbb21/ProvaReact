@@ -20,7 +20,6 @@ import {
 } from "../components/New-Bet/style";
 import Numbers from "../components/Numbers";
 import { NumberPlace } from "../components/Numbers/style";
-import gameData from "../games.json";
 import { VscArrowRight } from "react-icons/vsc";
 import { IoCartOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
@@ -30,6 +29,7 @@ import { ErrorMessage } from "../components/FormSignIn/style";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getGameData } from "../store/GameSlice";
+import axios from "axios";
 
 interface Options {
   type: string;
@@ -37,6 +37,7 @@ interface Options {
   range: number;
   price: number;
   color: string;
+  game_id: string;
   "max-number": number;
 }
 interface CartOptions {
@@ -44,6 +45,7 @@ interface CartOptions {
   price: number;
   numbers: number[];
   type: string;
+  game_id: string;
   color: string;
 }
 
@@ -59,8 +61,8 @@ const NewBet: React.FC = () => {
   const dispatch = useAppDispatch();
   const history = useHistory();
   const { id } = useParams<ParamTypes>();
-  const games = useAppSelector(state =>  state.game.items);
-  const token = useAppSelector(state => state.user.token);
+  const games = useAppSelector((state) => state.game.items);
+  const token = useAppSelector((state) => state.user.token);
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -69,23 +71,22 @@ const NewBet: React.FC = () => {
     setNumbersOfTheGame(sortedArray);
   }, []);
 
-  useEffect(()=>{
-    if(!token) return;
+  useEffect(() => {
+    if (!token) return;
     dispatch(getGameData(token));
-    console.log('aquiii');
+    console.log("aquiii");
   }, [dispatch, token]);
 
   useEffect(() => {
-   
-    
-    if(games.length === 0) return;
+    if (games.length === 0) return;
     let gameOne = games[0];
-    console.log('Games', games)
+    console.log("Games", games);
     const {
       price,
       color,
       range,
       type,
+      id,
       description,
       "max-number": maxNumber,
     } = gameOne;
@@ -94,6 +95,7 @@ const NewBet: React.FC = () => {
       color,
       range,
       type,
+      game_id: id,
       description,
       "max-number": maxNumber,
     });
@@ -126,10 +128,12 @@ const NewBet: React.FC = () => {
       color,
       range,
       type,
+      id,
       description,
       "max-number": maxNumber,
     } = gameChosed[0];
     setGameOptions({
+      game_id: id,
       price,
       color,
       range,
@@ -153,21 +157,19 @@ const NewBet: React.FC = () => {
       return false;
     }
     if (isAlreadyIntheLimit) {
-      
-      
       toast.error("You already chosed all the numbers", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
       return false;
     }
-    
+
     return true;
   };
 
   const handleChoseNumber = (numberChosed: number) => {
     const isPosibleToChose = isPosibleToChoseTheNumber(numberChosed);
-    
+
     if (isPosibleToChose) {
       setChosedNumber((previusState) => {
         let newArray = [...previusState];
@@ -209,12 +211,11 @@ const NewBet: React.FC = () => {
 
   const addGameToCartHandler = () => {
     if (chosedNumbers.length !== gameOptions?.["max-number"]) {
-      
       toast.error("Still missing numbers in your game", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-      
+
       return;
     }
     setCartNumber((previus) => {
@@ -225,10 +226,11 @@ const NewBet: React.FC = () => {
         numbers: chosedNumbers,
         price: gameOptions.price,
         type: gameOptions.type,
+        game_id: gameOptions.game_id
       });
       return newArray;
     });
-
+      
     setChosedNumber([]);
   };
 
@@ -256,9 +258,48 @@ const NewBet: React.FC = () => {
     return day + "/" + month + "/" + year;
   };
 
+  const formatDate2 = (date: Date) => {
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let day = date.toDateString().split(" ")[2];
+
+    return `${year}-${month}-${day} ${date.toLocaleTimeString()}`;
+  };
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
       const date = formatDate(new Date());
+      console.log("date1", date);
+      const date2 = formatDate2(new Date());
+      console.log("date2", date2);
+      console.log("date", new Date().toLocaleString("es"));
+      console.log(date);
+      console.log(cartNumbers);
+
+      const data = cartNumbers.map((cart) => {
+        return {
+          gameNumbers: cart.numbers,
+          price: cart.price,
+          game_date: date2,
+          game_id: cart.game_id
+        };
+      });
+
+      axios.post('http://127.0.0.1:3333/gamble', {data}, { headers: {Authorization: `Bearer ${token}`}})
+      .then(response =>  {
+        console.log(response.data);
+        toast.success("bets saved sucesfully", {
+          position: toast.POSITION.TOP_RIGHT,
+          autoClose: 1500,
+        });
+      })
+      .catch(err => {
+        toast.error("sommeting went wrong", {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 1500,
+        });
+        console.log(err.message);
+      })
+      
 
       cartNumbers.forEach((cart) => {
         const teste = {
@@ -275,14 +316,12 @@ const NewBet: React.FC = () => {
       });
 
       setCartNumber([]);
-      history.replace(`/my-bets/${id}`);
-    } else {
       
+    } else {
       toast.error("Value of game is lower than R$ 30,00", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-      
     }
   };
 
@@ -331,7 +370,7 @@ const NewBet: React.FC = () => {
                 })
               : ""}
           </NumberPlace>
-        
+
           <ButtonInActionWrapper win={64.8}>
             <ActionButton
               win={16.4}
@@ -398,7 +437,6 @@ const NewBet: React.FC = () => {
               <VscArrowRight />
             </ActionButton>
           </CartWrapper>
-       
         </ErrorMessage>
       </BetPageWrapper>
     </>
