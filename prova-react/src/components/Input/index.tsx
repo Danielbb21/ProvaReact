@@ -7,6 +7,8 @@ interface InputProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   value?: string;
   display?: boolean;
+  min?: string;
+  step?:string;
 }
 
 const Input: React.FC<InputProps> = (props) => {
@@ -16,7 +18,9 @@ const Input: React.FC<InputProps> = (props) => {
       type={props.type}
       onChange={props.onChange}
       value={props.value}
-      display = {props.display}
+      display = {props.display} 
+      min = {props.min}
+      step = {props.step}
     ></InputWrapper>
   );
 };

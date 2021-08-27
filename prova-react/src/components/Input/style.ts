@@ -6,6 +6,7 @@ interface InputWrapperProps{
 }
 
 export const InputWrapper = styled.input<InputWrapperProps>`
+
     padding-bottom: 1.5rem;
     padding-top: 2.5rem;
     padding-left: 1.5rem;
