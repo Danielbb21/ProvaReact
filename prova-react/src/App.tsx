@@ -14,6 +14,7 @@ import UpdatePassword from "./pages/UpdatePassword";
 import UpdateUser from "./pages/UpdateUser";
 import { CookiesProvider } from "react-cookie";
 import { useAppSelector } from "./store/store-hooks";
+import CreateGame from "./pages/CreateGame";
 
 function App() {
   const isLoggedIn = useAppSelector(state => state.user.isLoggedIn);
@@ -38,9 +39,15 @@ function App() {
             <UpdatePassword />
           </Route>
           <Route path="/update" exact>
-            <UpdateUser />
+          {isLoggedIn && <UpdateUser />}
+            {!isLoggedIn && <Redirect to= '/' />}
+            
           </Route>
-          
+          <Route path="/game" exact>
+          {isLoggedIn && <CreateGame />}
+            {!isLoggedIn && <Redirect to= '/' />}
+            
+          </Route>
           <Route path="/my-bets">
             {isLoggedIn && <MyBets />}
             {!isLoggedIn && <Redirect to= '/' />}

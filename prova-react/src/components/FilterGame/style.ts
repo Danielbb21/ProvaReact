@@ -119,3 +119,8 @@ export const ToNewBetLink = styled(Link)`
         }
   }
 `;
+
+export const LinksWrappers = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

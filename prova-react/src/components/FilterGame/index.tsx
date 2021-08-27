@@ -8,6 +8,7 @@ import {
   FilterHeaderWrapper,
   FilterTitle,
   FilterWord,
+  LinksWrappers,
   MessageWrapper,
   ToNewBetLink,
 } from "./style";
@@ -35,15 +36,14 @@ interface CartInterface {
   user_id: number;
 }
 const formatDate = (date: Date) => {
-  
-  const dateString = date.toLocaleDateString().split('/');
-  
+  const dateString = date.toLocaleDateString().split("/");
+
   const day = dateString[0];
   const month = dateString[1];
   const year = dateString[2];
-  
+
   return `${day}/${month}/${year}`;
-}
+};
 const sortGame = (
   arr: CartInterface[],
   typeOfSort: string | null,
@@ -51,18 +51,23 @@ const sortGame = (
 ) => {
   const date = new Date();
   const formatedDate = formatDate(date);
-  if(arr[0]){
+  if (arr[0]) {
     console.log(arr[0].date_game, formatedDate);
   }
   if (typeOfSort) {
-    
     return arr
       .filter((cart) => cart.type === typeOfSort)
-      .filter((cart) => cart.user_id === +id).filter(cart => cart.date_game === formatedDate);
+      .filter((cart) => cart.user_id === +id)
+      .filter((cart) => cart.date_game === formatedDate);
   }
-  console.log('27/8/2021', formatedDate);
-  console.log('filtered', arr.filter(cart => cart.date_game === '27/8/2021'));
-  return arr.filter((cart) => cart.user_id === +id).filter(cart => cart.date_game === formatedDate);
+  console.log("27/8/2021", formatedDate);
+  console.log(
+    "filtered",
+    arr.filter((cart) => cart.date_game === "27/8/2021")
+  );
+  return arr
+    .filter((cart) => cart.user_id === +id)
+    .filter((cart) => cart.date_game === formatedDate);
 };
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
@@ -118,11 +123,16 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
             ))}
           </FilterButton>
         </FilterHeaderContent>
-
-        <ToNewBetLink to={`/new-bet/${id}`}>
-          <span>New Bet</span>
-          <VscArrowRight />
-        </ToNewBetLink>
+        <LinksWrappers>
+          <ToNewBetLink to={`/new-bet`}>
+            <span>New Bet</span>
+            <VscArrowRight />
+          </ToNewBetLink>
+          <ToNewBetLink to={`/game`}>
+            <span>Create Game</span>
+            <VscArrowRight />
+          </ToNewBetLink>
+        </LinksWrappers>
       </FilterHeaderWrapper>
       {arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
       {arr.length > 0

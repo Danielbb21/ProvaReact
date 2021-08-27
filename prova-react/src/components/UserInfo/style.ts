@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-interface UserInfoProps{
-    hei?: number; 
-    wid?:number;
+interface UserInfoProps {
+    hei?: number;
+    wid?: number;
 }
 export const UserInfoWrapper = styled.div<UserInfoProps>`
     display: flex;
@@ -25,7 +25,15 @@ export const UserInfoWrapper = styled.div<UserInfoProps>`
       
   }
 `;
+export const InfoWrapper = styled.div`
+    display: flex; 
+    flex-direction: column;
+     
+    max-height: 70%; 
+    width: 70%;
+    overflow: auto;
 
+`;
 export const UserInfoTitle = styled.span`
     margin: 0;
     font-weight: bold;
