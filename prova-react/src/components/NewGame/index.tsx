@@ -17,7 +17,7 @@ const NewGame: React.FC = () => {
   const [enteredRange, setEnteredRange] = useState<number>(0);
   const [enteredPrice, setEnteredPrice] = useState<number>(0);
   const [enteredMaxNumber, setEnteredMaxNumber] = useState<number>(0);
-  const [enteredColor, setEnteredColor] = useState<string>("#ffffff");
+  const [enteredColor, setEnteredColor] = useState<string>("#101010");
   const [enteredMinCartValue, setEnteredMinCartValue] = useState<number>(0);
   const typeValid = enteredType.trim().length !== 0;
   const descriptionValid = enteredDescription.trim().length !== 0;

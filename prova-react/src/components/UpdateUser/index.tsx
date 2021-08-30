@@ -35,7 +35,6 @@ const UserInfoComponnent: React.FC = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    
     if (token) {
       dispatch(getUserInfo(token));
       setEnteredName(user.name);
@@ -65,7 +64,6 @@ const UserInfoComponnent: React.FC = (props) => {
           { headers: { Authorization: `Bearer ${token}` } }
         )
         .then((response) => {
-          
           toast.success("Updated information", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1500,
@@ -73,10 +71,17 @@ const UserInfoComponnent: React.FC = (props) => {
           history.push("/account");
         })
         .catch((err) => {
-          toast.error("Sommeting went wrong", {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 1500,
-          });
+          if (err.message === "Request failed with status code 400") {
+            toast.error("Email already in use", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+            });
+          } else {
+            toast.error("Sommeting went wrong", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+            });
+          }
         });
     } else {
       toast.error("Invalid Field", {

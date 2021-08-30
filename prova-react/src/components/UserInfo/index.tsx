@@ -104,7 +104,7 @@ const UserInfo: React.FC = (props) => {
             ? "Number of games per game type"
             : "Value spent in each type of game"}
         </UserInfoTitle>
-        <InfoWrapper>
+        <InfoWrapper isData = "true">
           {userGameInfo &&
             userGameInfo.map((user) => {
               return (

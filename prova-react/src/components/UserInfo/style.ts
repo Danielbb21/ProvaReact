@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface UserInfoProps {
     hei?: number;
     wid?: number;
+    isData?:string;
 }
 export const UserInfoWrapper = styled.div<UserInfoProps>`
     display: flex;
@@ -25,10 +26,11 @@ export const UserInfoWrapper = styled.div<UserInfoProps>`
       
   }
 `;
-export const InfoWrapper = styled.div`
+export const InfoWrapper = styled.div<UserInfoProps>`
     display: flex; 
     flex-direction: column;
-     
+     align-items: ${(props) => props.isData ? 'center' :    ''};
+     /* align-items: center; */
     max-height: 70%; 
     width: 70%;
     overflow: auto;

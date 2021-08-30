@@ -49,6 +49,7 @@ const sortGame = (
   typeOfSort: string | null,
   id: string
 ) => {
+  
   const date = new Date();
   const formatedDate = formatDate(date);
   if (arr[0]) {
@@ -74,10 +75,10 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   const location = useLocation();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.info);
-
+  console.log('USER', user);
   const token = useAppSelector((state) => state.user.token);
 
-  console.log("CART_REDUX", cartRedux);
+  
   useEffect(() => {
     if (!token) return;
     dispatch(getGameData(token));
