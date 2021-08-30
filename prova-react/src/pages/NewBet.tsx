@@ -285,7 +285,8 @@ const NewBet: React.FC = () => {
       if(token){
         try{
         dispatch(getBetData(token, data));
-        history.replace('/my-bets');
+          setTimeout(() => {history.replace('/my-bets');} ,  1500);
+        
         }
         catch(err){
 

@@ -27,12 +27,13 @@ interface FilterGameProps {
 interface CartInterface {
   maxNumber: number;
   type: string;
-  price: string;
+  price: number;
   color: string;
   gameNumbers: string;
   date_game?: string;
   game_date: string;
   game_id: number;
+  
   user_id: number;
 }
 const formatDate = (date: Date) => {
@@ -44,29 +45,16 @@ const formatDate = (date: Date) => {
 
   return `${day}/${month}/${year}`;
 };
-const sortGame = (
-  arr: CartInterface[],
-  typeOfSort: string | null,
-  id: string
-) => {
-  
-  const date = new Date();
-  const formatedDate = formatDate(date);
-  if (arr[0]) {
-    console.log(arr[0].date_game, formatedDate);
-  }
-  if (typeOfSort) {
-    return arr
-      .filter((cart) => cart.type === typeOfSort)
-      .filter((cart) => cart.user_id === +id)
-      .filter((cart) => cart.date_game === formatedDate);
-  }
-  
+const formatApiDate = (date: string) => {
+  const dateString = date.split("T");
+  const data = dateString[0].split('-');
+  const day = data[2];
+  const month = data[1];
+  const year = data[0];
 
-  return arr
-    .filter((cart) => cart.user_id === +id)
-    .filter((cart) => cart.date_game === formatedDate);
-};
+  return `${day}/${month}/${year}`;
+}
+
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const games = useAppSelector((state) => state.game.items);
@@ -77,11 +65,41 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   const user = useAppSelector((state) => state.user.info);
   console.log('USER', user);
   const token = useAppSelector((state) => state.user.token);
-
+  const sortGame = (
+    arr: CartInterface[],
+    typeOfSort: string | null,
+    id: string
+  ) => {
+    
+    const date = new Date();
+    const formatedDate = formatDate(date);
+    if (arr[0]) {
+     arr =  arr.map((element) => {
+       
+        return {...element , date_game: formatApiDate(element.game_date)};
+      });
+      console.log('arrr', arr);
+      console.log(arr[0].date_game, formatedDate);
+    }
+    if (typeOfSort) {
+      const game = games.find(g => g.type === typeOfSort);
+      if(!game) return;
+      return arr
+        .filter((cart) => cart.game_id === + game?.id)
+        .filter((cart) => cart.user_id === +id)
+        .filter((cart) => cart.date_game === formatedDate);
+    }
+    
   
+    return arr
+      .filter((cart) => cart.user_id === +id)
+      .filter((cart) => cart.date_game === formatedDate);
+  };
+ 
   useEffect(() => {
     if (!token) return;
     dispatch(getGameData(token));
+    console.log('aqui');
     dispatch(getUserInfo(token));
     
   }, [dispatch, token]);
@@ -92,7 +110,8 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   const isSortingName = queryParams.get("sort");
   
   
-  const arr = sortGame(cartRedux, isSortingName, user.id);
+  const arr = sortGame(user.gambles, isSortingName, user.id);
+  console.log('ARRR', arr);
 
   const filterGame = (gameName: string) => {
     if (isSortingName === gameName) {
@@ -132,23 +151,27 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           </ToNewBetLink>
         </LinksWrappers>
       </FilterHeaderWrapper>
-      {arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
-      {arr.length > 0
-        ? arr.map((element) => (
-            <CartItems
+      { arr && arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
+      { arr && arr.length > 0
+        ? arr.map((element) => {
+          const game = games.find(g => +g.id === element.game_id);
+          if(!game) return null;
+          
+          return( <CartItems
               key={Math.random().toString()}
               size="2"
-              price={element.price}
-              type={element.type}
-              color={element.color}
+              price={element.price.toFixed(2).toString().replace('.', ',')}
+              type={game.type}
+              color={game.color}
               isList={true}
               date={element.date_game}
             >
               <CartNumbers wid="100" size="2">
                 {element.gameNumbers.toString()}
               </CartNumbers>
-            </CartItems>
-          ))
+            </CartItems>)
+        }
+          )
         : ""}
     </FilterContainer>
   );
