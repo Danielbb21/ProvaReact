@@ -21,7 +21,7 @@ interface NavProps {
 const Navbar: React.FC<NavProps> = (props) => {
   const dispatch = useAppDispatch();
   const removeUserTokenHandler = () => {
-    console.log("aquiiii");
+    
     dispatch(logOut());
     return;
   };

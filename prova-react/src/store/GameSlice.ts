@@ -28,12 +28,12 @@ export const gameSlice = createSlice({
     initialState: initialStateGame,
     reducers: {
         addGames: (state, action: PayloadAction<GameObj[]>) => {
-            console.log('Actionnn', action.payload)
+
             state.items = [];
             action.payload.forEach((game) => {
                 state.items.push(game);
             });
-            
+
         }
     }
 });
@@ -43,19 +43,14 @@ export default gameSlice.reducer;
 
 export function getGameData(token: string): AppThunk {
     return async function (dispatch: AppDispatch) {
-        
+
         axios
             .get("http://127.0.0.1:3333/game", {
                 headers: { Authorization: `Bearer ${token}` }
 
             })
             .then((response) => {
-                console.log("ok teste", response.data);
-
-
                 dispatch(addGames(response.data));
-
-
             })
             .catch((err) => {
                 console.log(err.message);

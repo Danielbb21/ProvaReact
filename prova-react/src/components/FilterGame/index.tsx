@@ -60,11 +60,8 @@ const sortGame = (
       .filter((cart) => cart.user_id === +id)
       .filter((cart) => cart.date_game === formatedDate);
   }
-  console.log("27/8/2021", formatedDate);
-  console.log(
-    "filtered",
-    arr.filter((cart) => cart.date_game === "27/8/2021")
-  );
+  
+
   return arr
     .filter((cart) => cart.user_id === +id)
     .filter((cart) => cart.date_game === formatedDate);
@@ -85,15 +82,15 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
     if (!token) return;
     dispatch(getGameData(token));
     dispatch(getUserInfo(token));
-    console.log("aquiii");
+    
   }, [dispatch, token]);
   const { id } = props;
 
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingName = queryParams.get("sort");
-  console.log("userrrr", user);
-  console.log("CART REDUX", cartRedux);
+  
+  
   const arr = sortGame(cartRedux, isSortingName, user.id);
 
   const filterGame = (gameName: string) => {

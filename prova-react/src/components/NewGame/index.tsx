@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAppSelector } from "../../store/store-hooks";
 import ActionButton from "../ActionButton";
@@ -25,7 +26,8 @@ const NewGame: React.FC = () => {
   const maxNumberValid = enteredMaxNumber > 0;
   const colorValid = enteredColor.trim().length !== 0;
   const minCartValid = enteredMinCartValue > 0;
-    const token = useAppSelector(state => state.user.token);
+  const token = useAppSelector((state) => state.user.token);
+  const history = useHistory();
 
   const formValid =
     typeValid &&
@@ -37,9 +39,9 @@ const NewGame: React.FC = () => {
     minCartValid;
   const createGameHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('token', token);
+    
     if (formValid) {
-      if (  enteredMaxNumber > enteredRange) {
+      if (enteredMaxNumber > enteredRange) {
         toast.error("max numbers bigger than range", {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1500,
@@ -47,32 +49,35 @@ const NewGame: React.FC = () => {
         return;
       }
 
-      axios.post(
-        "http://127.0.0.1:3333/game",
-        {
-          type: enteredType,
-          description: enteredDescription,
-          range: enteredRange,
-          price: enteredPrice,
-          "max-number": enteredMaxNumber,
-          color: enteredColor,
-          "min-cart-value": enteredMinCartValue,
-        },
-        { headers: { Authorization: `Bearer ${token}` } }
-      ).then(response => {
-          console.log(response.data);
+      axios
+        .post(
+          "http://127.0.0.1:3333/game",
+          {
+            type: enteredType,
+            description: enteredDescription,
+            range: enteredRange,
+            price: enteredPrice,
+            "max-number": enteredMaxNumber,
+            color: enteredColor,
+            "min-cart-value": enteredMinCartValue,
+          },
+          { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .then((response) => {
+          
           toast.success("Game Created", {
-            position: toast.POSITION.TOP_LEFT,
+            position: toast.POSITION.TOP_RIGHT,
             autoClose: 1500,
           });
-      }).catch(err => {
-          console.log(err.message);
+          history.push('/my-bets');
+        })
+        .catch((err) => {
+          
           toast.error("Sommeting went wrong", {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 1500,
           });
-      })
-      ;
+        });
     } else {
       toast.error("Invalid Field(s)", {
         position: toast.POSITION.TOP_CENTER,
@@ -82,7 +87,7 @@ const NewGame: React.FC = () => {
   };
   return (
     <>
-      <Navbar hasHome={true} id={Math.random().toString()} hasNav={true} />
+      <Navbar hasHome={true} id={Math.random().toString()} hasNav={false} />
       <form onSubmit={createGameHandler}>
         <UserInfoWrapper hei={70} wid={50}>
           <FormTitle>Create your Game</FormTitle>

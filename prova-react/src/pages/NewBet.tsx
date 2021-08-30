@@ -23,7 +23,7 @@ import { NumberPlace } from "../components/Numbers/style";
 import { VscArrowRight } from "react-icons/vsc";
 import { IoCartOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../store/store-hooks";
-import { addToCart, getBetData } from "../store/CartSlice";
+import {  getBetData } from "../store/CartSlice";
 import { useHistory, useParams } from "react-router-dom";
 import { ErrorMessage } from "../components/FormSignIn/style";
 import { toast } from "react-toastify";
@@ -74,13 +74,13 @@ const NewBet: React.FC = () => {
   useEffect(() => {
     if (!token) return;
     dispatch(getGameData(token));
-    console.log("aquiii");
+    
   }, [dispatch, token]);
 
   useEffect(() => {
     if (games.length === 0) return;
     let gameOne = games[0];
-    console.log("Games", games);
+    
     const {
       price,
       color,
@@ -183,7 +183,7 @@ const NewBet: React.FC = () => {
     let arrayOfChosenNumbers = [...chosedNumbers];
 
     if (arrayOfChosenNumbers.length === gameOptions?.["max-number"]) {
-      console.log(arrayOfChosenNumbers.length, gameOptions?.["max-number"]);
+      
       arrayOfChosenNumbers = [];
     }
     if (!gameOptions) {
@@ -268,12 +268,9 @@ const NewBet: React.FC = () => {
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
       const date = formatDate(new Date());
-      console.log("date1", date);
+      
       const date2 = formatDate2(new Date());
-      console.log("date2", date2);
-      console.log("date", new Date().toLocaleString("es"));
-      console.log(date);
-      console.log(cartNumbers);
+   
 
       const data = cartNumbers.map((cart) => {
         return {
@@ -286,23 +283,16 @@ const NewBet: React.FC = () => {
 
     
       if(token){
-
+        try{
         dispatch(getBetData(token, data));
+        history.replace('/my-bets');
+        }
+        catch(err){
+
+        }
       }
 
-      cartNumbers.forEach((cart) => {
-        const teste = {
-          id: cart.id,
-          price: cart.price,
-          color: cart.color,
-          typeGame: cart.type,
-          numbers: cart.numbers,
-          date,
-          user_id: id,
-        };
-
-        
-      });
+     
 
       setCartNumber([]);
       
@@ -342,6 +332,7 @@ const NewBet: React.FC = () => {
                   if (chosedNumbers.find((num) => num === number)) {
                     return (
                       <Numbers
+                      key = {Math.random().toString()}
                         onChoseNumber={handleChoseNumber.bind(this, number)}
                         isChosed={true}
                       >

@@ -35,7 +35,7 @@ const UserInfoComponnent: React.FC = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("aquo");
+    
     if (token) {
       dispatch(getUserInfo(token));
       setEnteredName(user.name);
@@ -65,7 +65,7 @@ const UserInfoComponnent: React.FC = (props) => {
           { headers: { Authorization: `Bearer ${token}` } }
         )
         .then((response) => {
-          console.log(response.data);
+          
           toast.success("Updated information", {
             position: toast.POSITION.TOP_RIGHT,
             autoClose: 1500,
@@ -90,7 +90,7 @@ const UserInfoComponnent: React.FC = (props) => {
     <>
       <Navbar hasHome={true} id={Math.random().toString()} hasNav={false} />
       <form onSubmit={updateUserDataHandler}>
-        <UserInfoWrapper hei={70} wid={85}>
+        <UserInfoWrapper hei={70} wid={50}>
           <FormTitle>Update your information</FormTitle>
 
           <FieldTitle>Name</FieldTitle>

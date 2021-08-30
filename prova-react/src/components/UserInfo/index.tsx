@@ -26,9 +26,6 @@ const UserInfo: React.FC = (props) => {
   const [perPrice, setPerPrice] = useState<boolean>(false);
   const games = useAppSelector((state) => state.game.items);
 
-  console.log(userGameInfo);
-  // const userInfo = getUserInfo(users, props.id);
-  // const cartInfo = getCartOfTheUser(cartItems, props.id);
   const token = useAppSelector((state) => state.user.token);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.info);
@@ -36,33 +33,35 @@ const UserInfo: React.FC = (props) => {
   useEffect(() => {
     const getUserData = () => {
       if (token) {
-        console.log("loading");
+        
         dispatch(getUserInfo(token));
         dispatch(getGameData(token));
-        console.log("finish");
+        
       }
     };
 
     getUserData();
   }, [token, dispatch]);
 
-  console.log("GAMESSS", games);
+  
 
   const typeOfGames = games.map((game) => game.type);
 
   const perPriceHandler = () => {
-    console.log(userGameInfo);
+    
 
     setPerPrice((previus) => !previus);
   };
 
   const checkPrice = (typeGame: string | null | undefined): number => {
-    console.log("typeGame", typeGame);
+    
     if (typeGame) {
       let price = 0;
-      const gameValue = user.gambles.filter(
-        (cart) => cart["game"]["type"] === typeGame
-      );
+      const gameValue = user.gambles.filter((cart) => {
+        return cart["game"] ?  cart["game"]["type"] === typeGame: '';
+          
+        
+      });
       gameValue.forEach((game) => {
         price += game["price"];
       });
@@ -78,9 +77,9 @@ const UserInfo: React.FC = (props) => {
   typeOfGames.forEach((game) => {
     let price = checkPrice(game);
 
-    let quantity = user.gambles.filter(
-      (cart) => cart["game"]["type"] === game
-    ).length;
+    let quantity = user.gambles.filter((cart) => {
+      return cart["game"] ? cart["game"]["type"] === game : "";
+    }).length;
     userGameInfo.push({
       type: game,
       quantity: quantity,
@@ -93,19 +92,19 @@ const UserInfo: React.FC = (props) => {
       <Navbar hasHome={true} id={Math.random().toString()} hasNav={true} />
       <UserInfoWrapper>
         <UserInfoTitle>Your information</UserInfoTitle>
-       
-          <UserLabel>
-            Email: <span>{user.email}</span>
-          </UserLabel>
-          <UserLabel>
-            Nome: <span>{user.name}</span>
-          </UserLabel>
-          <UserInfoTitle>
-            {!perPrice
-              ? "Number of games per game type"
-              : "Value spent in each type of game"}
-          </UserInfoTitle>
-          <InfoWrapper>
+
+        <UserLabel>
+          Email: <span>{user.email}</span>
+        </UserLabel>
+        <UserLabel>
+          Nome: <span>{user.name}</span>
+        </UserLabel>
+        <UserInfoTitle>
+          {!perPrice
+            ? "Number of games per game type"
+            : "Value spent in each type of game"}
+        </UserInfoTitle>
+        <InfoWrapper>
           {userGameInfo &&
             userGameInfo.map((user) => {
               return (

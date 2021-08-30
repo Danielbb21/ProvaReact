@@ -34,7 +34,7 @@ export const cartSlice = createSlice({
       action.payload.forEach((game) => {
         state.items.push(game);
     });
-      console.log('SATE', state.items);
+      
       
     }
   }
@@ -56,7 +56,7 @@ export function getBetData(token: string, data: GameData[]): AppThunk {
 
     axios.post('http://127.0.0.1:3333/gamble', { data }, { headers: { Authorization: `Bearer ${token}` } })
       .then(response => {
-        console.log(response.data);
+        
         dispatch(addToCart(response.data));
         toast.success("bets saved sucesfully", {
           position: toast.POSITION.TOP_RIGHT,

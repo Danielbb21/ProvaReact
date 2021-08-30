@@ -91,6 +91,7 @@ export const FilterButton = styled.div`
     width: 50%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     @media(max-width: 800px) {
        flex-direction: column;
        height: 14rem;

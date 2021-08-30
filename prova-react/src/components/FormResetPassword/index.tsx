@@ -21,7 +21,7 @@ const FormResetPassword: React.FC = () => {
   const queryParams = new URLSearchParams(location.search);
 
   const token = queryParams.get("token");
-  console.log("token", token);
+  
   const {
     value: enteredPassword,
     changeValueHandler: changePasswordHandler,

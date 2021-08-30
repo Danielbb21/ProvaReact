@@ -21,7 +21,7 @@ import {  logUser} from '../../store/UserSlice';
 const Form: React.FC = () => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const history = useHistory();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const user = useAppSelector(state => state.user.isLoggedIn);
   
@@ -29,6 +29,7 @@ const Form: React.FC = () => {
   if(user){
     history.replace('my-bets');
   }
+
   const {
     value: enteredEmail,
     changeValueHandler: changeEmailHandler,
@@ -51,13 +52,9 @@ const Form: React.FC = () => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
-     
       
      dispatch(logUser( enteredEmail,enteredPassword));
 
-      
-      
-        
       setIsClicked(false);
     }
   };

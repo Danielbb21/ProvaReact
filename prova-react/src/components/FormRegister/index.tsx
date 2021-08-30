@@ -16,13 +16,11 @@ import {
 import axios from "axios";
 import Loader from "../Loader";
 
-
-
 const FormRegister: React.FC = (props) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
-  
+
   const [isLoadding, setIsLoading] = useState<boolean>(false);
-  
+
   const history = useHistory();
 
   const {
@@ -49,30 +47,46 @@ const FormRegister: React.FC = (props) => {
   } = useForm((value) => value.trim().length !== 0);
 
   const formIsValid = emailIsValid && passwordIsValid && nameIsValid;
-  
- 
 
   const submitLoginHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsClicked(true);
     if (formIsValid) {
       setIsLoading(true);
-      axios.post('http://127.0.0.1:3333/user', {name: enteredName, email: enteredEmail, password: enteredPassword})
-          .then(reposne => {
-            console.log('finalizado');
-            setIsLoading(false);
-            console.log(reposne.data);
-            toast.success('User creater', {position: toast.POSITION.TOP_RIGHT, autoClose: 1000});
-            history.push("/");
-          })
-          .catch(err =>{
-            setIsLoading(false);
-            toast.error('Sommeting went wrong', {position: toast.POSITION.TOP_CENTER, autoClose: 1500});
+      axios
+        .post("http://127.0.0.1:3333/user", {
+          name: enteredName,
+          email: enteredEmail,
+          password: enteredPassword,
+        })
+        .then((reposne) => {
+          
+          setIsLoading(false);
+          
+          toast.success("User creater", {
+            position: toast.POSITION.TOP_RIGHT,
+            autoClose: 1000,
+          });
+          history.push("/");
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          if (err.message === "Request failed with status code 400") {
+            toast.error("This Email is alredy been in use", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+            });
+          } else {
+            toast.error("Sommeting went wrong", {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 1500,
+            });
             console.log(err.message);
-            return 
-          })
+          }
+          return;
+        });
       setIsClicked(false);
-      
+
       return;
     }
   };
@@ -83,8 +97,8 @@ const FormRegister: React.FC = (props) => {
   return (
     <ButtonAndForm>
       <FormTitle>Registration</FormTitle>
-        {isLoadding && <Loader />}
-      <FormWrapper size={90} onSubmit={submitLoginHandler} >
+      {isLoadding && <Loader />}
+      <FormWrapper size={90} onSubmit={submitLoginHandler}>
         <Input
           type="text"
           text="Name"
@@ -109,7 +123,7 @@ const FormRegister: React.FC = (props) => {
         {passwordError && isClicked && (
           <ErrorMessage>Password Invalido</ErrorMessage>
         )}
-        
+
         <ButtonForm color="#B5C401" position="ok">
           <span>Register</span>
           <VscArrowRight />

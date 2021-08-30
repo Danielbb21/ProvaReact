@@ -11,23 +11,23 @@ const logged = !!localToken;
 const UserObj = {
     token: localToken,
     isLoggedIn: logged,
-    info:{
+    info: {
         id: '',
         email: '',
         name: '',
         password: '',
         gambles: []
     }
-   
+
 }
 
 
 
-interface UserInformation{
+interface UserInformation {
     id: string;
-    name:string;
+    name: string;
     email: string;
-    password?:string;
+    password?: string;
     gamble?: [];
 }
 
@@ -37,10 +37,7 @@ export const UserSlice = createSlice({
     reducers: {
         login: (state, action: PayloadAction<string>) => {
             
-
-            console.log('Aquiii');
             const data = action.payload;
-            console.log('DATAAA', data);
             localStorage.setItem('token', data);
             state.token = data;
             state.isLoggedIn = true;
@@ -56,13 +53,13 @@ export const UserSlice = createSlice({
             state.info.email = action.payload.email;
             state.info.name = action.payload.name;
             state.info.id = action.payload.id;
-            if(action.payload.password){
+            if (action.payload.password) {
                 state.info.password = action.payload.password;
             }
-            if(action.payload.gamble){
-                state.info.gambles = action.payload.gamble.map(gamble=>gamble);
+            if (action.payload.gamble) {
+                state.info.gambles = action.payload.gamble.map(gamble => gamble);
             }
-           
+
         }
     }
 });
@@ -71,7 +68,7 @@ export const UserSlice = createSlice({
 export const { login, logOut, setUserInfo } = UserSlice.actions;
 export default UserSlice.reducer;
 
-export function logUser(email: string, password: string): AppThunk  {
+export function logUser(email: string, password: string): AppThunk {
     return async function (dispatch: AppDispatch) {
         axios
             .post("http://127.0.0.1:3333/session", {
@@ -79,39 +76,46 @@ export function logUser(email: string, password: string): AppThunk  {
                 password: password,
             })
             .then((response) => {
-                console.log("ok teste", response.data);
                 const token = response.data.token;
-                
-                 dispatch(login(token));
+
+                dispatch(login(token));
                 return true;
-                
+
             })
             .catch((err) => {
-                toast.error('Sommeting Went Wrong', {
-                    position: toast.POSITION.TOP_CENTER,
-                    autoClose: 1500,
-                });
+                
+                if (err.message === 'Request failed with status code 400') {
+                    toast.error('Email password combination is wrong', {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 1500,
+                    });
+                } else {
+                    toast.error('Sommeting Went Wrong', {
+                        position: toast.POSITION.TOP_CENTER,
+                        autoClose: 1500,
+                    });
+                }
                 console.log(err.message);
                 return false;
             });
     }
 
-    
+
 }
 
-export function getUserInfo(token: string): AppThunk  {
+export function getUserInfo(token: string): AppThunk {
     return async function (dispatch: AppDispatch) {
         axios.get('http://127.0.0.1:3333/user', {
-            headers: {Authorization: `Bearer ${token}`}
-          }).then(response => {
-            console.log(response.data);
-            dispatch(setUserInfo({email: response.data[0].email, name: response.data[0].name, gamble: response.data[0].gambles, id: response.data[0].id}));
-    
-          })
-          .catch(err =>{
-            console.log(err.message);
-          })
+            headers: { Authorization: `Bearer ${token}` }
+        }).then(response => {
+            
+            dispatch(setUserInfo({ email: response.data[0].email, name: response.data[0].name, gamble: response.data[0].gambles, id: response.data[0].id }));
+
+        })
+            .catch(err => {
+                console.log(err.message);
+            })
     }
 
-    
+
 }
