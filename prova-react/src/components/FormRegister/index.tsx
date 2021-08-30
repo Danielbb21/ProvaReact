@@ -95,6 +95,8 @@ const FormRegister: React.FC = (props) => {
     history.push("/");
   };
   return (
+    <>
+     
     <ButtonAndForm>
       <FormTitle>Registration</FormTitle>
       {isLoadding && <Loader />}
@@ -134,6 +136,7 @@ const FormRegister: React.FC = (props) => {
         <span>Back</span>
       </ButtonForm>
     </ButtonAndForm>
+    </>
   );
 };
 

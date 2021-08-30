@@ -65,8 +65,8 @@ const Form: React.FC = () => {
 
   return (
     <ButtonAndForm>
-      <FormTitle>Authentication</FormTitle>
       {isLoading && <Loader />}
+      <FormTitle>Authentication</FormTitle>
       <FormWrapper size={60} onSubmit={submitLoginHandler}>
         <Input
           type="email"
