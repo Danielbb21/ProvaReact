@@ -19,11 +19,56 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { getGameData } from "../../store/GameSlice";
 import { getUserInfo } from "../../store/UserSlice";
+import useApi from "../../hooks/use-Api";
+import Loader from "../Loader";
+import { ButtonFilter, ButtonFilterWrapper } from "../ButtonGame/style";
 
 interface FilterGameProps {
   id: string;
 }
 
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password?: string;
+  token?: string;
+  token_created_at?: string;
+  created_at: string;
+  updated_at: string;
+}
+interface Game {
+  id: string;
+  type: string;
+  description: string;
+  range: number;
+  price: number;
+  "max-number": number;
+  color: string;
+  "min-cart-value": number;
+  created_at: string;
+  updated_at: string;
+}
+interface Data {
+  id: number;
+  gameNumbers: string;
+  user_id: number;
+  game_id: number;
+  price: number;
+  game_date: string;
+  created_at: string;
+  updated_at: string;
+  user: User;
+  game: Game;
+}
+
+interface Bets {
+  total: number;
+  perPage: number;
+  page: number;
+  lastPage: number;
+  data?: Data[];
+}
 interface CartInterface {
   maxNumber: number;
   type: string;
@@ -33,7 +78,7 @@ interface CartInterface {
   date_game?: string;
   game_date: string;
   game_id: number;
-  
+
   user_id: number;
 }
 const formatDate = (date: Date) => {
@@ -47,118 +92,132 @@ const formatDate = (date: Date) => {
 };
 const formatApiDate = (date: string) => {
   const dateString = date.split("T");
-  const data = dateString[0].split('-');
+  const data = dateString[0].split("-");
   const day = data[2];
   const month = data[1];
   const year = data[0];
 
   return `${day}/${month}/${year}`;
-}
-
+};
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const games = useAppSelector((state) => state.game.items);
-  
+
   const history = useHistory();
   const location = useLocation();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.info);
-  console.log('USER', user);
+  console.log("USER", user);
   const token = useAppSelector((state) => state.user.token);
-  const sortGame = (
-    arr: CartInterface[],
-    typeOfSort: string | null,
-    id: string
-  ) => {
-    
-    const date = new Date();
-    const formatedDate = formatDate(date);
-    if (arr[0]) {
-     arr =  arr.map((element) => {
-       
-        return {...element , date_game: formatApiDate(element.game_date)};
-      });
-      console.log('arrr', arr);
-      console.log(arr[0].date_game, formatedDate);
-    }
+  const sortGame = (typeOfSort: string | null) => {
     if (typeOfSort) {
-      const game = games.find(g => g.type === typeOfSort);
-      if(!game) return;
-      return arr
-        .filter((cart) => cart.game_id === + game?.id)
-        .filter((cart) => cart.user_id === +id)
-        .filter((cart) => cart.date_game === formatedDate);
+      console.log("aqui");
+      fetchData(1, typeOfSort);
+    } else {
+      fetchData(1);
     }
-    
-  
-    return arr
-      .filter((cart) => cart.user_id === +id)
-      .filter((cart) => cart.date_game === formatedDate);
+
+    // if (arr[0]) {
+    //  arr =  arr.map((element) => {
+
+    //     return {...element };
+    //   });
+
+    // }
+    // if (typeOfSort) {
+    //   const game = games.find(g => g.type === typeOfSort);
+    //   if(!game) return;
+    //   if(!arr[0]) return;
+    //   return arr
+    //     .filter((cart) => cart.game.type === typeOfSort)
+
+    // }
+
+    // return arr
   };
- 
+
+  const { bets, fetchData, isLoading } = useApi();
+
   useEffect(() => {
     if (!token) return;
+    fetchData(1);
+    setPageChosed(0);
+
     dispatch(getGameData(token));
-    console.log('aqui');
+
     dispatch(getUserInfo(token));
-    
-  }, [dispatch, token]);
+  }, [dispatch, token, fetchData]);
   const { id } = props;
 
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingName = queryParams.get("sort");
-  const [filter, setFilter] = useState<string>('');
-  
-  const arr = sortGame(user.gambles, isSortingName, user.id);
-  console.log('ARRR', arr);
+  const [filter, setFilter] = useState<string>("");
+  // let arr: Data[] | undefined = []
+  const [pageChosed, setPageChosed] = useState<number>();
+  if (!bets?.data) {
+    return <></>;
+  }
+  const arr = bets.data;
+
+  console.log("ARRR RETURNED", arr);
 
   const filterGame = (gameName: string) => {
     setFilter(gameName);
+    sortGame(gameName);
+    setPageChosed(0);
     if (isSortingName === gameName) {
-      setFilter('');
+      setFilter("");
+      sortGame("");
       history.push(`/my-bets/${id}?sort=`);
     } else {
       history.push(`/my-bets/${id}?sort=${gameName}`);
     }
   };
-
+  let allPages: number[] = [];
+  for (let i = 0; i < bets.lastPage; i++) {
+    allPages.push(i);
+  }
+  const changePage = (page: number) => {
+    console.log("PAGE", page + 1);
+    setPageChosed(page);
+    fetchData(page + 1, filter);
+  };
   return (
+    <>
     <FilterContainer>
+      {isLoading && <Loader />}
       <FilterHeaderWrapper>
         <FilterHeaderContent>
           <FilterTitle>Recent Games</FilterTitle>
           <FilterWord>Filters</FilterWord>
           <FilterButton>
             {games.map((game) => {
-              if(filter === game.type){
+              if (filter === game.type) {
                 return (
                   <ButtonGame
-                choseGame={filterGame.bind(this, game.type)}
-                key={Math.random().toString()}
-                color={game.color}
-                background={game.color}
-                isClickable = {true}
-              >
-                {game.type}
-              </ButtonGame>
-                )
+                    choseGame={filterGame.bind(this, game.type)}
+                    key={Math.random().toString()}
+                    color={game.color}
+                    background={game.color}
+                    isClickable={true}
+                  >
+                    {game.type}
+                  </ButtonGame>
+                );
+              } else {
+                return (
+                  <ButtonGame
+                    choseGame={filterGame.bind(this, game.type)}
+                    key={Math.random().toString()}
+                    color={game.color}
+                    background={game.color}
+                  >
+                    {game.type}
+                  </ButtonGame>
+                );
               }
-
-              else{
-              return (
-              <ButtonGame
-                choseGame={filterGame.bind(this, game.type)}
-                key={Math.random().toString()}
-                color={game.color}
-                background={game.color}
-              >
-                {game.type}
-              </ButtonGame>
-              
-            )
-              }
-          })}
+            })}
           </FilterButton>
         </FilterHeaderContent>
         <LinksWrappers>
@@ -172,29 +231,53 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           </ToNewBetLink>
         </LinksWrappers>
       </FilterHeaderWrapper>
-      { arr && arr.length === 0 && <MessageWrapper>No Game found</MessageWrapper>}
-      { arr && arr.length > 0
+      {arr && arr.length === 0 && (
+        <MessageWrapper>No Game found</MessageWrapper>
+      )}
+      {arr && arr.length > 0
         ? arr.map((element) => {
-          const game = games.find(g => +g.id === element.game_id);
-          if(!game) return null;
-          
-          return( <CartItems
-              key={Math.random().toString()}
-              size="2"
-              price={element.price.toFixed(2).toString().replace('.', ',')}
-              type={game.type}
-              color={game.color}
-              isList={true}
-              date={element.date_game}
-            >
-              <CartNumbers wid="100" size="2">
-                {element.gameNumbers.toString()}
-              </CartNumbers>
-            </CartItems>)
-        }
-          )
+            const game = games.find((g) => +g.id === element.game_id);
+            if (!game) return null;
+
+            return (
+              <CartItems
+                key={Math.random().toString()}
+                size="2"
+                price={element.price.toFixed(2).toString().replace(".", ",")}
+                type={game.type}
+                color={game.color}
+                isList={true}
+                date={formatApiDate(element.game_date)}
+              >
+                <CartNumbers wid="100" size="2">
+                  {element.gameNumbers.toString()}
+                </CartNumbers>
+              </CartItems>
+            );
+          })
         : ""}
+        <ButtonFilterWrapper>
+        {allPages.length > 1 &&
+      allPages.map((page) => {
+        if(pageChosed === page){
+          return(
+            <ButtonFilter onClick={changePage.bind(this, page)} isClicked = {true}>
+            {page + 1}
+          </ButtonFilter>
+          )
+        }
+        return (
+         
+            <ButtonFilter onClick={changePage.bind(this, page)}>
+              {page + 1}
+            </ButtonFilter>
+          
+        );
+      })}
+      </ButtonFilterWrapper>
     </FilterContainer>
+    
+     </> 
   );
 };
 

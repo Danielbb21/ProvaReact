@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import {  useParams } from "react-router-dom";
 import FilterGame from "../components/FilterGame";
@@ -13,7 +13,7 @@ const MyBets: React.FC = () => {
   
   const {id} = useParams<ParamTypes>();
 
-  
+ 
   return (
     <>
       <Navbar hasHome = {false} id= {id}/>

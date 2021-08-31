@@ -28,3 +28,32 @@ export const ButtonGameWrapper = styled.button<ButtonProps>`
         cursor: pointer;
     }
 `;
+export const  ButtonFilterWrapper = styled.div`
+    display: flex;
+    
+    width: 100%;
+    /* flex-direction: column-reverse; */
+    /* align-items: flex-end; */
+    /* width: 10%; */
+    justify-content: flex-end;
+    
+    
+`;
+interface ButtonFilterProps{
+    isClicked?: boolean;
+}
+
+export const ButtonFilter = styled.button<ButtonFilterProps>`
+    width: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.4rem;
+    padding: 2rem;
+    border-radius: .5rem;
+    background-color: ${(props) => props.isClicked ? '#666666' :''};
+    color: ${(props) => props.isClicked ? '#fff' :''};
+    &:hover{
+        background-color: lightblue;
+    }
+`;
