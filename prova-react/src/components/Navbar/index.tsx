@@ -43,7 +43,7 @@ const Navbar: React.FC<NavProps> = (props) => {
           )}
           <NavLinks to="/" onClick={removeUserTokenHandler}>
             {" "}
-            <span>Sair</span>
+            <span>Logout</span>
             <VscArrowRight />
           </NavLinks>
         </NavOptions>

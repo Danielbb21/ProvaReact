@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { VscArrowRight } from "react-icons/vsc";
 import ButtonGame from "../ButtonGame";
 import {
@@ -58,7 +58,7 @@ const formatApiDate = (date: string) => {
 
 const FilterGame: React.FC<FilterGameProps> = (props) => {
   const games = useAppSelector((state) => state.game.items);
-  const cartRedux = useAppSelector((state) => state.cart.items);
+  
   const history = useHistory();
   const location = useLocation();
   const dispatch = useAppDispatch();
@@ -108,13 +108,15 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
   const queryParams = new URLSearchParams(location.search);
 
   const isSortingName = queryParams.get("sort");
-  
+  const [filter, setFilter] = useState<string>('');
   
   const arr = sortGame(user.gambles, isSortingName, user.id);
   console.log('ARRR', arr);
 
   const filterGame = (gameName: string) => {
+    setFilter(gameName);
     if (isSortingName === gameName) {
+      setFilter('');
       history.push(`/my-bets/${id}?sort=`);
     } else {
       history.push(`/my-bets/${id}?sort=${gameName}`);
@@ -128,7 +130,23 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
           <FilterTitle>Recent Games</FilterTitle>
           <FilterWord>Filters</FilterWord>
           <FilterButton>
-            {games.map((game) => (
+            {games.map((game) => {
+              if(filter === game.type){
+                return (
+                  <ButtonGame
+                choseGame={filterGame.bind(this, game.type)}
+                key={Math.random().toString()}
+                color={game.color}
+                background={game.color}
+                isClickable = {true}
+              >
+                {game.type}
+              </ButtonGame>
+                )
+              }
+
+              else{
+              return (
               <ButtonGame
                 choseGame={filterGame.bind(this, game.type)}
                 key={Math.random().toString()}
@@ -137,7 +155,10 @@ const FilterGame: React.FC<FilterGameProps> = (props) => {
               >
                 {game.type}
               </ButtonGame>
-            ))}
+              
+            )
+              }
+          })}
           </FilterButton>
         </FilterHeaderContent>
         <LinksWrappers>

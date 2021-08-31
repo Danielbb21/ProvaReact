@@ -63,6 +63,8 @@ const NewBet: React.FC = () => {
   const { id } = useParams<ParamTypes>();
   const games = useAppSelector((state) => state.game.items);
   const token = useAppSelector((state) => state.user.token);
+  const [filter, setFilter] = useState<string>('');
+  
 
   const pickNumbersOfTheArray = useCallback((range: number) => {
     const arrayOfNumbers = fillNumbers(range, range);
@@ -80,7 +82,7 @@ const NewBet: React.FC = () => {
   useEffect(() => {
     if (games.length === 0) return;
     let gameOne = games[0];
-    
+    setFilter(gameOne.type);
     const {
       price,
       color,
@@ -120,6 +122,7 @@ const NewBet: React.FC = () => {
 
   const handleClick = (typeGame: string) => {
     const gameChosed = games.filter((game) => game.type === typeGame);
+    setFilter(gameChosed[0].type);
     if (typeGame !== gameOptions?.type) {
       setChosedNumber([]);
     }
@@ -251,12 +254,7 @@ const NewBet: React.FC = () => {
     return `R$ ${num.toFixed(2).replace(".", ",")}`;
   };
 
-  const formatDate = (date: Date): string => {
-    let month = date.getMonth() + 1;
-    let year = date.getFullYear();
-    let day = date.toDateString().split(" ")[2];
-    return day + "/" + month + "/" + year;
-  };
+ 
 
   const formatDate2 = (date: Date) => {
     let month = date.getMonth() + 1;
@@ -267,7 +265,7 @@ const NewBet: React.FC = () => {
   };
   const saveGameHandler = () => {
     if (totalPrice >= 30) {
-      const date = formatDate(new Date());
+      
       
       const date2 = formatDate2(new Date());
    
@@ -313,7 +311,24 @@ const NewBet: React.FC = () => {
           <GameTitle title={"FOR " + gameOptions?.type.toUpperCase()} />
           <DescriptionTitle>Chose a game</DescriptionTitle>
           <ButtonInActionWrapper win={40}>
-            {games.map((game) => (
+            {games.map((game, index) =>{ 
+             
+              if(game.type === filter){
+                return(
+                  <ButtonGame
+                key={Math.random().toString()}
+                color={game.color}
+                background={game.color}
+                choseGame={handleClick.bind(this, game.type)}
+                isClickable = {true}
+              >
+                {game.type}
+              </ButtonGame>
+                )
+              }
+              
+              return(
+              
               <ButtonGame
                 key={Math.random().toString()}
                 color={game.color}
@@ -322,7 +337,7 @@ const NewBet: React.FC = () => {
               >
                 {game.type}
               </ButtonGame>
-            ))}
+            )})}
           </ButtonInActionWrapper>
 
           <GameDescription description={gameOptions?.description} />

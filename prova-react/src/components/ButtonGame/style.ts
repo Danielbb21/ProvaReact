@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface ButtonProps {
     backgorund?: string;
     color?: string;
+    isClickable?:boolean;
 
 }
 
@@ -15,11 +16,13 @@ export const ButtonGameWrapper = styled.button<ButtonProps>`
     padding: 1rem;
     border: 2px solid ;
     border-radius: 10rem;
-    color: ${(props) => props.backgorund === '#01AC66' ?  '#FFF' : props.color};
+    color: ${(props) => props.isClickable ? '#FFF' : props.color};
+    /* color: ${(props) => props.backgorund === '#01AC66' ?  '#FFF' : props.color}; */
     font-size: 1.4rem;
     font-weight: bold;
     font-style: italic;
-    background: ${(props) => props.backgorund === '#01AC66' ? props.backgorund : '#FFFFFF'} 0% 0% no-repeat padding-box;
+    background: ${(props) => props.isClickable ? props.backgorund : '#FFFFFF'} 0% 0% no-repeat padding-box;
+    /* background: ${(props) => props.backgorund === '#01AC66' ? props.backgorund : '#FFFFFF'} 0% 0% no-repeat padding-box; */
 
     &:hover{
         cursor: pointer;
